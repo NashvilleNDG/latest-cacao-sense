@@ -161,7 +161,7 @@
             "title": "Cacao Butter",
             "subtitle": "Cold-pressed, food-grade cacao butter",
             "cta_label": "Shop Now",
-            "link": ""
+            "link": "shopify://products/cacao-butter"
           }
         },
         "t4": {
@@ -197,7 +197,7 @@
             "title": "Cacao Tea",
             "subtitle": "Cacao husk tea — rich, earthy & energizing",
             "cta_label": "Shop Now",
-            "link": ""
+            "link": "shopify://products/cacao-tea"
           }
         }
       },
