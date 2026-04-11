@@ -105,16 +105,18 @@ body.ts-body {
   background: transparent;
 }
 
-/* Inner pages: subtle glass behind home-style (light) nav so it reads on pale content */
+/*
+ * Inner pages (collection, product, cart, etc.): solid brand bar at top.
+ * A light→transparent gradient lived only inside the short header strip, so the
+ * lower nav row sat on near-white and white links disappeared. Same bar as scroll.
+ */
 body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
-  background: linear-gradient(
-    180deg,
-    rgba(18, 10, 6, 0.58) 0%,
-    rgba(18, 10, 6, 0.28) 55%,
-    transparent 100%
-  );
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: #7c3419;
+  color: var(--ts-primary-fg);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* Scrolled: match footer bar */
@@ -314,17 +316,22 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
   color: var(--ts-accent);
 }
 
-.ts-header--scrolled .ts-header__mobile-panel {
+.ts-header--scrolled .ts-header__mobile-panel,
+body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-panel {
   background: #7c3419;
   border-top-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 }
 
-.ts-header--scrolled .ts-header__mobile-link {
+.ts-header--scrolled .ts-header__mobile-link,
+body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-link {
   color: rgba(255, 255, 255, 0.9);
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-.ts-header--scrolled .ts-header__mobile-link:hover {
+.ts-header--scrolled .ts-header__mobile-link:hover,
+body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-link:hover {
   color: var(--ts-accent);
 }
 
@@ -1698,10 +1705,22 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 }
 
 /* ----- Product page ----- */
+.ts-product-page {
+  padding-top: clamp(7.5rem, 6rem + 5vw, 10.5rem);
+  padding-bottom: clamp(5.5rem, 7vw, 9rem);
+}
+
+@media (min-width: 768px) {
+  .ts-product-page {
+    padding-top: clamp(8.5rem, 7rem + 4vw, 11.5rem);
+    padding-bottom: clamp(6.5rem, 9vw, 10.5rem);
+  }
+}
+
 .ts-product-page__crumbs {
   font-size: 0.8125rem;
   color: var(--ts-muted-fg);
-  margin-bottom: 2rem;
+  margin-bottom: 2.75rem;
   max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
@@ -1728,7 +1747,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 
 .ts-product-page__grid {
   display: grid;
-  gap: 3rem;
+  gap: clamp(2.5rem, 4vw, 3.5rem);
   max-width: 72rem;
   margin: 0 auto;
   grid-template-columns: 1fr;
@@ -2066,7 +2085,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 
 .ts-product-page__trust {
   list-style: none;
-  margin: 0;
+  margin: 2.5rem 0 0;
   padding: 0;
   display: flex;
   flex-direction: column;
