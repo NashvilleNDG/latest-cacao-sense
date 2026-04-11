@@ -1,25 +1,125 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "our_story": {
       "type": "ts-our-story-page",
       "blocks": {
-        "v1": { "type": "value", "settings": { "title": "Rooted in Guatemala", "text": "Finca El Rosario Quesada — one of the oldest plantation homes in the region with over 200 years of history, near the ancient Mayan park Takalik Abaj." } },
-        "v2": { "type": "value", "settings": { "title": "7 Cacao Varieties", "text": "We cultivate seven different cacao varieties on the same land, allowing for biodiversity, resilience, and a layered flavor spectrum unique to our farm." } },
-        "v3": { "type": "value", "settings": { "title": "Zero Waste Process", "text": "Nothing is wasted. Leftover organic material is returned to the land as natural fertilizer, closing the cycle and nourishing future harvests." } },
-        "v4": { "type": "value", "settings": { "title": "Community Rooted", "text": "Our team comes from the local community — many are direct descendants of Mayan heritage, working in alignment with ancestral agricultural traditions." } },
-        "p1": { "type": "process", "settings": { "step": "01", "title": "Hand Germination", "text": "Each plant is germinated by hand with care and intention." } },
-        "p2": { "type": "process", "settings": { "step": "02", "title": "Individual Monitoring", "text": "Trees are grown and monitored individually throughout their lifecycle." } },
-        "p3": { "type": "process", "settings": { "step": "03", "title": "Hand-Harvested", "text": "Pods are hand-harvested at peak ripeness to ensure optimal flavor." } },
-        "p4": { "type": "process", "settings": { "step": "04", "title": "Manual Sorting", "text": "Fruit is opened and sorted manually, ensuring only the best beans proceed." } },
-        "p5": { "type": "process", "settings": { "step": "05", "title": "Custom Fermentation", "text": "Beans are processed using custom fermentation protocols refined through generations." } }
+        "v1": {
+          "type": "value",
+          "settings": {
+            "title": "Rooted in Guatemala",
+            "text": "Finca El Rosario Quesada — one of the oldest plantation homes in the region with over 200 years of history, near the ancient Mayan park Takalik Abaj."
+          }
+        },
+        "v2": {
+          "type": "value",
+          "settings": {
+            "title": "7 Cacao Varieties",
+            "text": "We cultivate seven different cacao varieties on the same land, allowing for biodiversity, resilience, and a layered flavor spectrum unique to our farm."
+          }
+        },
+        "v3": {
+          "type": "value",
+          "settings": {
+            "title": "Zero Waste Process",
+            "text": "Nothing is wasted. Leftover organic material is returned to the land as natural fertilizer, closing the cycle and nourishing future harvests."
+          }
+        },
+        "v4": {
+          "type": "value",
+          "settings": {
+            "title": "Community Rooted",
+            "text": "Our team comes from the local community — many are direct descendants of Mayan heritage, working in alignment with ancestral agricultural traditions."
+          }
+        },
+        "p1": {
+          "type": "process",
+          "settings": {
+            "step": "01",
+            "title": "Hand Germination",
+            "text": "Each plant is germinated by hand with care and intention."
+          }
+        },
+        "p2": {
+          "type": "process",
+          "settings": {
+            "step": "02",
+            "title": "Individual Monitoring",
+            "text": "Trees are grown and monitored individually throughout their lifecycle."
+          }
+        },
+        "p3": {
+          "type": "process",
+          "settings": {
+            "step": "03",
+            "title": "Hand-Harvested",
+            "text": "Pods are hand-harvested at peak ripeness to ensure optimal flavor."
+          }
+        },
+        "p4": {
+          "type": "process",
+          "settings": {
+            "step": "04",
+            "title": "Manual Sorting",
+            "text": "Fruit is opened and sorted manually, ensuring only the best beans proceed."
+          }
+        },
+        "p5": {
+          "type": "process",
+          "settings": {
+            "step": "05",
+            "title": "Custom Fermentation",
+            "text": "Beans are processed using custom fermentation protocols refined through generations."
+          }
+        }
       },
-      "block_order": ["v1", "v2", "v3", "v4", "p1", "p2", "p3", "p4", "p5"],
+      "block_order": [
+        "v1",
+        "v2",
+        "v3",
+        "v4",
+        "p1",
+        "p2",
+        "p3",
+        "p4",
+        "p5"
+      ],
       "settings": {
+        "hero_image_alt": "Cacao farm Guatemala",
+        "hero_eyebrow": "Est. 2026 · Guatemala",
+        "hero_title": "Our Story",
+        "hero_lead": "\"Cacao is the language of the earth, spoken in flavor.\"",
+        "intro_kicker": "Where We Come From",
         "intro_title": "Born in the Rainforest of Guatemala",
-        "intro_rte": "<p>Cacao Senses is born in the tropical rainforest of Guatemala, deep in ancestral land located six hours from the city, where nature remains untouched and traditions remain alive. Our farm, <em>Finca El Rosario Quesada</em>, is one of the oldest plantation homes in the region, with more than 200 years of history.</p><p>We are located in the vicinity of the ancient Mayan archaeological park <strong>Takalik Abaj</strong> — one of the earliest and most important ceremonial and trade centers of Mesoamerica.</p>",
-        "cta_link": "/"
+        "intro_rte": "<p>Cacao Senses is born in the tropical rainforest of Guatemala, deep in ancestral land located six hours from the city, where nature remains untouched and traditions remain alive. Our farm, <em>Finca El Rosario Quesada</em>, is one of the oldest plantation homes in the region, with more than 200 years of history.</p><p>We are located in the vicinity of the ancient Mayan archaeological park<br/><strong>Takalik Abaj</strong> — one of the earliest and most important ceremonial and trade centers of Mesoamerica. This sacred site was once a bridge between the Olmec and Mayan civilizations and played a vital role in the development of early cacao culture and trade routes. To cultivate cacao in the shadow of such a powerful ancestral site is more than geography — it is continuity.</p><p>Originally owned by the Chiquita Banana Company over 200 years ago, the land later became a family project when we acquired it. About 70 years ago, coffee and macadamia were planted across the farm. Then, ten years ago we made a conscious return to our Mayan roots and transitioned into cacao, honoring the sacred fruit that shaped our civilization.</p><p>From the farm, volcanoes rise across the horizon. The soil is naturally enriched by centuries of volcanic ash, creating mineral-dense earth that allows plants to flourish and gives our cacao its distinctive, layered flavor profile unlike any other origin.</p>",
+        "band_quote": "\"\"The Mayans regarded cacao as sacred — a divine gift from the gods, used in ceremony, spiritual rituals, and rites of passage.\"",
+        "band_sub": "Today, we continue that lineage with reverence, responsibility, and pride.",
+        "mission_title": "Our Mission",
+        "mission_rte": "<p>To share the power, benefits, and sacred heritage of cacao with the world. We are committed to producing the highest quality single-origin cacao using ancient Mayan principles and traditional methods. By honoring ancestral techniques and combining them with careful modern protocols, we keep the tradition alive while making its benefits accessible globally. We believe cacao is more than a crop — it is nourishment, ceremony, culture, and connection.<br/><br/></p>",
+        "vision_title": "Our Vision",
+        "vision_rte": "<p>To bring authentic, single-origin Guatemalan cacao to the world while preserving ancestral knowledge, regenerative farming practices, and community involvement. We aim to become a global reference for origin-true cacao, grown with integrity, processed with intention, and shared with purpose — while uplifting local communities and honoring Mayan agricultural wisdom.<br/><br/></p>",
+        "cacao_kicker": "Single Origin",
+        "cacao_title": "Our Cacao",
+        "cacao_rte": "<p>Our cacao is <em>single origin</em>, grown exclusively on our farm in Guatemala's tropical volcanic region. We cultivate seven different cacao varieties on the same land, allowing for biodiversity, resilience, and a layered flavor spectrum.</p><p>Each variety expresses itself differently depending on micro-soil conditions, elevation, and sun exposure — creating depth and complexity in every harvest. The mineral-rich volcanic soil, rainforest climate, and careful cultivation result in cacao that is aromatic, nutrient-dense, and flavor-forward.</p><p>Our cacao is not blended with outside sources. Every bean can be traced back to our farm.</p>",
+        "process_kicker": "Seed to Product",
+        "process_title": "Our Process",
+        "process_intro": "We follow a fully hands-on, small-batch process from seed to finished cacao. Every step is done with intention.",
+        "cta_title": "Rooted in the Soil. Crafted by Nature. Shared by Us.",
+        "cta_text": "Discover our range of premium single-origin cacao products.",
+        "cta_label": "Shop Our Products",
+        "cta_link": "shopify://collections/frontpage"
       }
     }
   },
-  "order": ["our_story"]
+  "order": [
+    "our_story"
+  ]
 }
