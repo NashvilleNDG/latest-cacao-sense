@@ -1,9 +1,113 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "ts-main-cart",
       "settings": {}
+    },
+    "ts_vbc_collections_GaAEDL": {
+      "type": "ts-vbc-collections",
+      "blocks": {
+        "tile_Lt6R98": {
+          "type": "tile",
+          "settings": {
+            "large": true,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/b6e179db2_generated_image.png",
+            "tag": "Superfood",
+            "title": "Cacao Beans",
+            "subtitle": "Raw whole beans — the purest form of chocolate",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        },
+        "tile_NEThxT": {
+          "type": "tile",
+          "settings": {
+            "large": false,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/27bf60b05_generated_image.png",
+            "tag": "Baking Essentials",
+            "title": "Cacao Powder",
+            "subtitle": "Stone-ground pure cacao powder",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        },
+        "tile_meW7Jm": {
+          "type": "tile",
+          "settings": {
+            "large": false,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/d16bebc9a_generated_image.png",
+            "tag": "Pure & Natural",
+            "title": "Cacao Butter",
+            "subtitle": "Cold-pressed, food-grade cacao butter",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        },
+        "tile_MzQFBX": {
+          "type": "tile",
+          "settings": {
+            "large": false,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/44e05de1a_generated_image.png",
+            "tag": "Indulge",
+            "title": "Cacao Wafers",
+            "subtitle": "Premium melting wafers for baking & snacking",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        },
+        "tile_Q7PYmU": {
+          "type": "tile",
+          "settings": {
+            "large": false,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/84225d9d9_generated_image.png",
+            "tag": "Superfood",
+            "title": "Cacao Nibs",
+            "subtitle": "Crunchy raw nibs, nature's chocolate chips",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        },
+        "tile_QjxhhG": {
+          "type": "tile",
+          "settings": {
+            "large": false,
+            "fallback_image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/cba85b745_generated_image.png",
+            "tag": "Sip & Relax",
+            "title": "Cacao Tea",
+            "subtitle": "Cacao husk tea — rich, earthy & energizing",
+            "cta_label": "Shop Now",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "tile_Lt6R98",
+        "tile_NEThxT",
+        "tile_meW7Jm",
+        "tile_MzQFBX",
+        "tile_Q7PYmU",
+        "tile_QjxhhG"
+      ],
+      "name": "Velvet collection grid",
+      "settings": {
+        "kicker": "Explore",
+        "title_prefix": "Our",
+        "title_accent": "Collections",
+        "subtitle": "Each collection tells a unique story of terroir, craftsmanship and taste."
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main",
+    "ts_vbc_collections_GaAEDL"
+  ]
 }
