@@ -8,6 +8,9 @@
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- else -%}
+      <link rel="icon" type="image/png" sizes="32x32" href="{{ 'logo.png' | asset_url }}">
+      <link rel="apple-touch-icon" href="{{ 'logo.png' | asset_url }}">
     {%- endif -%}
 
     <title>
@@ -20,6 +23,52 @@
     {% if page_description %}
       <meta name="description" content="{{ page_description | escape }}">
     {% endif %}
+
+    {%- liquid
+      assign og_image = 'logo.png' | asset_url
+      capture og_title
+        echo page_title
+        if current_tags
+          echo ' – '
+          echo current_tags | join: ', '
+        endif
+        if current_page != 1
+          echo ' – '
+          echo 'general.meta.page' | t: page: current_page
+        endif
+        unless page_title contains shop.name
+          echo ' – '
+          echo shop.name
+        endunless
+      endcapture
+      assign og_title = og_title | strip
+      if page_description != blank
+        assign og_description = page_description
+      elsif shop.description != blank
+        assign og_description = shop.description
+      else
+        assign og_description = shop.name
+      endif
+      if template.name == 'product'
+        assign og_type = 'product'
+      elsif template.name == 'article'
+        assign og_type = 'article'
+      else
+        assign og_type = 'website'
+      endif
+    -%}
+    <meta property="og:site_name" content="{{ shop.name | escape }}">
+    <meta property="og:title" content="{{ og_title | escape }}">
+    <meta property="og:description" content="{{ og_description | escape }}">
+    <meta property="og:type" content="{{ og_type }}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:image" content="{{ og_image }}">
+    <meta property="og:image:secure_url" content="{{ og_image }}">
+    <meta property="og:image:alt" content="{{ shop.name | escape }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ og_title | escape }}">
+    <meta name="twitter:description" content="{{ og_description | escape }}">
+    <meta name="twitter:image" content="{{ og_image }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
