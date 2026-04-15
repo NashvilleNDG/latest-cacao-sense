@@ -1595,6 +1595,27 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   }
 }
 
+@media (max-width: 767px) {
+  .ts-newsletter__input,
+  .ts-newsletter input[type="email"],
+  #ts-newsletter-form .ts-newsletter__input {
+    width: 100%;
+    height: 52px;
+    padding: 14px 20px;
+    font-size: 16px;
+    border-radius: 50px;
+    box-sizing: border-box;
+  }
+
+  .ts-newsletter__form,
+  #ts-newsletter-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
 .ts-newsletter__input {
   flex: 1;
   height: 3.25rem;
@@ -3268,6 +3289,54 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   font-size: 0.875rem;
   color: var(--ts-muted-fg);
   line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+
+  .ts-footer__grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .ts-footer__col {
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Center logo */
+  .ts-footer__logo,
+  .ts-footer__logo img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  /* Center tagline text */
+  .ts-footer__tagline,
+  .ts-footer p {
+    text-align: center;
+  }
+
+  /* Center column headings and links */
+  .ts-footer__col,
+  .ts-footer__col h4,
+  .ts-footer__col ul,
+  .ts-footer__col li,
+  .ts-footer__col a {
+    text-align: center;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  /* Center copyright bar */
+  .ts-footer__bottom,
+  .ts-footer__copy {
+    text-align: center;
+  }
+
 }
 
 
