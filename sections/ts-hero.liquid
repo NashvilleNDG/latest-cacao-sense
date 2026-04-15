@@ -45,10 +45,6 @@
         if primary_href == blank
           assign primary_href = routes.all_products_collection_url
         endif
-        assign secondary_href = section.settings.secondary_link
-        if secondary_href == blank
-          assign secondary_href = routes.root_url | append: '#ts-story'
-        endif
       %}
       <div class="ts-hero__ctas">
         <a class="ts-btn ts-btn--primary" href="{{ primary_href }}">
@@ -57,7 +53,6 @@
             <path d="M5 12h14M12 5l7 7-7 7"></path>
           </svg>
         </a>
-        <a class="ts-btn ts-btn--ghost" href="{{ secondary_href }}">{{ section.settings.secondary_label }}</a>
       </div>
 
       <div class="ts-hero__stats">
