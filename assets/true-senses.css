@@ -2804,6 +2804,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   position: relative;
   z-index: 1;
   padding: 5rem 0 5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ts-os-hero__content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .ts-os-hero__eyebrow {
@@ -2930,6 +2939,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
 .ts-os-cacao {
   padding: 6rem 0;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ts-os-cacao {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .ts-os-cacao__grid {
@@ -3121,6 +3139,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   position: relative;
   z-index: 1;
   padding: 5rem 0 7rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ts-contact-hero__content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .ts-contact-hero__eyebrow {
@@ -3149,6 +3176,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
 .ts-contact-body {
   padding: 4rem 0 6rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .ts-contact-body {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 .ts-contact-grid {
