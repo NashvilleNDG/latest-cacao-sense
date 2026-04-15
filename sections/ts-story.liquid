@@ -1,6 +1,6 @@
 {% liquid
   assign story_img = section.settings.image
-  assign default_story = 'https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/2a6809f9f_generated_35710a50.png'
+  assign default_story = 'Story.webp' | asset_url
 %}
 
 <section id="story" class="ts-story">
@@ -80,7 +80,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image",
-      "info": "Optional — defaults to demo image."
+      "info": "Optional — defaults to theme asset Story.webp."
     },
     {
       "type": "text",

@@ -1,6 +1,6 @@
 {% liquid
   assign hero_img = section.settings.image
-  assign default_hero = 'https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/0778a5f5c_generated_image.png'
+  assign default_hero = 'Home-hero.webp' | asset_url
 %}
 
 <section class="ts-hero">
@@ -79,7 +79,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Background image",
-      "info": "Optional — defaults to demo cocoa image."
+      "info": "Optional — defaults to theme asset Home-hero.webp."
     },
     {
       "type": "text",
