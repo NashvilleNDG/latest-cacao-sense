@@ -1,5 +1,5 @@
 {% liquid
-  assign default_logo = 'logo-transparent.png' | asset_url
+  assign default_logo = 'logo.png' | asset_url
   assign logo = section.settings.logo
   assign url_story = '/pages/our-story'
   if pages['our-story'] != blank
@@ -19,7 +19,7 @@
           {% if logo != blank %}
             <img src="{{ logo | image_url: width: 400 }}" alt="{{ section.settings.logo_alt | escape }}" width="{{ logo.width }}" height="{{ logo.height }}" loading="lazy">
           {% else %}
-            <img src="{{ default_logo }}" alt="{{ section.settings.logo_alt | escape }}" width="200" height="80" loading="lazy">
+            <img src="{{ default_logo }}" class="ts-logo-default" alt="{{ section.settings.logo_alt | escape }}" width="200" height="80" loading="lazy">
           {% endif %}
         </a>
         <p class="ts-footer__tagline">{{ section.settings.tagline }}</p>

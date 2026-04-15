@@ -38,6 +38,9 @@ body.ts-body {
 
 .ts-main {
   min-height: 50vh;
+  position: relative;
+  /* Below header (z-index: 100) so overlapped hero imagery does not paint over the nav */
+  z-index: 0;
 }
 
 .visually-hidden {
@@ -96,32 +99,46 @@ body.ts-body {
 
 /* ----- Header ----- */
 .ts-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
+  position: relative;
+  z-index: 100;
   transition: background 0.5s, box-shadow 0.5s, border-color 0.5s;
-  background: transparent;
+  background-color: transparent;
+  overflow: visible;
+  padding-top: 4px;
+  padding-bottom: 4px;
 }
 
-/*
- * Inner pages (collection, product, cart, etc.): solid brand bar at top.
- * A light→transparent gradient lived only inside the short header strip, so the
- * lower nav row sat on near-white and white links disappeared. Same bar as scroll.
- */
-body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
-  background: #7c3419;
-  color: var(--ts-primary-fg);
+/* home-header: transparent bar over imagery (default overlay look) */
+.ts-header.ts-header--home-header:not(.ts-header--scrolled) {
+  background-color: transparent;
+}
+
+/* bg-header: solid teal bar (e.g. cart) */
+.ts-header.ts-header--bg-header:not(.ts-header--scrolled) {
+  background-color: #058181;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ts-header.ts-header--bg-header:not(.ts-header--scrolled) .ts-header__mobile-panel {
+  background: #058181;
+  border-top-color: rgba(255, 255, 255, 0.15);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.12);
 }
 
-/* Scrolled: match footer bar */
+.ts-header.ts-header--bg-header:not(.ts-header--scrolled) .ts-header__mobile-link {
+  color: rgba(255, 255, 255, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.ts-header.ts-header--bg-header:not(.ts-header--scrolled) .ts-header__mobile-link:hover {
+  color: #fff;
+}
+
+/* Scrolled: warm gold bar */
 .ts-header--scrolled {
-  background: #7c3419;
+  background: #c08e3e;
   color: var(--ts-primary-fg);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
@@ -133,14 +150,41 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 5rem;
 }
 
 .ts-header__logo img {
-  height: 3.5rem;
+  height: 70px;
   width: auto;
+  display: block;
   object-fit: contain;
   transition: filter 0.5s;
+}
+
+.ts-header__logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+  padding-top: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767px) {
+  .ts-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+  .ts-header__logo img {
+    height: 70px;
+    width: auto;
+    display: block;
+  }
+
+  .ts-header__logo {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
 
 /* Not scrolled: same light-on-dark treatment as homepage hero header */
@@ -151,6 +195,13 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 /* Scrolled dark bar: light logo like footer */
 .ts-header--scrolled .ts-header__logo img {
   filter: brightness(0) invert(1);
+}
+
+/* Full-color default logo (assets/logo.png) — keep original colors */
+.ts-header:not(.ts-header--scrolled) .ts-header__logo img.ts-logo-default,
+.ts-header--scrolled .ts-header__logo img.ts-logo-default,
+.ts-footer__logo img.ts-logo-default {
+  filter: none;
 }
 
 .ts-header__nav-desktop {
@@ -166,8 +217,8 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 }
 
 .ts-header__link {
-  font-size: 0.875rem;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: 0.02em;
   text-decoration: none;
   position: relative;
@@ -306,7 +357,8 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
 .ts-header__mobile-link {
   display: block;
   padding: 0.75rem 0;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 700;
   color: color-mix(in srgb, var(--ts-fg) 80%, transparent);
   text-decoration: none;
   border-bottom: 1px solid color-mix(in srgb, var(--ts-border) 40%, transparent);
@@ -316,22 +368,19 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) {
   color: var(--ts-accent);
 }
 
-.ts-header--scrolled .ts-header__mobile-panel,
-body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-panel {
-  background: #7c3419;
+.ts-header--scrolled .ts-header__mobile-panel {
+  background: #c08e3e;
   border-top-color: rgba(255, 255, 255, 0.12);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
 
-.ts-header--scrolled .ts-header__mobile-link,
-body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-link {
+.ts-header--scrolled .ts-header__mobile-link {
   color: rgba(255, 255, 255, 0.9);
   border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
-.ts-header--scrolled .ts-header__mobile-link:hover,
-body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobile-link:hover {
+.ts-header--scrolled .ts-header__mobile-link:hover {
   color: var(--ts-accent);
 }
 
@@ -382,12 +431,41 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   position: relative;
   z-index: 2;
   width: 100%;
-  padding-top: 8rem;
+  /* Header is in document flow (not fixed), so less top offset than overlay layout */
+  padding-top: 3rem;
   padding-bottom: 6rem;
 }
 
 .ts-hero__copy {
   max-width: 48rem;
+}
+
+/* Home: first section is hero — overlap under transparent header so body bg does not show a gap */
+body.template-index #MainContent > .shopify-section:first-child .ts-hero {
+  margin-top: -5.75rem;
+}
+
+body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-hero__content {
+  padding-top: 8rem;
+}
+
+/* Our story & contact: same overlay as home — dark hero sits under transparent header */
+#MainContent > .shopify-section:first-child.section-ts-os-page .ts-os-hero {
+  margin-top: -5.75rem;
+}
+
+#MainContent > .shopify-section:first-child.section-ts-os-page .ts-os-hero__content {
+  padding-top: 8rem;
+  padding-bottom: 5rem;
+}
+
+#MainContent > .shopify-section:first-child.section-ts-contact-page .ts-contact-hero {
+  margin-top: -5.75rem;
+}
+
+#MainContent > .shopify-section:first-child.section-ts-contact-page .ts-contact-hero__content {
+  padding-top: 8rem;
+  padding-bottom: 7rem;
 }
 
 /* Hero: dark-tinted glass so panels are legible without a frosted white “card” on the image */
@@ -548,7 +626,8 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 }
 
 .ts-marquee {
-  background: var(--ts-accent);
+  /* Match footer bar (teal) */
+  background: #058181;
   overflow: hidden;
   padding: 0.75rem 0;
 }
@@ -565,7 +644,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--ts-accent-fg);
+  color: rgba(255, 255, 255, 0.92);
   padding: 0 2rem;
 }
 
@@ -824,14 +903,30 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   border: none;
   border-radius: var(--ts-radius-full);
   background: #fff;
-  color: var(--ts-fg);
+  color: #000;
   cursor: pointer;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
   transition: background 0.3s, color 0.3s;
 }
 
 .ts-product-card__atc button:hover {
-  background: var(--ts-accent);
+  background: #0b8281;
+  color: #fff;
+}
+
+/* "Choose options" / view link — not the default orange primary (card overlay) */
+.ts-product-card__atc .ts-btn--primary {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: background 0.3s, color 0.3s;
+}
+
+.ts-product-card__atc .ts-btn--primary:hover {
+  background: #0b8281;
   color: #fff;
 }
 
@@ -910,7 +1005,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-story {
   position: relative;
   padding: 6rem 0;
-  background: #7c3419;
+  background: #058181;
   color: var(--ts-primary-fg);
   overflow: hidden;
 }
@@ -1429,7 +1524,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   margin: 0 auto;
   padding: 3rem 1.5rem;
   border-radius: 2.5rem;
-  background: #7c3419;
+  background: #058181;
   color: #fff;
   text-align: center;
   overflow: hidden;
@@ -1561,8 +1656,8 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 /* ----- Footer ----- */
 .ts-footer {
-  background: #7c3419;
-  color: var(--ts-primary-fg);
+  background: #058181;
+  color: rgba(255, 255, 255, 0.92);
   padding: 4rem 0;
 }
 
@@ -1597,9 +1692,9 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-footer__logo img {
   display: block;
   width: auto;
-  max-width: min(14rem, 100%);
+  max-width: min(21rem, 100%);
   height: auto;
-  max-height: 6.5rem;
+  max-height: 9.75rem;
   object-fit: contain;
   object-position: left center;
   filter: brightness(0) invert(1);
@@ -1608,7 +1703,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-footer__tagline {
   font-size: 0.875rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.82);
   margin: 0 0 1.5rem;
 }
 
@@ -1621,17 +1716,17 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   width: 2.5rem;
   height: 2.5rem;
   border-radius: var(--ts-radius-full);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.88);
   transition: color 0.2s, border-color 0.2s;
 }
 
 .ts-footer__social a:hover {
-  color: var(--ts-accent);
-  border-color: var(--ts-accent);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.75);
 }
 
 .ts-footer__col h4 {
@@ -1654,18 +1749,18 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 .ts-footer__col a {
   font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.88);
   text-decoration: none;
 }
 
 .ts-footer__col a:hover {
-  color: var(--ts-accent);
+  color: #fff;
 }
 
 .ts-footer__bottom {
   margin-top: 3.5rem;
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1683,7 +1778,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 .ts-footer__copy {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.75);
   margin: 0;
 }
 
@@ -1696,23 +1791,23 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 .ts-footer__legal a {
   font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
 }
 
 .ts-footer__legal a:hover {
-  color: var(--ts-accent);
+  color: #fff;
 }
 
 /* ----- Product page ----- */
 .ts-product-page {
-  padding-top: clamp(7.5rem, 6rem + 5vw, 10.5rem);
+  padding-top: clamp(2rem, 2vw + 1.5rem, 3rem);
   padding-bottom: clamp(5.5rem, 7vw, 9rem);
 }
 
 @media (min-width: 768px) {
   .ts-product-page {
-    padding-top: clamp(8.5rem, 7rem + 4vw, 11.5rem);
+    padding-top: clamp(2.25rem, 2vw + 1.75rem, 3.25rem);
     padding-bottom: clamp(6.5rem, 9vw, 10.5rem);
   }
 }
@@ -2109,13 +2204,13 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 /* ----- Search results ----- */
 .ts-search-page {
-  padding-top: clamp(7.5rem, 6rem + 5vw, 10.5rem);
+  padding-top: clamp(2rem, 2vw + 1.5rem, 3rem);
   padding-bottom: clamp(5rem, 7vw, 8.5rem);
 }
 
 @media (min-width: 768px) {
   .ts-search-page {
-    padding-top: clamp(8.5rem, 7rem + 4vw, 11.5rem);
+    padding-top: clamp(2.25rem, 2vw + 1.75rem, 3.25rem);
     padding-bottom: clamp(6rem, 9vw, 9.5rem);
   }
 }
@@ -2410,7 +2505,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-how-made {
   position: relative;
   padding: 6rem 0;
-  background: #793018;
+  background: #058181;
   overflow: hidden;
 }
 
@@ -2673,7 +2768,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-os-hero__content {
   position: relative;
   z-index: 1;
-  padding: 10rem 0 5rem;
+  padding: 5rem 0 5rem;
 }
 
 .ts-os-hero__eyebrow {
@@ -2739,7 +2834,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 .ts-os-band {
   padding: 5rem 1.5rem;
-  background: #793018;
+  background: #058181;
   text-align: center;
 }
 
@@ -2791,7 +2886,8 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   font-family: var(--ts-font-display);
   font-size: 1.75rem;
   font-weight: 700;
-  color: #793018;
+  color: #000;
+  text-align: center;
   margin-bottom: 1.5rem;
 }
 
@@ -2842,7 +2938,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 
 .ts-os-process {
   padding: 6rem 0;
-  background: #793018;
+  background: #058181;
 }
 
 .ts-os-process__head {
@@ -2937,16 +3033,17 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: #793018;
+  background: #058181;
   color: #fff;
   padding: 1rem 2rem;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
+  transition: background 0.25s;
 }
 
 .ts-os-cta__btn:hover {
-  opacity: 0.92;
+  background: #046f6f;
 }
 
 /* Contact page */
@@ -2986,7 +3083,7 @@ body:not(.template-index) .ts-header:not(.ts-header--scrolled) .ts-header__mobil
 .ts-contact-hero__content {
   position: relative;
   z-index: 1;
-  padding: 10rem 0 7rem;
+  padding: 5rem 0 7rem;
 }
 
 .ts-contact-hero__eyebrow {

@@ -1,10 +1,17 @@
 {% liquid
   assign logo = section.settings.logo
   assign logo_alt = section.settings.logo_alt | default: shop.name
-  assign default_logo = 'logo-transparent.png' | asset_url
+  assign default_logo = 'logo.png' | asset_url
+  assign header_variant = section.settings.header_variant | default: 'home-header'
+  if template.name == 'cart' or template.name == 'product' or template.name == 'collection'
+    assign header_variant = 'bg-header'
+  endif
+  if header_variant != 'home-header' and header_variant != 'bg-header'
+    assign header_variant = 'home-header'
+  endif
 %}
 
-<header class="ts-header" data-ts-header>
+<header class="ts-header ts-header--{{ header_variant }}" data-ts-header>
   <div class="ts-page-width">
     <div class="ts-header__inner">
       <a href="{{ routes.root_url }}" class="ts-header__logo">
@@ -118,6 +125,23 @@
       "id": "logo_alt",
       "label": "Logo alt text",
       "default": "Cacao Senses"
+    },
+    {
+      "type": "select",
+      "id": "header_variant",
+      "label": "Header style",
+      "default": "home-header",
+      "options": [
+        {
+          "value": "home-header",
+          "label": "Home header (transparent over hero)"
+        },
+        {
+          "value": "bg-header",
+          "label": "BG header (solid teal)"
+        }
+      ],
+      "info": "Cart, product, and collection (all products) pages always use BG header. Choose the default for all other templates."
     }
   ]
 }
