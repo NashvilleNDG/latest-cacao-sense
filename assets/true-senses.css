@@ -2662,6 +2662,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   overflow: hidden;
   border: 1px solid var(--ts-border);
   background: var(--ts-card);
+  text-align: center;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
@@ -2714,7 +2715,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 1rem;
+  margin: 0 auto 1rem;
 }
 
 .ts-usage-card__product {
@@ -3268,3 +3269,5 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   color: var(--ts-muted-fg);
   line-height: 1.6;
 }
+
+
