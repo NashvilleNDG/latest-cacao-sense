@@ -2882,10 +2882,12 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   border: 1px solid var(--ts-border);
 }
 
+/* Match Our Cacao title scale, then −20% for card headings */
 .ts-os-mission__h {
   font-family: var(--ts-font-display);
-  font-size: 1.75rem;
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
   font-weight: 700;
+  line-height: 1.15;
   color: #000;
   text-align: center;
   margin-bottom: 1.5rem;
@@ -3166,6 +3168,17 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
 .ts-contact-form__submit {
   margin-top: 0.5rem;
+}
+
+/* Match footer teal; overrides global .ts-btn--primary on contact form */
+.ts-contact-form .ts-contact-form__submit.ts-btn--primary {
+  background: #058181;
+  box-shadow: 0 10px 30px rgba(5, 100, 100, 0.25);
+}
+
+.ts-contact-form .ts-contact-form__submit.ts-btn--primary:hover {
+  background: #046f6f;
+  color: #fff;
 }
 
 .ts-contact-cards {
