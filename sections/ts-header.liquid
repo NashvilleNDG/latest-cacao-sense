@@ -45,6 +45,14 @@
             if pages['premium-collection'] != blank
               assign url_premium = pages['premium-collection'].url
             endif
+            assign url_recipes = '/pages/recipes'
+            if pages['recipes'] != blank
+              assign url_recipes = pages['recipes'].url
+            endif
+            assign url_blog = '/pages/blog'
+            if pages['blog'] != blank
+              assign url_blog = pages['blog'].url
+            endif
             assign url_contact = '/pages/contact'
             if pages['contact'] != blank
               assign url_contact = pages['contact'].url
@@ -72,6 +80,8 @@
           <a class="ts-header__link" href="{{ routes.all_products_collection_url }}">Shop</a>
           <a class="ts-header__link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
           <a class="ts-header__link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
+          <a class="ts-header__link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
+          <a class="ts-header__link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
           <a class="ts-header__link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
         {% endif %}
       </nav>
@@ -138,6 +148,14 @@
           if pages['premium-collection'] != blank
             assign url_premium = pages['premium-collection'].url
           endif
+          assign url_recipes = '/pages/recipes'
+          if pages['recipes'] != blank
+            assign url_recipes = pages['recipes'].url
+          endif
+          assign url_blog = '/pages/blog'
+          if pages['blog'] != blank
+            assign url_blog = pages['blog'].url
+          endif
           assign url_contact = '/pages/contact'
           if pages['contact'] != blank
             assign url_contact = pages['contact'].url
@@ -150,6 +168,8 @@
         <a class="ts-header__mobile-link" href="{{ routes.all_products_collection_url }}">Shop</a>
         <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
+        <a class="ts-header__mobile-link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
+        <a class="ts-header__mobile-link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
       {% endif %}
     </div>

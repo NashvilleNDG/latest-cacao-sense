@@ -3330,6 +3330,282 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   background: #046f6f;
 }
 
+/* ----- Recipes page ----- */
+.ts-recipes {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 1rem;
+}
+
+.ts-recipes__list {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  margin-top: 1rem;
+}
+
+.ts-recipe {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 2.5rem 3rem;
+  align-items: start;
+}
+
+.ts-recipe:nth-child(even) .ts-recipe__media {
+  order: 2;
+}
+
+.ts-recipe:nth-child(even) .ts-recipe__body {
+  order: 1;
+}
+
+.ts-recipe__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ts-radius-lg);
+  background: var(--ts-card);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+}
+
+.ts-recipe__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ts-muted-fg);
+}
+
+.ts-recipe__pill {
+  background: var(--ts-primary);
+  color: var(--ts-primary-fg);
+  padding: 0.3rem 0.7rem;
+  border-radius: var(--ts-radius-full);
+  font-weight: 600;
+}
+
+.ts-recipe__dot {
+  opacity: 0.5;
+}
+
+.ts-recipe__title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ts-fg);
+  margin: 0 0 0.6rem;
+}
+
+.ts-recipe__desc {
+  color: var(--ts-muted-fg);
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+}
+
+.ts-recipe__cols {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 1.5rem 2.25rem;
+}
+
+.ts-recipe__cols h3 {
+  margin: 0 0 0.6rem;
+  font-family: var(--ts-font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ts-accent);
+}
+
+.ts-recipe__ing ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.75;
+  color: var(--ts-fg);
+}
+
+.ts-recipe__method ol {
+  margin: 0;
+  padding-left: 1.25rem;
+  line-height: 1.6;
+  color: var(--ts-fg);
+}
+
+.ts-recipe__method li {
+  margin-bottom: 0.5rem;
+}
+
+.ts-recipe__tip {
+  margin: 1.4rem 0 0;
+  padding: 0.75rem 1rem;
+  background: var(--ts-muted);
+  border-left: 3px solid var(--ts-accent);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ts-fg);
+}
+
+.ts-recipes__cta {
+  text-align: center;
+  margin-top: 4.5rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--ts-border);
+}
+
+.ts-recipes__cta-text {
+  font-family: var(--ts-font-display);
+  font-size: 1.4rem;
+  color: var(--ts-primary);
+  margin: 0 0 1.25rem;
+}
+
+@media (max-width: 767px) {
+  .ts-recipe {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .ts-recipe:nth-child(even) .ts-recipe__media,
+  .ts-recipe:nth-child(even) .ts-recipe__body {
+    order: 0;
+  }
+
+  .ts-recipe__cols {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* ----- Blog (Journal) page ----- */
+.ts-blog {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 4rem 1.5rem 1rem;
+}
+
+.ts-blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.ts-blog-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--ts-card);
+  border: 1px solid var(--ts-border);
+  border-radius: var(--ts-radius-lg);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ts-blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+.ts-blog-card__media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.ts-blog-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.ts-blog-card:hover .ts-blog-card__media img {
+  transform: scale(1.04);
+}
+
+.ts-blog-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.25rem 1.4rem 1.5rem;
+}
+
+.ts-blog-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.65rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ts-muted-fg);
+}
+
+.ts-blog-card__cat {
+  background: var(--ts-secondary);
+  color: var(--ts-primary);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--ts-radius-full);
+  font-weight: 600;
+}
+
+.ts-blog-card__title {
+  font-family: var(--ts-font-display);
+  font-size: 1.25rem;
+  line-height: 1.25;
+  margin: 0 0 0.6rem;
+  color: var(--ts-fg);
+}
+
+.ts-blog-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ts-blog-card__title a:hover {
+  color: var(--ts-primary);
+}
+
+.ts-blog-card__excerpt {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--ts-muted-fg);
+  margin: 0 0 1.1rem;
+}
+
+.ts-blog-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: auto;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ts-accent);
+  text-decoration: none;
+}
+
+.ts-blog-card__more:hover {
+  gap: 0.6rem;
+}
+
+@media (max-width: 1023px) {
+  .ts-blog-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 639px) {
+  .ts-blog-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Contact page */
 .ts-contact-page {
   background: var(--ts-bg);

@@ -1,0 +1,106 @@
+{
+  "sections": {
+    "recipes": {
+      "type": "ts-recipes-page",
+      "blocks": {
+        "r1": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "powder",
+            "product": "Cacao Powder",
+            "category": "Morning Ritual",
+            "time": "5 min",
+            "title": "Classic Ceremonial Cacao Drink",
+            "description": "A warm, grounding chocolate elixir to start your day with sustained, crash-free energy.",
+            "ingredients": "2 tbsp Cacao Sense Cacao Powder\n1 cup warm oat milk (or milk of choice)\n1 tsp honey or maple syrup\nPinch of cinnamon\nPinch of sea salt",
+            "method": "Warm the oat milk gently over low heat — do not boil.\nWhisk in the cacao powder until smooth and glossy.\nAdd honey, cinnamon and sea salt; whisk again.\nPour into your favourite mug and sip slowly. Pure ritual.",
+            "tip": "For a frothy finish, blend for 10 seconds before serving."
+          }
+        },
+        "r2": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "wafers",
+            "product": "Cacao Wafers",
+            "category": "Baking",
+            "time": "15 min",
+            "title": "Silky Dark Chocolate Ganache",
+            "description": "Two ingredients, endless uses — glaze cakes, fill tarts, or dip fruit.",
+            "ingredients": "200g Cacao Sense Cacao Wafers\n200ml warm cream (or coconut cream)",
+            "method": "Place cacao wafers in a heatproof bowl.\nHeat cream until just steaming, then pour over the wafers.\nLet sit 2 minutes, then stir slowly from the centre until silky and glossy.\nUse warm as a glaze, or chill to pipe and fill.",
+            "tip": "Add a pinch of sea salt for depth."
+          }
+        },
+        "r3": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "nibs",
+            "product": "Cacao Nibs",
+            "category": "Snack",
+            "time": "30 min",
+            "title": "Cacao Nib Energy Granola",
+            "description": "Crunchy, nutrient-dense, and naturally sweet — nature's chocolate chips baked into your morning.",
+            "ingredients": "2 cups rolled oats\n½ cup Cacao Sense Cacao Nibs\n⅓ cup honey\n¼ cup coconut oil, melted\n½ cup mixed nuts\nPinch of salt",
+            "method": "Preheat oven to 160°C (320°F).\nMix oats, nuts and salt. Stir in honey and melted coconut oil.\nSpread on a lined tray and bake 20 minutes, stirring once.\nCool completely, then fold in cacao nibs so they stay crunchy and raw.",
+            "tip": "Store in an airtight jar for up to two weeks."
+          }
+        },
+        "r4": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "tea",
+            "product": "Cacao Tea",
+            "category": "Sip & Relax",
+            "time": "8 min",
+            "title": "Soothing Cacao Husk Tea",
+            "description": "A caffeine-light, earthy brew made from sun-dried cacao husks — perfect for winding down.",
+            "ingredients": "2 tbsp Cacao Sense Cacao Tea\n2 cups water\nHoney or orange peel (optional)",
+            "method": "Bring water to a gentle simmer.\nAdd cacao tea and steep 5–7 minutes.\nStrain into a cup. Add honey or a twist of orange peel.\nSip warm and unwind.",
+            "tip": "Steep longer for a richer, fuller body."
+          }
+        },
+        "r5": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "butter",
+            "product": "Cacao Butter",
+            "category": "Beauty",
+            "time": "20 min",
+            "title": "Whipped Cacao Butter Body Balm",
+            "description": "Not everything cacao goes in a bowl — this luxurious balm is nature's purest moisturiser.",
+            "ingredients": "½ cup Cacao Sense Cacao Butter\n2 tbsp coconut oil\n5 drops essential oil (optional)",
+            "method": "Melt cacao butter and coconut oil gently over a water bath.\nRemove from heat and cool until slightly firm.\nWhip with a hand mixer until light and fluffy.\nSpoon into a jar. Apply to skin for deep, lasting moisture.",
+            "tip": "Store in a cool place to keep the whipped texture."
+          }
+        },
+        "r6": {
+          "type": "recipe",
+          "settings": {
+            "fallback": "beans",
+            "product": "Cacao Beans",
+            "category": "Post-Workout Fuel",
+            "time": "5 min",
+            "title": "Raw Cacao Bean Trail Mix",
+            "description": "A magnesium-rich, energising snack for recovery and focus.",
+            "ingredients": "½ cup Cacao Sense Cacao Beans\n½ cup almonds\n¼ cup dried cherries\n¼ cup pumpkin seeds",
+            "method": "Combine all ingredients in a bowl.\nToss and portion into jars or pouches.\nGrab and go for natural energy that lasts.",
+            "tip": "Crack the beans lightly to release their full aroma."
+          }
+        }
+      },
+      "block_order": ["r1", "r2", "r3", "r4", "r5", "r6"],
+      "settings": {
+        "hero_eyebrow": "Recipes",
+        "hero_title": "Recipes to Awaken Your Senses",
+        "subtext": "From morning rituals to evening indulgence — discover simple, nourishing ways to bring pure single-origin cacao into your kitchen. Every recipe uses 100% pure Cacao Sense products: no additives, no shortcuts, just real chocolate flavour.",
+        "cta_text": "Ready to start cooking?",
+        "cta_label": "Shop the Full Cacao Collection"
+      }
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["recipes", "newsletter"]
+}

@@ -1,0 +1,100 @@
+{
+  "sections": {
+    "blog": {
+      "type": "ts-blog-page",
+      "blocks": {
+        "b1": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-hero.webp",
+            "category": "Heritage",
+            "read_time": "6 min read",
+            "title": "From Bean to Bliss: The 127-Year Journey of Cacao Sense",
+            "excerpt": "Behind every product is a story that began over a century ago in the fertile highlands of Guatemala. Discover how generations of farming tradition, sustainable land stewardship, and an uncompromising commitment to purity shaped the cacao you taste today — from family-owned farms to your table."
+          }
+        },
+        "b2": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-cacao.webp",
+            "category": "Education",
+            "read_time": "5 min read",
+            "title": "Why Single-Origin Cacao Tastes Different (And Better)",
+            "excerpt": "\"Single-origin\" is more than a label — it's terroir in a bean. We break down how soil, altitude and climate in Ecuador, Ghana and Madagascar create distinct flavour notes, and why blended commercial cacao loses the very character that makes pure cacao extraordinary."
+          }
+        },
+        "b3": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-premium-2.webp",
+            "category": "Wellness",
+            "read_time": "7 min read",
+            "title": "The Superfood Science: 6 Reasons Cacao Belongs in Your Daily Ritual",
+            "excerpt": "With 40× the antioxidants of blueberries, natural mood-lifting compounds, and crash-free energy from theobromine, raw cacao is one of the most nutrient-dense foods on earth. Here's the science behind the heart health, magnesium, and serotonin benefits that make cacao a true superfood."
+          }
+        },
+        "b4": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-image-1.webp",
+            "category": "Education",
+            "read_time": "4 min read",
+            "title": "Cacao vs. Cocoa: What's the Real Difference?",
+            "excerpt": "They sound the same, but the processing tells two very different stories. Learn why raw, cold-processed cacao retains nutrients that high-heat cocoa destroys — and how to know which one you're really buying."
+          }
+        },
+        "b5": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-vision.webp",
+            "category": "Craft",
+            "read_time": "5 min read",
+            "title": "Inside Our 72-Hour Stone-Grinding Process",
+            "excerpt": "Most chocolate is processed in minutes. We take 72 hours. Step inside our small-batch process — from hand-harvested pods to natural fermentation, slow sun-drying, and traditional granite stone-grinding — and discover why patience is the secret ingredient to purity."
+          }
+        },
+        "b6": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "recipe-tea.webp",
+            "category": "Lifestyle",
+            "read_time": "4 min read",
+            "title": "5 Morning Rituals to Transform Your Day with Cacao",
+            "excerpt": "From ceremonial cacao drinks to nib-packed breakfast bowls, discover simple ways to weave pure cacao into your morning for sustained energy, focus, and a moment of calm before the day begins."
+          }
+        },
+        "b7": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "os-premium-hero.webp",
+            "category": "Sustainability",
+            "read_time": "6 min read",
+            "title": "Sustainability at the Source: How We Farm Without Compromise",
+            "excerpt": "Owning our farms means owning our impact. Explore how ethical harvesting, regenerative practices, and direct partnerships with farming communities make Cacao Sense a brand you can feel good about — from highland soil to sealed pouch."
+          }
+        },
+        "b8": {
+          "type": "post",
+          "settings": {
+            "fallback_asset": "recipe-butter.webp",
+            "category": "Lifestyle",
+            "read_time": "4 min read",
+            "title": "Beyond the Kitchen: Surprising Ways to Use Cacao Butter",
+            "excerpt": "Cacao butter isn't just for baking. From whipped body balms to lip care and natural moisturisers, discover why this cold-pressed, food-grade ingredient is a luxury your skincare routine has been missing."
+          }
+        }
+      },
+      "block_order": ["b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8"],
+      "settings": {
+        "hero_eyebrow": "Journal",
+        "hero_title": "The Cacao Journal",
+        "subtext": "Stories, science and rituals from the world of pure single-origin cacao. Explore the heritage behind every bean, the benefits behind every sip, and the craft behind every batch."
+      }
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["blog", "newsletter"]
+}

@@ -1,0 +1,146 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'Home-hero.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+    </div>
+  </section>
+
+  <section class="ts-recipes ts-page-width">
+    {% if section.settings.subtext != blank %}
+      <div class="ts-os-intro-block rte"><p>{{ section.settings.subtext }}</p></div>
+    {% endif %}
+
+    <div class="ts-recipes__list">
+      {% for block in section.blocks %}
+        {% if block.type == 'recipe' %}
+          {% liquid
+            assign rimg = block.settings.image
+            assign rfallback = 'recipe-' | append: block.settings.fallback | append: '.webp' | asset_url
+            assign ing_lines = block.settings.ingredients | newline_to_br | split: '<br />'
+            assign method_lines = block.settings.method | newline_to_br | split: '<br />'
+          %}
+          <article class="ts-recipe" {{ block.shopify_attributes }}>
+            <div class="ts-recipe__media">
+              {% if rimg != blank %}
+                <img src="{{ rimg | image_url: width: 1000 }}" alt="{{ block.settings.title | escape }}" width="{{ rimg.width }}" height="{{ rimg.height }}" loading="lazy">
+              {% else %}
+                <img src="{{ rfallback }}" alt="{{ block.settings.title | escape }}" width="1000" height="1000" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="ts-recipe__body">
+              <p class="ts-recipe__meta">
+                {% if block.settings.product != blank %}<span class="ts-recipe__pill">{{ block.settings.product }}</span>{% endif %}
+                {% if block.settings.category != blank %}<span>{{ block.settings.category }}</span>{% endif %}
+                {% if block.settings.time != blank %}<span class="ts-recipe__dot">·</span><span>{{ block.settings.time }}</span>{% endif %}
+              </p>
+              <h2 class="ts-recipe__title">{{ block.settings.title }}</h2>
+              {% if block.settings.description != blank %}
+                <p class="ts-recipe__desc">{{ block.settings.description }}</p>
+              {% endif %}
+              <div class="ts-recipe__cols">
+                <div class="ts-recipe__ing">
+                  <h3>{{ 'sections.recipes.ingredients' | t }}</h3>
+                  <ul>
+                    {% for line in ing_lines %}
+                      {% assign l = line | strip %}
+                      {% if l != blank %}<li>{{ l }}</li>{% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+                <div class="ts-recipe__method">
+                  <h3>{{ 'sections.recipes.method' | t }}</h3>
+                  <ol>
+                    {% for line in method_lines %}
+                      {% assign l = line | strip %}
+                      {% if l != blank %}<li>{{ l }}</li>{% endif %}
+                    {% endfor %}
+                  </ol>
+                </div>
+              </div>
+              {% if block.settings.tip != blank %}
+                <p class="ts-recipe__tip"><strong>{{ 'sections.recipes.tip' | t }}</strong> {{ block.settings.tip }}</p>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank or section.settings.cta_label != blank %}
+      <div class="ts-recipes__cta">
+        {% if section.settings.cta_text != blank %}<p class="ts-recipes__cta-text">{{ section.settings.cta_text }}</p>{% endif %}
+        <a class="ts-btn ts-btn--primary" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+          {{ section.settings.cta_label }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Recipes page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to the theme's Home-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Cacao recipes" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Recipes" },
+    { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "Recipes to Awaken Your Senses" },
+    { "type": "textarea", "id": "subtext", "label": "Intro subtext", "default": "From morning rituals to evening indulgence — discover simple, nourishing ways to bring pure single-origin cacao into your kitchen. Every recipe uses 100% pure Cacao Sense products: no additives, no shortcuts, just real chocolate flavour." },
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Ready to start cooking?" },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop the Full Cacao Collection" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "recipe",
+      "name": "Recipe",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select", "id": "fallback", "label": "Placeholder (if no image)",
+          "options": [
+            { "value": "powder", "label": "Cacao Powder" },
+            { "value": "wafers", "label": "Cacao Wafers" },
+            { "value": "nibs", "label": "Cacao Nibs" },
+            { "value": "tea", "label": "Cacao Tea" },
+            { "value": "butter", "label": "Cacao Butter" },
+            { "value": "beans", "label": "Cacao Beans" }
+          ],
+          "default": "powder"
+        },
+        { "type": "text", "id": "product", "label": "Product tag", "default": "Cacao Powder" },
+        { "type": "text", "id": "category", "label": "Category", "default": "Morning Ritual" },
+        { "type": "text", "id": "time", "label": "Time", "default": "5 min" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Recipe title" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "" },
+        { "type": "textarea", "id": "ingredients", "label": "Ingredients (one per line)", "default": "" },
+        { "type": "textarea", "id": "method", "label": "Method (one step per line)", "default": "" },
+        { "type": "textarea", "id": "tip", "label": "Tip", "default": "" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Recipes page" }]
+}
+{% endschema %}

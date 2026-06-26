@@ -1,0 +1,102 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'Story.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+    </div>
+  </section>
+
+  <section class="ts-blog ts-page-width">
+    {% if section.settings.subtext != blank %}
+      <div class="ts-os-intro-block rte"><p>{{ section.settings.subtext }}</p></div>
+    {% endif %}
+
+    <div class="ts-blog-grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'post' %}
+          {% liquid
+            assign pimg = block.settings.image
+            assign pfallback = block.settings.fallback_asset | asset_url
+            assign purl = block.settings.url
+          %}
+          <article class="ts-blog-card" {{ block.shopify_attributes }}>
+            <div class="ts-blog-card__media">
+              {% if purl != blank %}<a href="{{ purl }}" tabindex="-1" aria-hidden="true">{% endif %}
+              {% if pimg != blank %}
+                <img src="{{ pimg | image_url: width: 800 }}" alt="{{ block.settings.title | escape }}" width="{{ pimg.width }}" height="{{ pimg.height }}" loading="lazy">
+              {% else %}
+                <img src="{{ pfallback }}" alt="{{ block.settings.title | escape }}" width="800" height="533" loading="lazy">
+              {% endif %}
+              {% if purl != blank %}</a>{% endif %}
+            </div>
+            <div class="ts-blog-card__body">
+              <p class="ts-blog-card__meta">
+                {% if block.settings.category != blank %}<span class="ts-blog-card__cat">{{ block.settings.category }}</span>{% endif %}
+                {% if block.settings.read_time != blank %}<span>{{ block.settings.read_time }}</span>{% endif %}
+              </p>
+              <h2 class="ts-blog-card__title">
+                {% if purl != blank %}<a href="{{ purl }}">{{ block.settings.title }}</a>{% else %}{{ block.settings.title }}{% endif %}
+              </h2>
+              {% if block.settings.excerpt != blank %}
+                <p class="ts-blog-card__excerpt">{{ block.settings.excerpt }}</p>
+              {% endif %}
+              {% if purl != blank %}
+                <a class="ts-blog-card__more" href="{{ purl }}">{{ 'sections.blog.read_more' | t }}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+                </a>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Blog page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "max_blocks": 30,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to the theme's Story.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "The Cacao Journal" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Journal" },
+    { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "The Cacao Journal" },
+    { "type": "textarea", "id": "subtext", "label": "Intro subtext", "default": "Stories, science and rituals from the world of pure single-origin cacao. Explore the heritage behind every bean, the benefits behind every sip, and the craft behind every batch." }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "Blog post",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "fallback_asset", "label": "Placeholder asset (if no image)", "default": "os-hero.webp", "info": "Theme asset filename used when no image is set." },
+        { "type": "text", "id": "category", "label": "Category", "default": "Heritage" },
+        { "type": "text", "id": "read_time", "label": "Read time", "default": "5 min read" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Blog title" },
+        { "type": "textarea", "id": "excerpt", "label": "Excerpt", "default": "" },
+        { "type": "url", "id": "url", "label": "Article link", "info": "Optional. Link to the full article." }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Blog page" }]
+}
+{% endschema %}

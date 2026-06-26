@@ -69,6 +69,8 @@
       "process": "Our Process",
       "premium": "Premium Collection",
       "collections": "Collections",
+      "recipes": "Recipes",
+      "blog": "Blog",
       "contact": "Contact",
       "butter": "Butter",
       "nibs": "Nibs",
@@ -103,6 +105,14 @@
     },
     "newsletter": {
       "email_label": "Email address"
+    },
+    "recipes": {
+      "ingredients": "Ingredients",
+      "method": "Method",
+      "tip": "Tip:"
+    },
+    "blog": {
+      "read_more": "Read article"
     },
     "contact": {
       "name": "Name",
