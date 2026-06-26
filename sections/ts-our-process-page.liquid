@@ -1,0 +1,142 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'os-process-hero.webp' | asset_url
+  assign img1 = section.settings.image_1
+  assign img1_fallback = 'os-process-1.webp' | asset_url
+  assign img2 = section.settings.image_2
+  assign img2_fallback = 'os-process-2.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1797" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+      {% if section.settings.hero_lead != blank %}
+        <p class="ts-os-hero__lead">{{ section.settings.hero_lead }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="ts-os-story ts-page-width">
+    {% if section.settings.intro_heading != blank or section.settings.intro_rte != blank %}
+      <div class="ts-os-intro-block rte">
+        {% if section.settings.intro_heading != blank %}<h2>{{ section.settings.intro_heading }}</h2>{% endif %}
+        {{ section.settings.intro_rte }}
+      </div>
+    {% endif %}
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        {% if img1 != blank %}
+          <img src="{{ img1 | image_url: width: 1400 }}" alt="{{ section.settings.image_1_alt | escape }}" width="{{ img1.width }}" height="{{ img1.height }}" loading="lazy">
+        {% else %}
+          <img src="{{ img1_fallback }}" alt="{{ section.settings.image_1_alt | escape }}" width="1600" height="1067" loading="lazy">
+        {% endif %}
+        {% if section.settings.image_1_caption != blank %}
+          <figcaption class="ts-os-row__caption">{{ section.settings.image_1_caption }}</figcaption>
+        {% endif %}
+      </figure>
+      <div class="ts-os-row__text rte">
+        {% if section.settings.row_1_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_1_heading }}</h2>{% endif %}
+        {{ section.settings.row_1_rte }}
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        {% if img2 != blank %}
+          <img src="{{ img2 | image_url: width: 1400 }}" alt="{{ section.settings.image_2_alt | escape }}" width="{{ img2.width }}" height="{{ img2.height }}" loading="lazy">
+        {% else %}
+          <img src="{{ img2_fallback }}" alt="{{ section.settings.image_2_alt | escape }}" width="1600" height="1067" loading="lazy">
+        {% endif %}
+        {% if section.settings.image_2_caption != blank %}
+          <figcaption class="ts-os-row__caption">{{ section.settings.image_2_caption }}</figcaption>
+        {% endif %}
+      </figure>
+      <div class="ts-os-row__text rte">
+        {% if section.settings.row_2_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_2_heading }}</h2>{% endif %}
+        {{ section.settings.row_2_rte }}
+      </div>
+    </div>
+  </section>
+
+  {% if section.settings.cta_title != blank %}
+    <section class="ts-os-cta ts-page-width">
+      <h2 class="ts-os-cta__title">{{ section.settings.cta_title }}</h2>
+      {% if section.settings.cta_text != blank %}
+        <p class="ts-os-cta__text">{{ section.settings.cta_text }}</p>
+      {% endif %}
+      <a class="ts-btn ts-btn--primary ts-os-cta__btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+        {{ section.settings.cta_label }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </section>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Our process page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset os-process-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Cacao processing at Finca El Rosario Quesada" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Single Origin · Guatemala" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Our Process" },
+    { "type": "textarea", "id": "hero_lead", "label": "Hero subtitle", "default": "From beginning to end." },
+
+    { "type": "header", "content": "Intro (full width)" },
+    { "type": "text", "id": "intro_heading", "label": "Intro heading", "default": "From Seed to Your Table" },
+    {
+      "type": "richtext",
+      "id": "intro_rte",
+      "label": "Intro text",
+      "default": "<p>Every cacao product begins with a single seed and a commitment to preserving the ancestral way of cultivating cacao.</p><p>At Cacao Senses, every step of our process is done with intention. We germinate each cacao plant by hand, carefully nurture every tree, and harvest each pod at peak ripeness to ensure the highest quality from the very beginning.</p>"
+    },
+
+    { "type": "header", "content": "Row 1 — image left, text right" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1", "info": "Falls back to asset os-process-1.webp if empty." },
+    { "type": "text", "id": "image_1_alt", "label": "Image 1 alt", "default": "Cacao beans fermenting" },
+    { "type": "text", "id": "image_1_caption", "label": "Image 1 caption", "default": "" },
+    { "type": "text", "id": "row_1_heading", "label": "Row 1 heading", "default": "" },
+    {
+      "type": "richtext",
+      "id": "row_1_rte",
+      "label": "Row 1 text",
+      "default": "<p>Once harvested, the cacao fruit is opened and the beans begin their transformation through fermentation — one of the most important steps in developing cacao's rich aroma and complex flavor. Inspired by ancient Mayan traditions, we have perfected our own fermentation protocols through years of research and experience.</p><p>Each cacao variety is unique, which is why every harvest follows a carefully designed process to highlight its natural characteristics.</p>"
+    },
+
+    { "type": "header", "content": "Row 2 — image left, text right" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2", "info": "Falls back to asset os-process-2.webp if empty." },
+    { "type": "text", "id": "image_2_alt", "label": "Image 2 alt", "default": "Cacao beans sun-drying" },
+    { "type": "text", "id": "image_2_caption", "label": "Image 2 caption", "default": "" },
+    { "type": "text", "id": "row_2_heading", "label": "Row 2 heading", "default": "" },
+    {
+      "type": "richtext",
+      "id": "row_2_rte",
+      "label": "Row 2 text",
+      "default": "<p>After fermentation, our beans are slowly sun-dried, carefully monitored, and prepared to become our cacao products.</p><p>We believe in honoring the whole cacao fruit. Nothing goes to waste — organic remains are returned to the earth as natural fertilizer, creating a cycle that nourishes the same soil where our cacao grows.</p>"
+    },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Taste the Heritage" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Discover our range of premium single-origin cacao products." },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Our Products" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Our process page" }]
+}
+{% endschema %}

@@ -3010,6 +3010,32 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   margin: 0 0 1rem;
 }
 
+.ts-os-intro-block {
+  max-width: 48rem;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.ts-os-intro-block h2 {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ts-primary);
+  margin: 0 0 1.25rem;
+}
+
+.ts-os-intro-block p {
+  font-size: 1.075rem;
+  line-height: 1.85;
+  color: var(--ts-fg);
+  margin: 0 0 1rem;
+}
+
+.ts-os-intro-block p:last-child {
+  margin-bottom: 0;
+}
+
 @media (max-width: 767px) {
   .ts-os-row {
     grid-template-columns: 1fr;

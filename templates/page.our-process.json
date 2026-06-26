@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "our_process": {
+      "type": "ts-our-process-page",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["our_process", "newsletter"]
+}
