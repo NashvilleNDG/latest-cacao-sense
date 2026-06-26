@@ -2973,6 +2973,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   margin-bottom: 4rem;
 }
 
+/* Alternate rows: image on the right, text on the left */
+.ts-os-row--reverse .ts-os-row__media {
+  order: 2;
+}
+
+.ts-os-row--reverse .ts-os-row__text {
+  order: 1;
+}
+
 .ts-os-row__media {
   margin: 0;
 }
@@ -3051,6 +3060,12 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   .ts-os-row {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  /* Keep image above text on mobile, even for reversed rows */
+  .ts-os-row--reverse .ts-os-row__media,
+  .ts-os-row--reverse .ts-os-row__text {
+    order: 0;
   }
 }
 
