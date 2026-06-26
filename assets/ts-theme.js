@@ -261,6 +261,59 @@
     updateVisibility();
   }
 
+  function initDropdowns() {
+    var dropdowns = document.querySelectorAll('[data-ts-dropdown]');
+    if (!dropdowns.length) {
+      return;
+    }
+
+    function closeAll(except) {
+      dropdowns.forEach(function (dd) {
+        if (dd === except) {
+          return;
+        }
+        dd.classList.remove('is-open');
+        var t = dd.querySelector('[data-ts-dropdown-toggle]');
+        if (t) {
+          t.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    dropdowns.forEach(function (dd) {
+      var toggle = dd.querySelector('[data-ts-dropdown-toggle]');
+      if (!toggle) {
+        return;
+      }
+      toggle.addEventListener('click', function (e) {
+        e.preventDefault();
+        var open = dd.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          closeAll(dd);
+        }
+      });
+    });
+
+    document.addEventListener('click', function (e) {
+      dropdowns.forEach(function (dd) {
+        if (!dd.contains(e.target)) {
+          dd.classList.remove('is-open');
+          var t = dd.querySelector('[data-ts-dropdown-toggle]');
+          if (t) {
+            t.setAttribute('aria-expanded', 'false');
+          }
+        }
+      });
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' || e.keyCode === 27) {
+        closeAll(null);
+      }
+    });
+  }
+
   function initProductFilters() {
     var root = document.querySelector('[data-ts-products]');
     if (!root) return;
@@ -289,12 +342,14 @@
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function () {
       initHeader();
+      initDropdowns();
       initScrollTop();
       initProductFilters();
       initProductPage();
     });
   } else {
     initHeader();
+    initDropdowns();
     initScrollTop();
     initProductFilters();
     initProductPage();

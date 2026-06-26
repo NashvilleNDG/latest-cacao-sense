@@ -63,7 +63,10 @@
     "header": {
       "home": "Home",
       "shop": "Shop",
+      "about": "About",
       "story": "Our Story",
+      "history": "History of Farms",
+      "process": "Our Process",
       "collections": "Collections",
       "contact": "Contact",
       "butter": "Butter",

@@ -262,6 +262,102 @@ body.ts-body {
   width: 100%;
 }
 
+/* ----- Header dropdown (About) ----- */
+.ts-header__dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ts-header__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.ts-header__dropdown-caret {
+  transition: transform 0.25s ease;
+}
+
+.ts-header__dropdown.is-open .ts-header__dropdown-caret {
+  transform: rotate(180deg);
+}
+
+.ts-header__dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 0.85rem;
+  min-width: 230px;
+  padding: 0.5rem;
+  background: #058181;
+  border-radius: 1rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  z-index: 200;
+}
+
+.ts-header__dropdown-menu::before {
+  content: "";
+  position: absolute;
+  top: -0.85rem;
+  left: 0;
+  right: 0;
+  height: 0.85rem;
+}
+
+.ts-header__dropdown:hover .ts-header__dropdown-menu,
+.ts-header__dropdown:focus-within .ts-header__dropdown-menu,
+.ts-header__dropdown.is-open .ts-header__dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+.ts-header__dropdown-link {
+  display: block;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.6rem;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.ts-header__dropdown-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.ts-header__mobile-heading {
+  margin: 1rem 0 0.25rem;
+  font-family: var(--ts-font-body);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.ts-header__mobile-sublink {
+  padding-left: 1rem;
+}
+
 .ts-header__actions {
   display: flex;
   align-items: center;
@@ -2844,6 +2940,81 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   max-width: 42rem;
   line-height: 1.6;
   font-style: italic;
+}
+
+/* ----- Our Story: narrative with image rows ----- */
+.ts-os-story {
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 4.5rem 1.5rem 1rem;
+}
+
+.ts-os-story__lead {
+  max-width: 48rem;
+  margin: 0 auto 3.5rem;
+  text-align: center;
+}
+
+.ts-os-story__lead p {
+  margin: 0;
+  font-family: var(--ts-font-display);
+  font-size: 1.4rem;
+  line-height: 1.55;
+  color: var(--ts-primary);
+}
+
+.ts-os-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3.5rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+.ts-os-row__media {
+  margin: 0;
+}
+
+.ts-os-row__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--ts-radius-lg);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.14);
+}
+
+.ts-os-row__caption {
+  margin-top: 0.85rem;
+  font-size: 0.875rem;
+  font-style: italic;
+  text-align: center;
+  color: var(--ts-muted-fg);
+}
+
+.ts-os-row__text {
+  font-size: 1.075rem;
+  line-height: 1.85;
+  color: var(--ts-fg);
+}
+
+.ts-os-row__text > :first-child {
+  margin-top: 0;
+}
+
+.ts-os-row__heading {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--ts-primary);
+  margin: 0 0 1rem;
+}
+
+@media (max-width: 767px) {
+  .ts-os-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 }
 
 .ts-os-intro {
