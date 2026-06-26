@@ -1,16 +1,16 @@
 {% liquid
   assign hero_img = section.settings.hero_image
-  assign hero_fallback = 'os-hero.webp' | asset_img_url: '2400x'
+  assign hero_fallback = 'os-hero.webp' | asset_url
   assign img1 = section.settings.image_1
-  assign img1_fallback = 'os-image-1.webp' | asset_img_url: '1400x'
+  assign img1_fallback = 'os-image-1.webp' | asset_url
   assign img2 = section.settings.image_2
-  assign img2_fallback = 'os-image-2.webp' | asset_img_url: '1400x'
+  assign img2_fallback = 'os-image-2.webp' | asset_url
   assign img_mission = section.settings.image_mission
-  assign mission_fallback = 'os-mission.webp' | asset_img_url: '1400x'
+  assign mission_fallback = 'os-mission.webp' | asset_url
   assign img_vision = section.settings.image_vision
-  assign vision_fallback = 'os-vision.webp' | asset_img_url: '1400x'
+  assign vision_fallback = 'os-vision.webp' | asset_url
   assign img_cacao = section.settings.image_cacao
-  assign cacao_fallback = 'os-cacao.webp' | asset_img_url: '1400x'
+  assign cacao_fallback = 'os-cacao.webp' | asset_url
 %}
 
 <div class="ts-os-page">
