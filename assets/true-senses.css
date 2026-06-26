@@ -554,7 +554,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   padding-top: 8rem;
 }
 
-/* Our story & contact: same overlay as home — dark hero sits under transparent header */
+/* Story/process/premium pages: hero sits under the transparent header, with a top scrim for nav readability */
 #MainContent > .shopify-section:first-child.section-ts-os-page .ts-os-hero {
   margin-top: -5.75rem;
 }
@@ -2899,7 +2899,9 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 .ts-os-hero__shade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15));
+  background:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.2) 12%, rgba(0, 0, 0, 0) 28%),
+    linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15));
 }
 
 .ts-os-hero__content {
@@ -3034,6 +3036,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
 .ts-os-intro-block p:last-child {
   margin-bottom: 0;
+}
+
+.ts-os-intro-block--left {
+  text-align: left;
+}
+
+.ts-os-intro-block--left p:first-of-type {
+  font-size: 1.2rem;
+  color: var(--ts-primary);
 }
 
 @media (max-width: 767px) {

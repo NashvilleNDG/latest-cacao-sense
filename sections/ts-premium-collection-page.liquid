@@ -1,0 +1,142 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'os-premium-2.webp' | asset_url
+  assign img1 = section.settings.image_1
+  assign img1_fallback = 'os-premium-1.webp' | asset_url
+  assign img2 = section.settings.image_2
+  assign img2_fallback = 'os-premium-hero.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+      {% if section.settings.hero_lead != blank %}
+        <p class="ts-os-hero__lead">{{ section.settings.hero_lead }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="ts-os-story ts-page-width">
+    {% if section.settings.intro_heading != blank or section.settings.intro_rte != blank %}
+      <div class="ts-os-intro-block ts-os-intro-block--left rte">
+        {% if section.settings.intro_heading != blank %}<h2>{{ section.settings.intro_heading }}</h2>{% endif %}
+        {{ section.settings.intro_rte }}
+      </div>
+    {% endif %}
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        {% if img1 != blank %}
+          <img src="{{ img1 | image_url: width: 1400 }}" alt="{{ section.settings.image_1_alt | escape }}" width="{{ img1.width }}" height="{{ img1.height }}" loading="lazy">
+        {% else %}
+          <img src="{{ img1_fallback }}" alt="{{ section.settings.image_1_alt | escape }}" width="1600" height="2400" loading="lazy">
+        {% endif %}
+        {% if section.settings.image_1_caption != blank %}
+          <figcaption class="ts-os-row__caption">{{ section.settings.image_1_caption }}</figcaption>
+        {% endif %}
+      </figure>
+      <div class="ts-os-row__text rte">
+        {% if section.settings.row_1_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_1_heading }}</h2>{% endif %}
+        {{ section.settings.row_1_rte }}
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        {% if img2 != blank %}
+          <img src="{{ img2 | image_url: width: 1400 }}" alt="{{ section.settings.image_2_alt | escape }}" width="{{ img2.width }}" height="{{ img2.height }}" loading="lazy">
+        {% else %}
+          <img src="{{ img2_fallback }}" alt="{{ section.settings.image_2_alt | escape }}" width="1600" height="1067" loading="lazy">
+        {% endif %}
+        {% if section.settings.image_2_caption != blank %}
+          <figcaption class="ts-os-row__caption">{{ section.settings.image_2_caption }}</figcaption>
+        {% endif %}
+      </figure>
+      <div class="ts-os-row__text rte">
+        {% if section.settings.row_2_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_2_heading }}</h2>{% endif %}
+        {{ section.settings.row_2_rte }}
+      </div>
+    </div>
+  </section>
+
+  {% if section.settings.cta_title != blank %}
+    <section class="ts-os-cta ts-page-width">
+      <h2 class="ts-os-cta__title">{{ section.settings.cta_title }}</h2>
+      {% if section.settings.cta_text != blank %}
+        <p class="ts-os-cta__text">{{ section.settings.cta_text }}</p>
+      {% endif %}
+      <a class="ts-btn ts-btn--primary ts-os-cta__btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+        {{ section.settings.cta_label }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    </section>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Premium collection page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset os-premium-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Finca Ana María white cacao" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Single Origin · Guatemala" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Premium Collection" },
+    { "type": "textarea", "id": "hero_lead", "label": "Hero subtitle", "default": "Home of One of the World's Rare White Cacao Beans" },
+
+    { "type": "header", "content": "Intro" },
+    { "type": "text", "id": "intro_heading", "label": "Intro heading", "default": "" },
+    {
+      "type": "richtext",
+      "id": "intro_rte",
+      "label": "Intro text",
+      "default": "<p>Finca Ana María is one of the few producers in the world preserving and cultivating the rare White Cacao Bean — an ancient cacao variety recognized for its naturally light-colored seeds and exceptional genetic purity. Protected through generations of ancestral knowledge, this unique cacao lineage represents a living connection to the origins of cacao.</p><p>Nestled in the tropical forests of northern Guatemala, along the banks of the Río Negro (Chixoy), Finca Ana María is a family-owned cacao farm operated by the Ac Tot family, with a cacao-growing tradition dating back to the 1950s.</p><p>Our story began when our grandparents helped establish an agricultural community in the Lachuá Ecoregion alongside two other families, carrying with them generations of knowledge surrounding the cultivation, consumption, and traditional uses of cacao.</p><p>Located near Laguna Lachuá National Park and the ancient Maya archaeological site of Salinas de los Nueve Cerros, our farm sits in Cobán, Alta Verapaz — one of Guatemala's most biodiverse and historically important cacao-growing regions.</p><p>For decades, we have dedicated ourselves to researching, selecting, and preserving Guatemala's finest cacao genetics. Through years of exploration and cultivation, we created specialized clonal gardens featuring premium cacao varieties, including Trinitario and Criollo cultivars, known as our FAML selections.</p>"
+    },
+
+    { "type": "header", "content": "Row 1 — image left, text right" },
+    { "type": "image_picker", "id": "image_1", "label": "Image 1", "info": "Falls back to asset os-premium-1.webp if empty." },
+    { "type": "text", "id": "image_1_alt", "label": "Image 1 alt", "default": "Rare white cacao beans" },
+    { "type": "text", "id": "image_1_caption", "label": "Image 1 caption", "default": "" },
+    { "type": "text", "id": "row_1_heading", "label": "Row 1 heading", "default": "A Rare Ancestral Treasure" },
+    {
+      "type": "richtext",
+      "id": "row_1_rte",
+      "label": "Row 1 text",
+      "default": "<p>Our most exceptional discovery is our Premium White Cacao Line — a rare cacao variety distinguished by its naturally white seeds and unique sensory profile. Discovered deep within the Guatemalan jungle during an expedition through ancient cacao-growing regions, this extraordinary genetic lineage has been carefully protected and propagated by our family to preserve a variety that could have disappeared forever.</p><p>Today, Finca Ana María remains among the few producers worldwide cultivating and protecting this rare White Cacao Bean.</p><p>To maintain its purity, our White Cacao grows in dedicated plantations where strict cultivation practices help preserve its genetics and prevent cross-pollination with other cacao varieties.</p><p>Each tree represents years of research, preservation, and respect for the ancestral origins of cacao.</p>"
+    },
+
+    { "type": "header", "content": "Row 2 — image left, text right" },
+    { "type": "image_picker", "id": "image_2", "label": "Image 2", "info": "Falls back to asset os-premium-2.webp if empty." },
+    { "type": "text", "id": "image_2_alt", "label": "Image 2 alt", "default": "Sustainable cacao cultivation" },
+    { "type": "text", "id": "image_2_caption", "label": "Image 2 caption", "default": "" },
+    { "type": "text", "id": "row_2_heading", "label": "Row 2 heading", "default": "Preserving the Future of Cacao" },
+    {
+      "type": "richtext",
+      "id": "row_2_rte",
+      "label": "Row 2 text",
+      "default": "<p>At Finca Ana María, we combine ancestral knowledge with innovative and sustainable agricultural practices to produce exceptional specialty cacao while protecting the ecosystem around us.</p><p>From cultivation to fermentation and sun drying, every step is carefully managed to enhance the natural aromas, flavors, and unique characteristics of each cacao variety.</p><p>Our mission is to share one of the world's rarest cacao experiences while protecting our family legacy, conserving biodiversity, preserving water sources, and supporting the sustainable development of our local communities.</p><p><strong>More than cacao — a living piece of history preserved for future generations.</strong></p>"
+    },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Taste the Heritage" },
+    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Discover our range of premium single-origin cacao products." },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Our Products" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "presets": [{ "name": "Premium collection page" }]
+}
+{% endschema %}

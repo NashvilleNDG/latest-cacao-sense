@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "premium_collection": {
+      "type": "ts-premium-collection-page",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["premium_collection", "newsletter"]
+}

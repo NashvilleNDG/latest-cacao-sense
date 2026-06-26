@@ -41,6 +41,10 @@
             if pages['our-process'] != blank
               assign url_process = pages['our-process'].url
             endif
+            assign url_premium = '/pages/premium-collection'
+            if pages['premium-collection'] != blank
+              assign url_premium = pages['premium-collection'].url
+            endif
             assign url_contact = '/pages/contact'
             if pages['contact'] != blank
               assign url_contact = pages['contact'].url
@@ -66,6 +70,7 @@
             </div>
           </div>
           <a class="ts-header__link" href="{{ routes.all_products_collection_url }}">Shop</a>
+          <a class="ts-header__link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
           <a class="ts-header__link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
           <a class="ts-header__link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
         {% endif %}
@@ -129,6 +134,10 @@
           if pages['our-process'] != blank
             assign url_process = pages['our-process'].url
           endif
+          assign url_premium = '/pages/premium-collection'
+          if pages['premium-collection'] != blank
+            assign url_premium = pages['premium-collection'].url
+          endif
           assign url_contact = '/pages/contact'
           if pages['contact'] != blank
             assign url_contact = pages['contact'].url
@@ -139,6 +148,7 @@
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_history }}">{{ 'sections.header.history' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
       {% endif %}
