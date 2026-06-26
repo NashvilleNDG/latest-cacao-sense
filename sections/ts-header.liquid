@@ -38,7 +38,6 @@
               assign url_contact = pages['contact'].url
             endif
           %}
-          <a class="ts-header__link" href="{{ routes.root_url }}">{{ 'sections.header.home' | t }}</a>
           <a class="ts-header__link" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
           <a class="ts-header__link" href="{{ routes.all_products_collection_url }}">Shop</a>
           <a class="ts-header__link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
@@ -101,7 +100,6 @@
             assign url_contact = pages['contact'].url
           endif
         %}
-        <a class="ts-header__mobile-link" href="{{ routes.root_url }}">{{ 'sections.header.home' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ routes.all_products_collection_url }}">Shop</a>
         <a class="ts-header__mobile-link" href="{{ routes.root_url }}#collections">{{ 'sections.header.collections' | t }}</a>
