@@ -1,0 +1,111 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "contact_main": {
+      "type": "ts-contact-page",
+      "blocks": {
+        "i1": {
+          "type": "info",
+          "settings": {
+            "style": "email",
+            "label": "Email Us",
+            "value": "hello@cacaosense.com",
+            "sub": "We reply within 24 hours"
+          }
+        },
+        "i2": {
+          "type": "info",
+          "settings": {
+            "style": "phone",
+            "label": "Call Us",
+            "value": "+1 (800) 123-4567",
+            "sub": "Mon–Fri, 9am–6pm EST"
+          }
+        },
+        "i3": {
+          "type": "info",
+          "settings": {
+            "style": "map",
+            "label": "Our Warehouse",
+            "value": "128 Cacao Lane, New York, NY 10001",
+            "sub": "United States"
+          }
+        },
+        "i4": {
+          "type": "info",
+          "settings": {
+            "style": "clock",
+            "label": "Business Hours",
+            "value": "Mon–Fri: 9am – 6pm",
+            "sub": "Sat: 10am – 3pm EST"
+          }
+        },
+        "f1": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Yes! We ship to over 15 countries worldwide. International orders typically arrive within 7–14 business days.</p>"
+          }
+        },
+        "f2": {
+          "type": "faq",
+          "settings": {
+            "question": "Are your cacao products certified organic?",
+            "answer": "<p>All our cacao is sourced from certified organic farms. 100% free of pesticides, additives, and GMOs.</p>"
+          }
+        },
+        "f3": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>We offer a 30-day satisfaction guarantee on all cacao products.</p>"
+          }
+        },
+        "f4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I buy cacao in bulk for my business?",
+            "answer": "<p>Yes — we offer wholesale pricing for cafés, bakeries, and brands. Reach out for a custom quote.</p>"
+          }
+        },
+        "f5": {
+          "type": "faq",
+          "settings": {
+            "question": "How should I store cacao products?",
+            "answer": "<p>Store in a cool, dry place away from sunlight. Powder and nibs last 12–24 months; butter up to 2 years sealed.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "i1",
+        "i2",
+        "i3",
+        "i4",
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5"
+      ],
+      "settings": {
+        "hero_eyebrow": "We'd Love to Hear From You",
+        "hero_title": "Contact",
+        "hero_lead": "Questions about our cacao products, wholesale inquiries, or just want to share your love for cacao? Our team is here.",
+        "form_title": "Send a message",
+        "form_subtitle": "Fill out the form and our team will respond within 24 hours.",
+        "faq_title": "Frequently Asked Questions"
+      }
+    }
+  },
+  "order": [
+    "contact_main"
+  ]
+}
