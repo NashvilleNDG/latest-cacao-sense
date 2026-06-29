@@ -2986,6 +2986,10 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   margin: 0;
 }
 
+.ts-os-bulk__cta {
+  margin-top: 1.5rem;
+}
+
 .ts-os-row__media img {
   display: block;
   width: 100%;
