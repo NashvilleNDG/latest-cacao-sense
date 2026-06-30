@@ -82,6 +82,7 @@
           {% endif %}
         </figure>
         <div class="ts-os-row__text rte">
+          {% if section.settings.bulk_eyebrow != blank %}<p class="ts-os-row__kicker">{{ section.settings.bulk_eyebrow }}</p>{% endif %}
           {% if section.settings.bulk_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.bulk_heading }}</h2>{% endif %}
           {{ section.settings.bulk_rte }}
           {% if section.settings.bulk_cta_label != blank %}
@@ -158,12 +159,13 @@
     { "type": "header", "content": "Bulk Cocoa Beans — image left, text right" },
     { "type": "image_picker", "id": "image_bulk", "label": "Bulk image", "info": "Falls back to asset os-bulk.webp if empty." },
     { "type": "text", "id": "bulk_image_alt", "label": "Bulk image alt", "default": "Bulk Guatemalan cocoa beans in jute sacks" },
-    { "type": "text", "id": "bulk_heading", "label": "Bulk heading", "default": "Bulk Cocoa Beans" },
+    { "type": "text", "id": "bulk_eyebrow", "label": "Bulk eyebrow", "default": "Bulk Cacao" },
+    { "type": "text", "id": "bulk_heading", "label": "Bulk heading", "default": "Premium Single-Origin Cacao Beans" },
     {
       "type": "richtext",
       "id": "bulk_rte",
       "label": "Bulk text",
-      "default": "<p>We supply premium Guatemalan cocoa beans in bulk to brands, makers, and manufacturers who value quality and origin.</p><p>Available in traditional jute sacks and wholesale volumes starting at 100 pounds.</p><p>Every bean reflects the richness of Guatemalan terroir, crafted by generations of cacao growers and selected for exceptional sensory characteristics.</p><p><strong>Bulk cacao beans. Authentic origin. Extraordinary flavor.</strong></p>"
+      "default": "<p>In addition to our retail products, we offer our premium single-origin cacao beans in bulk for chocolatiers, manufacturers, roasters, and specialty food companies seeking exceptional origin cacao.</p><p>Our beans are grown exclusively on our family farm in Guatemala and are fully traceable from seed to shipment. Cultivated in mineral-rich volcanic soil and processed using carefully controlled fermentation and sun-drying protocols, our cacao delivers consistency, complexity, and character in every harvest.</p><p>Each lot is produced with the same attention to detail that defines our farm — from hand-harvesting at peak ripeness to meticulous post-harvest handling and quality control.</p><p>Whether you are crafting fine chocolate or developing premium cacao products, our bulk cacao beans offer an authentic expression of Guatemalan terroir and generations of cacao tradition.</p>"
     },
     { "type": "text", "id": "bulk_cta_label", "label": "Bulk CTA button", "default": "Enquire About Bulk Orders" },
     { "type": "url", "id": "bulk_cta_link", "label": "Bulk CTA link", "info": "Defaults to /pages/contact if empty." },

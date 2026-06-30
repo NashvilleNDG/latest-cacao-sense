@@ -3025,6 +3025,15 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   margin: 0 0 1rem;
 }
 
+.ts-os-row__kicker {
+  margin: 0 0 0.6rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ts-accent);
+}
+
 .ts-os-intro-block {
   max-width: 48rem;
   margin: 0 auto 3.5rem;
