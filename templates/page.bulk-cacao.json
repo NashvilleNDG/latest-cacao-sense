@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "bulk_cacao": {
+      "type": "ts-bulk-cacao-page",
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["bulk_cacao", "newsletter"]
+}

@@ -5,8 +5,6 @@
   assign img1_fallback = 'os-premium-1.webp' | asset_url
   assign img2 = section.settings.image_2
   assign img2_fallback = 'os-premium-hero.webp' | asset_url
-  assign img_bulk = section.settings.image_bulk
-  assign bulk_fallback = 'os-bulk.webp' | asset_url
 %}
 
 <div class="ts-os-page">
@@ -71,29 +69,6 @@
         {{ section.settings.row_2_rte }}
       </div>
     </div>
-
-    {% if section.settings.bulk_rte != blank or section.settings.bulk_heading != blank %}
-      <div class="ts-os-row ts-os-bulk">
-        <figure class="ts-os-row__media">
-          {% if img_bulk != blank %}
-            <img src="{{ img_bulk | image_url: width: 1400 }}" alt="{{ section.settings.bulk_image_alt | escape }}" width="{{ img_bulk.width }}" height="{{ img_bulk.height }}" loading="lazy">
-          {% else %}
-            <img src="{{ bulk_fallback }}" alt="{{ section.settings.bulk_image_alt | escape }}" width="1600" height="1280" loading="lazy">
-          {% endif %}
-        </figure>
-        <div class="ts-os-row__text rte">
-          {% if section.settings.bulk_eyebrow != blank %}<p class="ts-os-row__kicker">{{ section.settings.bulk_eyebrow }}</p>{% endif %}
-          {% if section.settings.bulk_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.bulk_heading }}</h2>{% endif %}
-          {{ section.settings.bulk_rte }}
-          {% if section.settings.bulk_cta_label != blank %}
-            <a class="ts-btn ts-btn--primary ts-os-bulk__cta" href="{{ section.settings.bulk_cta_link | default: '/pages/contact' }}">
-              {{ section.settings.bulk_cta_label }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-            </a>
-          {% endif %}
-        </div>
-      </div>
-    {% endif %}
   </section>
 
   {% if section.settings.cta_title != blank %}
@@ -156,19 +131,6 @@
       "default": "<p>At Finca Ana María, we combine ancestral knowledge with innovative and sustainable agricultural practices to produce exceptional specialty cacao while protecting the ecosystem around us.</p><p>From cultivation to fermentation and sun drying, every step is carefully managed to enhance the natural aromas, flavors, and unique characteristics of each cacao variety.</p><p>Our mission is to share one of the world's rarest cacao experiences while protecting our family legacy, conserving biodiversity, preserving water sources, and supporting the sustainable development of our local communities.</p><p><strong>More than cacao — a living piece of history preserved for future generations.</strong></p>"
     },
 
-    { "type": "header", "content": "Bulk Cocoa Beans — image left, text right" },
-    { "type": "image_picker", "id": "image_bulk", "label": "Bulk image", "info": "Falls back to asset os-bulk.webp if empty." },
-    { "type": "text", "id": "bulk_image_alt", "label": "Bulk image alt", "default": "Bulk Guatemalan cocoa beans in jute sacks" },
-    { "type": "text", "id": "bulk_eyebrow", "label": "Bulk eyebrow", "default": "Bulk Cacao" },
-    { "type": "text", "id": "bulk_heading", "label": "Bulk heading", "default": "Premium Single-Origin Cacao Beans" },
-    {
-      "type": "richtext",
-      "id": "bulk_rte",
-      "label": "Bulk text",
-      "default": "<p>In addition to our retail products, we offer our premium single-origin cacao beans in bulk for chocolatiers, manufacturers, roasters, and specialty food companies seeking exceptional origin cacao.</p><p>Our beans are grown exclusively on our family farm in Guatemala and are fully traceable from seed to shipment. Cultivated in mineral-rich volcanic soil and processed using carefully controlled fermentation and sun-drying protocols, our cacao delivers consistency, complexity, and character in every harvest.</p><p>Each lot is produced with the same attention to detail that defines our farm — from hand-harvesting at peak ripeness to meticulous post-harvest handling and quality control.</p><p>Whether you are crafting fine chocolate or developing premium cacao products, our bulk cacao beans offer an authentic expression of Guatemalan terroir and generations of cacao tradition.</p>"
-    },
-    { "type": "text", "id": "bulk_cta_label", "label": "Bulk CTA button", "default": "Enquire About Bulk Orders" },
-    { "type": "url", "id": "bulk_cta_link", "label": "Bulk CTA link", "info": "Defaults to /pages/contact if empty." },
 
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Taste the Heritage" },

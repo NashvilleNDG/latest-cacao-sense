@@ -1,0 +1,72 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'os-bulk.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="1600" height="1280" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+      {% if section.settings.hero_lead != blank %}
+        <p class="ts-os-hero__lead">{{ section.settings.hero_lead }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="ts-os-story ts-page-width">
+    <div class="ts-os-intro-block ts-os-intro-block--left rte">
+      {% if section.settings.body_heading != blank %}<h2>{{ section.settings.body_heading }}</h2>{% endif %}
+      {{ section.settings.body_rte }}
+    </div>
+
+    {% if section.settings.cta_label != blank %}
+      <div class="ts-bulk-cta">
+        <a class="ts-btn ts-btn--primary" href="{{ section.settings.cta_link | default: '/pages/contact' }}">
+          {{ section.settings.cta_label }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Bulk cacao page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset os-bulk.webp (bulk cacao sacks) if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Bulk Guatemalan cocoa beans in jute sacks" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Bulk Cacao" },
+    { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "Premium Single-Origin Cacao Beans" },
+    { "type": "textarea", "id": "hero_lead", "label": "Hero subtitle", "default": "Wholesale single-origin cacao, grown on our family farm in Guatemala." },
+
+    { "type": "header", "content": "Body" },
+    { "type": "text", "id": "body_heading", "label": "Body heading (optional)", "default": "" },
+    {
+      "type": "richtext",
+      "id": "body_rte",
+      "label": "Body text",
+      "default": "<p>In addition to our retail products, we offer our premium single-origin cacao beans in bulk for chocolatiers, manufacturers, roasters, and specialty food companies seeking exceptional origin cacao.</p><p>Our beans are grown exclusively on our family farm in Guatemala and are fully traceable from seed to shipment. Cultivated in mineral-rich volcanic soil and processed using carefully controlled fermentation and sun-drying protocols, our cacao delivers consistency, complexity, and character in every harvest.</p><p>Each lot is produced with the same attention to detail that defines our farm — from hand-harvesting at peak ripeness to meticulous post-harvest handling and quality control.</p><p>Whether you are crafting fine chocolate or developing premium cacao products, our bulk cacao beans offer an authentic expression of Guatemalan terroir and generations of cacao tradition.</p>"
+    },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Enquire About Bulk Orders" },
+    { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Defaults to /pages/contact if empty." }
+  ],
+  "presets": [{ "name": "Bulk cacao page" }]
+}
+{% endschema %}

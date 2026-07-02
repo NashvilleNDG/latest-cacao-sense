@@ -45,6 +45,10 @@
             if pages['premium-collection'] != blank
               assign url_premium = pages['premium-collection'].url
             endif
+            assign url_bulkcacao = '/pages/bulk-cacao'
+            if pages['bulk-cacao'] != blank
+              assign url_bulkcacao = pages['bulk-cacao'].url
+            endif
             assign url_recipes = '/pages/recipes'
             if pages['recipes'] != blank
               assign url_recipes = pages['recipes'].url
@@ -79,6 +83,7 @@
             </div>
           </div>
           <a class="ts-header__link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+          <a class="ts-header__link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
           <a class="ts-header__link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
           <a class="ts-header__link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
           <a class="ts-header__link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
@@ -147,6 +152,10 @@
           if pages['premium-collection'] != blank
             assign url_premium = pages['premium-collection'].url
           endif
+          assign url_bulkcacao = '/pages/bulk-cacao'
+          if pages['bulk-cacao'] != blank
+            assign url_bulkcacao = pages['bulk-cacao'].url
+          endif
           assign url_recipes = '/pages/recipes'
           if pages['recipes'] != blank
             assign url_recipes = pages['recipes'].url
@@ -166,6 +175,7 @@
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_history }}">{{ 'sections.header.history' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+        <a class="ts-header__mobile-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
