@@ -1,0 +1,87 @@
+{% comment %}
+  Default page template.
+  Renders the title and rich-text content of any page assigned the
+  "Default page" template (e.g. History of Farms). Without this file,
+  default-template pages have nothing to render and return 404.
+{% endcomment %}
+<div class="ts-default-page">
+  <div class="ts-page-width">
+    <header class="ts-default-page__header">
+      <p class="ts-default-page__eyebrow">{{ shop.name }}</p>
+      <h1 class="ts-default-page__title">{{ page.title }}</h1>
+    </header>
+
+    <div class="ts-default-page__body">
+      {% if page.content != blank %}
+        <div class="ts-default-page__content rte">{{ page.content }}</div>
+      {% else %}
+        <p class="ts-default-page__empty">This page is coming soon.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .ts-default-page {
+    background: var(--ts-bg);
+    color: var(--ts-fg);
+    padding: clamp(3rem, 8vw, 6rem) 0 clamp(4rem, 10vw, 7rem);
+  }
+  .ts-default-page__header {
+    text-align: center;
+    max-width: 48rem;
+    margin: 0 auto clamp(2rem, 5vw, 3.5rem);
+  }
+  .ts-default-page__eyebrow {
+    font-family: var(--ts-font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ts-accent);
+    margin: 0 0 1rem;
+  }
+  .ts-default-page__title {
+    font-family: var(--ts-font-display);
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.05;
+    font-weight: 700;
+    margin: 0;
+    color: var(--ts-primary);
+  }
+  .ts-default-page__body {
+    max-width: 46rem;
+    margin: 0 auto;
+  }
+  .ts-default-page__content {
+    font-family: var(--ts-font-body);
+    font-size: 1.075rem;
+    line-height: 1.8;
+    color: var(--ts-fg);
+  }
+  .ts-default-page__content > * + * { margin-top: 1.25rem; }
+  .ts-default-page__content h2 {
+    font-family: var(--ts-font-display);
+    font-size: 1.9rem;
+    line-height: 1.2;
+    margin-top: 2.5rem;
+    color: var(--ts-primary);
+  }
+  .ts-default-page__content h3 {
+    font-family: var(--ts-font-display);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    color: var(--ts-primary);
+  }
+  .ts-default-page__content a { color: var(--ts-accent); text-decoration: underline; }
+  .ts-default-page__content img { max-width: 100%; height: auto; border-radius: var(--ts-radius-lg); }
+  .ts-default-page__content ul,
+  .ts-default-page__content ol { padding-left: 1.5rem; }
+  .ts-default-page__content li { margin-top: 0.5rem; }
+  .ts-default-page__empty {
+    text-align: center;
+    color: var(--ts-muted-fg);
+    font-family: var(--ts-font-body);
+    font-size: 1.1rem;
+  }
+</style>
