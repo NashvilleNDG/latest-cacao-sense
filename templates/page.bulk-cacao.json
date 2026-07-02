@@ -9,5 +9,8 @@
       "settings": {}
     }
   },
-  "order": ["bulk_cacao", "newsletter"]
+  "order": [
+    "bulk_cacao",
+    "newsletter"
+  ]
 }
