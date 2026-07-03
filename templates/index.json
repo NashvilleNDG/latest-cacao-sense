@@ -60,6 +60,19 @@
         "secondary_link": "/pages/our-story"
       }
     },
+    "ts_video": {
+      "type": "ts-video",
+      "settings": {
+        "eyebrow": "Watch",
+        "heading": "From Our Farm to Your Cup",
+        "subtext": "A short look at how our single-origin cacao is grown, harvested, and crafted.",
+        "video_url": "https://youtu.be/5gn-w0d4zvU",
+        "show_controls": true,
+        "autoplay": false,
+        "loop": false,
+        "placeholder_text": "Add your video in the theme editor"
+      }
+    },
     "ts_marquee": {
       "type": "ts-stats-marquee",
       "settings": {
@@ -463,14 +476,6 @@
         "button_label": "Subscribe",
         "success_message": "Thanks for subscribing!",
         "note": "No spam, ever. Unsubscribe anytime. Join 50,000+ cocoa lovers."
-      }
-    },
-    "ts_video": {
-      "type": "ts-video",
-      "settings": {
-        "eyebrow": "Watch",
-        "heading": "From Our Farm to Your Cup",
-        "subtext": "A short look at how our single-origin cacao is grown, harvested, and crafted."
       }
     }
   },
