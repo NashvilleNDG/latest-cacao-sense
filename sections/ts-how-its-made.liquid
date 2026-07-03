@@ -24,7 +24,12 @@
                   loading="lazy"
                 >
               {% elsif block.settings.image_url != blank %}
-                <img src="{{ block.settings.image_url }}" alt="{{ block.settings.title | escape }}" width="600" height="450" loading="lazy">
+                {%- if block.settings.image_url contains '//' -%}
+                  {%- assign step_src = block.settings.image_url -%}
+                {%- else -%}
+                  {%- assign step_src = block.settings.image_url | asset_url -%}
+                {%- endif -%}
+                <img src="{{ step_src }}" alt="{{ block.settings.title | escape }}" width="600" height="450" loading="lazy">
               {% endif %}
               <span class="ts-how-made__step">{{ block.settings.step_number }}</span>
             </div>

@@ -115,7 +115,7 @@
           "settings": {
             "icon": "heart",
             "title": "Made with Love",
-            "text": "Every batch is small-batch roasted and stone-ground for 72 hours."
+            "text": "Every batch is small-batch roasted and stone-ground with care."
           }
         }
       },
@@ -314,7 +314,7 @@
             "icon": "leaf",
             "tone": "green",
             "title": "100% Pure & Natural",
-            "text": "No additives, no preservatives, no fillers. Just pure cacao as nature intended, stone-ground for 72 hours."
+            "text": "No additives, no preservatives, no fillers. Just pure cacao as nature intended."
           }
         },
         "b5": {
@@ -360,7 +360,7 @@
             "step_number": "01",
             "title": "Ethically Harvested",
             "text": "Ripe cacao pods are hand-picked at peak perfection on our own farms in the highlands of Guatemala.",
-            "image_url": "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&q=80"
+            "image_url": "ethically-harvested.webp"
           }
         },
         "h2": {
