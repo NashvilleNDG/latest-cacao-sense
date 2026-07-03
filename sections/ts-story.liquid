@@ -1,6 +1,6 @@
 {% liquid
   assign story_img = section.settings.image
-  assign default_story = 'Story.webp' | asset_url
+  assign default_story = 'Farms.webp' | asset_url
 %}
 
 <section id="story" class="ts-story">
@@ -19,7 +19,7 @@
               loading="lazy"
             >
           {% else %}
-            <img src="{{ default_story }}" alt="" width="1200" height="800" loading="lazy">
+            <img src="{{ default_story }}" alt="" width="1600" height="1198" loading="lazy">
           {% endif %}
         </div>
         <div class="ts-story__float ts-story__float--br ts-glass">
@@ -80,7 +80,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image",
-      "info": "Optional — defaults to theme asset Story.webp."
+      "info": "Optional — defaults to theme asset Farms.webp."
     },
     {
       "type": "text",
