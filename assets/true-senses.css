@@ -2995,6 +2995,14 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   margin-top: 2.5rem;
 }
 
+.ts-bulk-cta__note {
+  margin: 0.85rem 0 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ts-muted-fg);
+}
+
 .ts-os-row__media img {
   display: block;
   width: 100%;
@@ -3732,6 +3740,16 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 .ts-contact-form__sub {
   color: var(--ts-muted-fg);
   margin-bottom: 2rem;
+}
+
+.ts-contact-form__note {
+  margin: -1rem 0 2rem;
+  padding: 0.75rem 1rem;
+  background: var(--ts-muted);
+  border-left: 3px solid var(--ts-accent);
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ts-fg);
 }
 
 .ts-contact-form__success {

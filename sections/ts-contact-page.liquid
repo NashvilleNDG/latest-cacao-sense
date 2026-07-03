@@ -28,6 +28,10 @@
           <p class="ts-contact-form__sub">{{ section.settings.form_subtitle }}</p>
         {% endif %}
 
+        {% if section.settings.bulk_note != blank %}
+          <p class="ts-contact-form__note">{{ section.settings.bulk_note }}</p>
+        {% endif %}
+
         {% if form.posted_successfully? %}
           <p class="ts-contact-form__success">{{ 'sections.contact.success' | t }}</p>
         {% endif %}
@@ -143,6 +147,7 @@
     { "type": "textarea", "id": "hero_lead", "label": "Hero subtitle", "default": "Questions about cacao, shipping, or wholesale? We're here to help." },
     { "type": "text", "id": "form_title", "label": "Form title", "default": "Send a message" },
     { "type": "textarea", "id": "form_subtitle", "label": "Form subtitle", "default": "Fill out the form and our team will respond within 24 hours." },
+    { "type": "textarea", "id": "bulk_note", "label": "Bulk order note", "default": "Note: Bulk cocoa orders require a minimum quantity of 50 lbs." },
     { "type": "text", "id": "faq_title", "label": "FAQ heading", "default": "Frequently Asked Questions" }
   ],
   "blocks": [
