@@ -1,6 +1,6 @@
 {% liquid
   assign hero_img = section.settings.hero_image
-  assign hero_fallback = 'Contact-Hero.webp' | asset_url
+  assign hero_fallback = 'Contact.webp' | asset_url
 %}
 
 <div class="ts-contact-page">
@@ -9,7 +9,7 @@
       {% if hero_img != blank %}
         <img src="{{ hero_img | image_url: width: 2000 }}" alt="" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager">
       {% else %}
-        <img src="{{ hero_fallback }}" alt="" width="1600" height="900" loading="eager">
+        <img src="{{ hero_fallback }}" alt="" width="2400" height="1797" loading="eager">
       {% endif %}
       <div class="ts-contact-hero__shade"></div>
     </div>
