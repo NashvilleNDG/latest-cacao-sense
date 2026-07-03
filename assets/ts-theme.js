@@ -232,6 +232,29 @@
     }, interval);
   }
 
+  function initVideoCaptions() {
+    // Hide/disable caption (subtitle) tracks on Shopify-hosted section videos.
+    var videos = document.querySelectorAll('.ts-video-sec video');
+    if (!videos.length) {
+      return;
+    }
+    videos.forEach(function (v) {
+      function disableTracks() {
+        try {
+          var tracks = v.textTracks;
+          for (var i = 0; i < tracks.length; i++) {
+            tracks[i].mode = 'disabled';
+          }
+        } catch (e) {}
+      }
+      disableTracks();
+      v.addEventListener('loadedmetadata', disableTracks);
+      if (v.textTracks && v.textTracks.addEventListener) {
+        v.textTracks.addEventListener('addtrack', disableTracks);
+      }
+    });
+  }
+
   function initHeader() {
     var nav = document.querySelector('[data-ts-header]');
     if (!nav) return;
@@ -367,6 +390,7 @@
     document.addEventListener('DOMContentLoaded', function () {
       initHeader();
       initHeroSlider();
+      initVideoCaptions();
       initDropdowns();
       initScrollTop();
       initProductFilters();
@@ -375,6 +399,7 @@
   } else {
     initHeader();
     initHeroSlider();
+    initVideoCaptions();
     initDropdowns();
     initScrollTop();
     initProductFilters();
