@@ -464,10 +464,19 @@
         "success_message": "Thanks for subscribing!",
         "note": "No spam, ever. Unsubscribe anytime. Join 50,000+ cocoa lovers."
       }
+    },
+    "ts_video": {
+      "type": "ts-video",
+      "settings": {
+        "eyebrow": "Watch",
+        "heading": "From Our Farm to Your Cup",
+        "subtext": "A short look at how our single-origin cacao is grown, harvested, and crafted."
+      }
     }
   },
   "order": [
     "ts_hero",
+    "ts_video",
     "ts_marquee",
     "ts_product_grid",
     "ts_story",
