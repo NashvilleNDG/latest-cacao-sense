@@ -33,10 +33,6 @@
             if pages['our-story'] != blank
               assign url_story = pages['our-story'].url
             endif
-            assign url_history = '/pages/history-of-farms'
-            if pages['history-of-farms'] != blank
-              assign url_history = pages['history-of-farms'].url
-            endif
             assign url_process = '/pages/our-process'
             if pages['our-process'] != blank
               assign url_process = pages['our-process'].url
@@ -78,7 +74,6 @@
             </button>
             <div class="ts-header__dropdown-menu" data-ts-dropdown-menu>
               <a class="ts-header__dropdown-link" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
-              <a class="ts-header__dropdown-link" href="{{ url_history }}">{{ 'sections.header.history' | t }}</a>
               <a class="ts-header__dropdown-link" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
             </div>
           </div>
@@ -140,10 +135,6 @@
           if pages['our-story'] != blank
             assign url_story = pages['our-story'].url
           endif
-          assign url_history = '/pages/history-of-farms'
-          if pages['history-of-farms'] != blank
-            assign url_history = pages['history-of-farms'].url
-          endif
           assign url_process = '/pages/our-process'
           if pages['our-process'] != blank
             assign url_process = pages['our-process'].url
@@ -172,7 +163,6 @@
         <a class="ts-header__mobile-link" href="{{ routes.all_products_collection_url }}">Shop</a>
         <p class="ts-header__mobile-heading">{{ 'sections.header.about' | t }}</p>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
-        <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_history }}">{{ 'sections.header.history' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
