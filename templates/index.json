@@ -360,7 +360,7 @@
             "step_number": "01",
             "title": "Ethically Harvested",
             "text": "Ripe cacao pods are hand-picked at peak perfection on our own farms in the highlands of Guatemala.",
-            "image_url": "ethically-harvested.webp"
+            "image_url": "https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&q=80"
           }
         },
         "h2": {
@@ -369,7 +369,7 @@
             "step_number": "02",
             "title": "Sun-Dried & Fermented",
             "text": "Beans ferment naturally for 5–7 days then slow-dry in the open sun, developing their complex flavor profile.",
-            "image_url": "https://media.base44.com/images/public/69d4488a5dfc8f6017add6a5/f41d5c108_generated_image.png"
+            "image_url": "ethically-harvested.webp"
           }
         },
         "h4": {
