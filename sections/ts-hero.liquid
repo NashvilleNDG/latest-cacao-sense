@@ -1,22 +1,25 @@
 {% liquid
   assign hero_img = section.settings.image
   assign default_hero = 'Home-hero.webp' | asset_url
+  assign fb2 = 'hero-2.webp' | asset_url
+  assign fb3 = 'hero-3.webp' | asset_url
+  assign fb4 = 'hero-4.webp' | asset_url
+  assign fb5 = 'hero-5.webp' | asset_url
+  assign slide_ms = section.settings.slide_seconds | default: 5 | times: 1000
 %}
 
 <section class="ts-hero">
-  <div class="ts-hero__bg">
-    {% if hero_img != blank %}
-      <img
-        src="{{ hero_img | image_url: width: 2400 }}"
-        alt="{{ hero_img.alt | default: section.settings.image_alt | escape }}"
-        width="{{ hero_img.width }}"
-        height="{{ hero_img.height }}"
-        loading="eager"
-        fetchpriority="high"
-      >
-    {% else %}
-      <img src="{{ default_hero }}" alt="" width="1920" height="1080" loading="eager">
-    {% endif %}
+  <div class="ts-hero__bg" data-ts-hero-slider data-interval="{{ slide_ms }}">
+    <img
+      class="ts-hero__slide is-active"
+      src="{% if hero_img != blank %}{{ hero_img | image_url: width: 2400 }}{% else %}{{ default_hero }}{% endif %}"
+      alt="{{ hero_img.alt | default: section.settings.image_alt | escape }}"
+      width="1920" height="1080" loading="eager" fetchpriority="high"
+    >
+    <img class="ts-hero__slide" src="{% if section.settings.image_2 != blank %}{{ section.settings.image_2 | image_url: width: 2400 }}{% else %}{{ fb2 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
+    <img class="ts-hero__slide" src="{% if section.settings.image_3 != blank %}{{ section.settings.image_3 | image_url: width: 2400 }}{% else %}{{ fb3 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
+    <img class="ts-hero__slide" src="{% if section.settings.image_4 != blank %}{{ section.settings.image_4 | image_url: width: 2400 }}{% else %}{{ fb4 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
+    <img class="ts-hero__slide" src="{% if section.settings.image_5 != blank %}{{ section.settings.image_5 | image_url: width: 2400 }}{% else %}{{ fb5 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
     <div class="ts-hero__gradient-t" aria-hidden="true"></div>
     <div class="ts-hero__gradient-r" aria-hidden="true"></div>
   </div>
@@ -76,11 +79,21 @@
   "class": "section-ts-hero",
   "settings": [
     {
+      "type": "header",
+      "content": "Background slideshow",
+      "info": "The hero background cross-fades through these images automatically. Slide 1 shows first."
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Background image",
+      "label": "Slide 1 (background image)",
       "info": "Optional — defaults to theme asset Home-hero.webp."
     },
+    { "type": "image_picker", "id": "image_2", "label": "Slide 2", "info": "Defaults to hero-2.webp." },
+    { "type": "image_picker", "id": "image_3", "label": "Slide 3", "info": "Defaults to hero-3.webp." },
+    { "type": "image_picker", "id": "image_4", "label": "Slide 4", "info": "Defaults to hero-4.webp." },
+    { "type": "image_picker", "id": "image_5", "label": "Slide 5", "info": "Defaults to hero-5.webp." },
+    { "type": "range", "id": "slide_seconds", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Seconds per slide", "default": 5 },
     {
       "type": "text",
       "id": "image_alt",
