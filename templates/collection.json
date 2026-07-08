@@ -1,9 +1,11 @@
 {
   "sections": {
     "main": {
-      "type": "ts-main-collection",
+      "type": "ts-shop-catalog",
       "settings": {}
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
