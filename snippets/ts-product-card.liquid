@@ -119,13 +119,5 @@
     <p class="ts-product-card__desc">
       {{ product.description | strip_html | truncate: 120 }}
     </p>
-    <div class="ts-product-card__price-row">
-      <span class="ts-product-card__price">{{ product.price | money }}</span>
-      {% if product.compare_at_price > product.price %}
-        <span class="ts-product-card__compare">{{ product.compare_at_price | money }}</span>
-        {% assign save_amount = product.compare_at_price | minus: product.price | money %}
-        <span class="ts-product-card__save">{{ 'products.save' | t: amount: save_amount }}</span>
-      {% endif %}
-    </div>
   </div>
 </div>
