@@ -1,0 +1,84 @@
+{% comment %}
+  Theme-managed catalog card (no price, no cart).
+
+  Params:
+    name        - product name                       (required)
+    image       - theme asset filename, e.g. 'cacao-powder.webp'
+    origin      - small line above the name, e.g. 'Single Origin · Guatemala'
+    tagline     - one-paragraph description
+    bullets     - semicolon-separated benefit list
+    uses        - semicolon-separated "Perfect for" chips
+    net_wt      - e.g. '8oz (227g)'
+    servings    - e.g. '38 servings (1 tsp / 6g)'
+    ingredients - e.g. '100% Pure Cacao (Theobroma cacao)'
+    badge       - corner badge, e.g. 'Zero Sugar'
+    cta_label   - button text (omit to hide the button)
+    cta_url     - button link
+
+  To add a product: copy one `render` call in sections/ts-main-collection.liquid.
+{% endcomment %}
+
+<article class="ts-catalog-card">
+  <div class="ts-catalog-card__media">
+    {% if image != blank %}
+      <img src="{{ image | asset_url }}" alt="{{ name | escape }} pack" loading="lazy">
+    {% endif %}
+    {% if badge != blank %}
+      <span class="ts-catalog-card__badge">{{ badge }}</span>
+    {% endif %}
+  </div>
+
+  <div class="ts-catalog-card__body">
+    {% if origin != blank %}
+      <p class="ts-catalog-card__origin">{{ origin }}</p>
+    {% endif %}
+
+    <h3 class="ts-catalog-card__name">{{ name }}</h3>
+
+    {% if tagline != blank %}
+      <p class="ts-catalog-card__desc">{{ tagline }}</p>
+    {% endif %}
+
+    {% if bullets != blank %}
+      <ul class="ts-catalog-card__bullets">
+        {% assign bullet_items = bullets | split: ';' %}
+        {% for item in bullet_items %}
+          <li>{{ item | strip | escape }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% if uses != blank %}
+      <div class="ts-catalog-card__uses">
+        <span class="ts-catalog-card__uses-label">Perfect for</span>
+        <div class="ts-catalog-card__chips">
+          {% assign use_items = uses | split: ';' %}
+          {% for item in use_items %}
+            <span class="ts-catalog-card__chip">{{ item | strip | escape }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% if net_wt != blank or servings != blank or ingredients != blank %}
+      <dl class="ts-catalog-card__specs">
+        {% if net_wt != blank %}
+          <div><dt>Net wt.</dt><dd>{{ net_wt }}</dd></div>
+        {% endif %}
+        {% if servings != blank %}
+          <div><dt>Servings</dt><dd>{{ servings }}</dd></div>
+        {% endif %}
+        {% if ingredients != blank %}
+          <div><dt>Ingredients</dt><dd>{{ ingredients }}</dd></div>
+        {% endif %}
+      </dl>
+    {% endif %}
+
+    {% if cta_label != blank and cta_url != blank %}
+      <a class="ts-btn ts-btn--primary ts-catalog-card__cta" href="{{ cta_url }}">
+        {{ cta_label }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+    {% endif %}
+  </div>
+</article>
