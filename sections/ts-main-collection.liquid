@@ -12,7 +12,6 @@
 {%- capture handles_csv -%}{%- render 'ts-product-handles' -%}{%- endcapture -%}
 {%- assign handles = handles_csv | strip | split: ',' -%}
 
-<!-- CANARY-A1-maincollection -->
 <section class="ts-catalog ts-page-width">
   <header class="ts-catalog__head">
     <p class="ts-products__kicker">{{ section.settings.kicker }}</p>
