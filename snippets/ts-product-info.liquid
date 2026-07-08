@@ -1,0 +1,144 @@
+{% comment %}
+  Single source of truth for the theme-managed catalog.
+
+  Params:
+    handle - product handle, e.g. 'cacao-powder'
+    mode   - 'card' (shop grid tile) or 'detail' (product page)
+
+  To add a product: add a `when` branch below, drop <handle>.webp and
+  <handle>-pack.webp in assets/, and add the handle to the list in
+  sections/ts-main-collection.liquid.
+{% endcomment %}
+
+{% liquid
+  assign p_origin = 'Single Origin · Product of Guatemala'
+  assign p_badge = 'Zero Sugar'
+  assign p_ingredients = '100% Pure Cacao (Theobroma cacao)'
+  assign p_storage = 'Refrigeration not required. Store in a cool, dark, dry place.'
+  assign p_tagline = "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward."
+  assign p_net_wt = '8oz (227g)'
+  assign p_servings = ''
+  assign p_bullets = '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Energy and magnesium'
+  assign p_name = ''
+  assign p_uses = ''
+
+  case handle
+    when 'cacao-powder'
+      assign p_name = 'Cacao Powder'
+      assign p_uses = 'Chocolatiering;Baking;Skin & Body Care'
+      assign p_servings = '38 servings (1 tsp / 6g)'
+      assign p_bullets = '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Natural energy and magnesium'
+    when 'cacao-beans'
+      assign p_name = 'Cacao Beans'
+      assign p_uses = 'Brewing;Smoothies;Snacks;Baking'
+      assign p_servings = '45 servings (1 tsp / 5g)'
+    when 'cacao-nibs'
+      assign p_name = 'Cacao Nibs'
+      assign p_uses = 'Snacking;Smoothies;Salads;Baking'
+    when 'cacao-butter'
+      assign p_name = 'Cacao Butter'
+      assign p_uses = 'Tempering;Ice Creams;Desserts;Baking'
+      assign p_servings = '11 servings (1 tbsp / 20g)'
+      assign p_bullets = '100% cacao butter;Full-bodied creaminess;Rich in antioxidants & theobromine;Make chocolate & keto treats'
+    when 'cacao-wafers'
+      assign p_name = 'Cacao Wafers'
+      assign p_uses = 'Tempering;Ice Creams;Desserts;Baking'
+      assign p_servings = '4 servings (3 pieces / 54g)'
+    when 'cacao-tea'
+      assign p_name = 'Cacao Tea'
+      assign p_uses = 'Brewing;Smoothies;Snacks;Baking'
+      assign p_servings = '14 servings (1 tsp / 4g)'
+      assign p_net_wt = ''
+  endcase
+
+  assign p_img = handle | append: '.webp' | asset_url
+  assign p_pack = handle | append: '-pack.webp' | asset_url
+  assign p_url = '/products/' | append: handle
+
+  assign url_contact = '/pages/contact'
+  if pages['contact'] != blank
+    assign url_contact = pages['contact'].url
+  endif
+%}
+
+{% if p_name == blank %}
+  {% comment %}Unknown handle — render nothing rather than an empty shell.{% endcomment %}
+{% elsif mode == 'card' %}
+
+  <a class="ts-cat-tile" href="{{ p_url }}">
+    <div class="ts-cat-tile__media">
+      <img src="{{ p_img }}" alt="{{ p_name | escape }} pack" loading="lazy">
+      {% if p_badge != blank %}
+        <span class="ts-cat-tile__badge">{{ p_badge }}</span>
+      {% endif %}
+    </div>
+    <div class="ts-cat-tile__body">
+      <h3 class="ts-cat-tile__name">{{ p_name }}</h3>
+      <p class="ts-cat-tile__origin">{{ p_origin }}</p>
+    </div>
+  </a>
+
+{% else %}
+
+  <div class="ts-pdp" data-ts-pdp>
+    <div class="ts-pdp__gallery">
+      <div class="ts-pdp__thumbs">
+        <button type="button" class="ts-pdp__thumb is-active" data-ts-pdp-thumb data-src="{{ p_img }}" aria-label="Front of pack">
+          <img src="{{ p_img }}" alt="" loading="lazy">
+        </button>
+        <button type="button" class="ts-pdp__thumb" data-ts-pdp-thumb data-src="{{ p_pack }}" aria-label="Front and back of pack">
+          <img src="{{ p_pack }}" alt="" loading="lazy">
+        </button>
+      </div>
+      <div class="ts-pdp__main">
+        <img src="{{ p_img }}" alt="{{ p_name | escape }} pack" data-ts-pdp-main width="690" height="810">
+      </div>
+    </div>
+
+    <div class="ts-pdp__info">
+      <p class="ts-pdp__eyebrow">{{ p_origin }}</p>
+      <h1 class="ts-pdp__title">{{ p_name }}</h1>
+      <p class="ts-pdp__lead">{{ p_tagline }}</p>
+
+      {% if p_bullets != blank %}
+        <ul class="ts-pdp__bullets">
+          {% assign bullet_items = p_bullets | split: ';' %}
+          {% for item in bullet_items %}
+            <li>{{ item | strip | escape }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% if p_uses != blank %}
+        <div class="ts-pdp__uses">
+          <span class="ts-pdp__label">Perfect for</span>
+          <div class="ts-pdp__chips">
+            {% assign use_items = p_uses | split: ';' %}
+            {% for item in use_items %}
+              <span class="ts-pdp__chip">{{ item | strip | escape }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <dl class="ts-pdp__specs">
+        {% if p_net_wt != blank %}
+          <div><dt>Net wt.</dt><dd>{{ p_net_wt }}</dd></div>
+        {% endif %}
+        {% if p_servings != blank %}
+          <div><dt>Servings</dt><dd>{{ p_servings }}</dd></div>
+        {% endif %}
+        <div><dt>Ingredients</dt><dd>{{ p_ingredients }}</dd></div>
+        <div><dt>Storage</dt><dd>{{ p_storage }}</dd></div>
+      </dl>
+
+      <a class="ts-btn ts-btn--primary ts-pdp__cta" href="{{ url_contact }}">
+        Enquire About This Product
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+      </a>
+
+      <a class="ts-pdp__back" href="{{ routes.all_products_collection_url }}">← Back to all products</a>
+    </div>
+  </div>
+
+{% endif %}

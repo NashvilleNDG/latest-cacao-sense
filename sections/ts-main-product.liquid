@@ -1,300 +1,46 @@
+{% comment %}
+  Product detail page — theme-managed catalog (browse-only, no price/cart).
+
+  Content comes from snippets/ts-product-info.liquid, the same source the shop
+  grid uses, keyed by product.handle. Products not in that list fall back to
+  their Shopify data (still without price).
+{% endcomment %}
+
 {% liquid
-  assign v = product.selected_or_first_available_variant
-  assign show_badge = section.settings.show_badge
-  assign badge_from_tag = false
-  if show_badge
-    for t in product.tags
-      assign tl = t | downcase
-      if tl == 'best seller' or tl == 'bestseller' or tl == 'best-seller'
-        assign badge_from_tag = true
-        break
-      endif
-    endfor
-  endif
+  assign known = 'cacao-powder,cacao-beans,cacao-nibs,cacao-butter,cacao-wafers,cacao-tea' | split: ','
 
-  assign rating_display = section.settings.rating_value
-  assign review_ct = section.settings.review_count
-  if product.metafields.custom.rating.value != blank
-    assign rating_display = product.metafields.custom.rating.value
-  endif
-  if product.metafields.custom.review_count.value != blank
-    assign review_ct = product.metafields.custom.review_count.value
-  endif
-  if product.metafields.reviews.rating.value != blank
-    assign rating_display = product.metafields.reviews.rating.value
-  endif
-  if product.metafields.reviews.rating_count.value != blank
-    assign review_ct = product.metafields.reviews.rating_count.value
-  endif
-
-  assign origin_text = product.metafields.custom.origin.value | default: section.settings.fallback_origin
-  assign sizes_text = product.metafields.custom.available_sizes.value | default: section.settings.fallback_sizes
-
-  assign save_amount = 0
-  if v.compare_at_price > v.price
-    assign save_amount = v.compare_at_price | minus: v.price
-  endif
-  assign save_money = save_amount | money
-
-  assign show_badge_markup = false
-  if show_badge
-    if section.settings.badge_without_tag
-      assign show_badge_markup = true
-    elsif badge_from_tag
-      assign show_badge_markup = true
-    endif
+  assign url_contact = '/pages/contact'
+  if pages['contact'] != blank
+    assign url_contact = pages['contact'].url
   endif
 %}
 
-<section class="ts-product-page ts-page-width" data-ts-product-page>
-  <nav class="ts-product-page__crumbs" aria-label="{{ 'products.breadcrumb' | t }}">
-    <a href="{{ routes.root_url }}">{{ 'sections.header.home' | t }}</a>
-    <span class="ts-product-page__crumb-sep" aria-hidden="true">›</span>
-    <a href="{{ routes.collections_url }}">{{ 'sections.header.shop' | t }}</a>
-    {% if product.collections.size > 0 %}
-      {% assign crumb_col = product.collections.first %}
-      <span class="ts-product-page__crumb-sep" aria-hidden="true">›</span>
-      <a href="{{ crumb_col.url }}">{{ crumb_col.title }}</a>
-    {% endif %}
-    <span class="ts-product-page__crumb-sep" aria-hidden="true">›</span>
-    <span class="ts-product-page__crumb-current">{{ product.title }}</span>
-  </nav>
-
-  <div class="ts-product-page__grid">
-    <div class="ts-product-page__media-col">
-      <div class="ts-product-page__stage">
-        {% if show_badge_markup %}
-          <span class="ts-product-page__badge">{{ section.settings.badge_label }}</span>
-        {% endif %}
-        {% if product.featured_image %}
-          <img
-            id="ts-product-main-img"
-            class="ts-product-page__main-img"
-            src="{{ product.featured_image | image_url: width: 1200 }}"
-            alt="{{ product.featured_image.alt | default: product.title | escape }}"
-            width="{{ product.featured_image.width }}"
-            height="{{ product.featured_image.height }}"
-            data-ts-main-image
-          >
-        {% else %}
-          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg ts-product-page__placeholder' }}
-        {% endif %}
+<section class="ts-pdp-section ts-page-width">
+  {% if known contains product.handle %}
+    {% render 'ts-product-info', handle: product.handle, mode: 'detail' %}
+  {% else %}
+    <div class="ts-pdp">
+      <div class="ts-pdp__gallery">
+        <div class="ts-pdp__main">
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }}">
+          {% else %}
+            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
       </div>
-      {% if product.images.size > 1 %}
-        <div class="ts-product-page__thumbs" role="tablist" aria-label="{{ 'products.gallery_thumbs' | t }}">
-          {% for image in product.images %}
-            <button
-              type="button"
-              class="ts-product-page__thumb{% if forloop.first %} is-active{% endif %}"
-              data-ts-product-thumb
-              data-image-src="{{ image | image_url: width: 1200 }}"
-              data-image-alt="{{ image.alt | default: product.title | escape }}"
-              aria-label="{{ 'products.image_n' | t: n: forloop.index }}"
-              aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
-            >
-              <img
-                src="{{ image | image_url: width: 200 }}"
-                alt=""
-                width="200"
-                height="200"
-                loading="lazy"
-              >
-            </button>
-          {% endfor %}
-        </div>
-      {% endif %}
-    </div>
-
-    <div class="ts-product-page__info">
-      {% if section.settings.show_rating and rating_display != blank %}
-        <div class="ts-product-page__rating">
-          <span class="ts-product-page__stars" aria-hidden="true">
-            {% assign r = rating_display | times: 1.0 %}
-            {% for i in (1..5) %}
-              {% assign threshold = i | minus: 1 %}
-              {% if r >= i %}
-                <svg class="is-full" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              {% elsif r > threshold %}
-                <svg class="is-half" viewBox="0 0 24 24" width="18" height="18"><defs><linearGradient id="h-{{ section.id }}-{{ i }}"><stop offset="50%" stop-color="#fbbf24"/><stop offset="50%" stop-color="#e5e7eb"/></linearGradient></defs><path fill="url(#h-{{ section.id }}-{{ i }})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              {% else %}
-                <svg class="is-empty" viewBox="0 0 24 24" width="18" height="18"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-              {% endif %}
-            {% endfor %}
-          </span>
-          {% if review_ct != blank %}
-            <span class="ts-product-page__reviews-count">({{ review_ct }} {{ 'products.reviews_label' | t }})</span>
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {% if product.type != blank %}
-        <p class="ts-product-page__kicker">{{ product.type | upcase }}</p>
-      {% endif %}
-
-      <h1 class="ts-products__title ts-product-page__title">{{ product.title }}</h1>
-
-      <div class="ts-product-page__price-row" data-ts-price-row>
-        <span class="ts-product-card__price ts-product-page__price" data-ts-price>{{ v.price | money }}</span>
-        {% if v.compare_at_price > v.price %}
-          <span class="ts-product-card__compare ts-product-page__compare" data-ts-compare>{{ v.compare_at_price | money }}</span>
-          <span
-            class="ts-product-card__save ts-product-page__save"
-            data-ts-save
-            data-ts-save-template="{{ 'products.save' | t: amount: '__AMT__' | escape }}"
-          >{{ 'products.save' | t: amount: save_money }}</span>
-        {% else %}
-          <span class="ts-product-card__compare ts-product-page__compare" data-ts-compare hidden></span>
-          <span
-            class="ts-product-card__save ts-product-page__save"
-            data-ts-save
-            data-ts-save-template="{{ 'products.save' | t: amount: '__AMT__' | escape }}"
-            hidden
-          ></span>
-        {% endif %}
+      <div class="ts-pdp__info">
+        <p class="ts-pdp__eyebrow">{{ section.settings.fallback_origin }}</p>
+        <h1 class="ts-pdp__title">{{ product.title }}</h1>
+        <div class="ts-pdp__lead rte">{{ product.description }}</div>
+        <a class="ts-btn ts-btn--primary ts-pdp__cta" href="{{ url_contact }}">
+          Enquire About This Product
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+        <a class="ts-pdp__back" href="{{ routes.all_products_collection_url }}">← Back to all products</a>
       </div>
-
-      {% if product.description != blank %}
-        <div class="rte ts-product-page__desc">
-          {{ product.description }}
-        </div>
-      {% endif %}
-
-      {% if origin_text != blank or sizes_text != blank %}
-        <div class="ts-product-page__attrs">
-          {% if origin_text != blank %}
-            <div class="ts-product-page__attr">
-              <span class="ts-product-page__attr-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              </span>
-              <div>
-                <p class="ts-product-page__attr-label">{{ 'products.origin' | t }}</p>
-                <p class="ts-product-page__attr-value">{{ origin_text }}</p>
-              </div>
-            </div>
-          {% endif %}
-          {% if sizes_text != blank %}
-            <div class="ts-product-page__attr">
-              <span class="ts-product-page__attr-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6h15l-1.5 9h-12z"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M6 6 5 3H2"></path></svg>
-              </span>
-              <div>
-                <p class="ts-product-page__attr-label">{{ 'products.available_sizes' | t }}</p>
-                <p class="ts-product-page__attr-value">{{ sizes_text }}</p>
-              </div>
-            </div>
-          {% endif %}
-        </div>
-      {% endif %}
-
-      {% assign tag_limit = section.settings.tags_to_show %}
-      {% if product.tags.size > 0 %}
-        <div class="ts-product-page__tags">
-          {% assign tags_shown = 0 %}
-          {% for tag in product.tags %}
-            {% assign tdown = tag | downcase %}
-            {% if tdown == 'best seller' or tdown == 'bestseller' or tdown == 'best-seller' %}
-              {% continue %}
-            {% endif %}
-            {% if tags_shown >= tag_limit %}
-              {% break %}
-            {% endif %}
-            <span class="ts-product-page__tag">{{ tag }}</span>
-            {% assign tags_shown = tags_shown | plus: 1 %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {% form 'product', product, class: 'ts-product-page__form', id: 'ts-product-form' %}
-        {% if product.has_only_default_variant == false %}
-          <div class="ts-product-page__variants">
-            <label for="ts-variant-select">{{ 'products.variant' | t }}</label>
-            <select name="id" id="ts-variant-select" data-ts-variant-select>
-              {% for variant in product.variants %}
-                <option
-                  value="{{ variant.id }}"
-                  {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
-                  {% unless variant.available %}disabled{% endunless %}
-                >
-                  {{ variant.title }} — {{ variant.price | money }}{% unless variant.available %} ({{ 'products.sold_out' | t }}){% endunless %}
-                </option>
-              {% endfor %}
-            </select>
-          </div>
-        {% else %}
-          <input type="hidden" name="id" value="{{ v.id }}" data-ts-variant-id>
-        {% endif %}
-
-        <div class="ts-product-page__buy-row">
-          <div class="ts-product-page__qty" data-ts-qty-wrap>
-            <button type="button" class="ts-product-page__qty-btn" data-ts-qty-dec aria-label="{{ 'products.qty_decrease' | t }}">−</button>
-            <input
-              type="number"
-              name="quantity"
-              id="ts-product-qty"
-              class="ts-product-page__qty-input"
-              value="1"
-              min="1"
-              data-ts-qty
-              aria-label="{{ 'cart.quantity' | t }}"
-            >
-            <button type="button" class="ts-product-page__qty-btn" data-ts-qty-inc aria-label="{{ 'products.qty_increase' | t }}">+</button>
-          </div>
-          <div class="ts-product-page__actions">
-            <button type="submit" name="add" class="ts-btn ts-btn--primary ts-product-page__submit" data-ts-atc-btn>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M6 6 5 3H2"></path></svg>
-              <span data-ts-atc-label>{{ 'products.add_to_cart' | t }} — <span data-ts-atc-price>{{ v.price | money }}</span></span>
-            </button>
-            <button
-              type="button"
-              class="ts-product-page__wishlist"
-              data-ts-wishlist
-              aria-label="{{ 'general.wishlist' | t }}"
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            </button>
-          </div>
-        </div>
-      {% endform %}
-
-      <ul class="ts-product-page__trust" role="list">
-        <li>
-          <span class="ts-product-page__trust-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 2 8.8a7 7 0 0 1-10 9.2z"></path></svg>
-          </span>
-          <span>{{ section.settings.trust_1 }}</span>
-        </li>
-        <li>
-          <span class="ts-product-page__trust-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          </span>
-          <span>{{ section.settings.trust_2 }}</span>
-        </li>
-        <li>
-          <span class="ts-product-page__trust-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><path d="M16 8h4l3 3v5h-7V8z"></path><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-          </span>
-          <span>{{ section.settings.trust_3 }}</span>
-        </li>
-      </ul>
     </div>
-  </div>
-
-  <script type="application/json" id="ts-product-variants-data">
-    [
-      {%- for variant in product.variants -%}
-        {
-          "id": {{ variant.id }},
-          "price": {{ variant.price }},
-          "compare_at_price": {% if variant.compare_at_price %}{{ variant.compare_at_price }}{% else %}null{% endif %},
-          "available": {{ variant.available | json }},
-          "featured_image": {% if variant.featured_image %}{{ variant.featured_image | image_url: width: 1200 | json }}{% else %}null{% endif %}
-        }{% unless forloop.last %},{% endunless %}
-      {%- endfor -%}
-    ]
-  </script>
-  <script>
-    window.TS_MONEY_FORMAT = {{ shop.money_format | json }};
-  </script>
+  {% endif %}
 </section>
 
 {% schema %}
@@ -304,103 +50,14 @@
   "class": "section-ts-product",
   "settings": [
     {
-      "type": "header",
-      "content": "Badge"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_badge",
-      "label": "Show bestseller badge",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "badge_label",
-      "label": "Badge text",
-      "default": "Best seller"
-    },
-    {
-      "type": "checkbox",
-      "id": "badge_without_tag",
-      "label": "Show badge without Best seller tag",
-      "default": false
-    },
-    {
-      "type": "header",
-      "content": "Rating"
-    },
-    {
       "type": "paragraph",
-      "content": "Uses custom.rating and review_count when set."
-    },
-    {
-      "type": "checkbox",
-      "id": "show_rating",
-      "label": "Show rating row",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "rating_value",
-      "label": "Rating (1-5)",
-      "default": "4.9"
-    },
-    {
-      "type": "text",
-      "id": "review_count",
-      "label": "Review count label",
-      "default": "218"
-    },
-    {
-      "type": "header",
-      "content": "Attributes"
-    },
-    {
-      "type": "paragraph",
-      "content": "Metafields custom.origin and custom.available_sizes."
+      "content": "Catalog products render from snippets/ts-product-info.liquid. Settings below only affect products not in that list."
     },
     {
       "type": "text",
       "id": "fallback_origin",
       "label": "Fallback origin text",
       "default": "Guatemala"
-    },
-    {
-      "type": "text",
-      "id": "fallback_sizes",
-      "label": "Fallback sizes text",
-      "default": "8oz (227g)"
-    },
-    {
-      "type": "range",
-      "id": "tags_to_show",
-      "min": 2,
-      "max": 12,
-      "step": 1,
-      "label": "Max product tags to show",
-      "default": 6
-    },
-    {
-      "type": "header",
-      "content": "Trust row"
-    },
-    {
-      "type": "textarea",
-      "id": "trust_1",
-      "label": "Trust line 1",
-      "default": "100% Pure & Natural - No additives or preservatives"
-    },
-    {
-      "type": "textarea",
-      "id": "trust_2",
-      "label": "Trust line 2",
-      "default": "Single-Origin - Ethically sourced from certified farms"
-    },
-    {
-      "type": "textarea",
-      "id": "trust_3",
-      "label": "Trust line 3",
-      "default": "Free Shipping - On orders over $50"
     }
   ]
 }

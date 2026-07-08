@@ -1,17 +1,16 @@
 {% comment %}
-  Shop page — theme-managed catalog.
+  Shop page — theme-managed catalog grid.
 
-  Products are defined here in Liquid (not Shopify products, and not section
-  blocks) so they can be edited straight from GitHub. Section blocks live in
-  templates/collection.json, which is why they are not used here.
+  Tiles show image + name only; full details live on the product page
+  (/products/<handle>), rendered by snippets/ts-product-info.liquid.
 
-  To add a product:
-    1. Drop its image in assets/ (e.g. assets/cacao-nibs.webp)
-    2. Copy one `render 'ts-catalog-card'` call below and edit the values.
+  To add a product: add its handle below, add a `when` branch in
+  snippets/ts-product-info.liquid, and drop <handle>.webp +
+  <handle>-pack.webp in assets/.
 {% endcomment %}
 
 {% liquid
-  assign contact_url = '/pages/contact'
+  assign handles = 'cacao-powder,cacao-beans,cacao-nibs,cacao-butter,cacao-wafers,cacao-tea' | split: ','
 %}
 
 <section class="ts-catalog ts-page-width">
@@ -24,93 +23,9 @@
   </header>
 
   <div class="ts-catalog__grid">
-    {% render 'ts-catalog-card',
-      name: 'Cacao Powder',
-      image: 'cacao-powder.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Natural energy and magnesium',
-      uses: 'Chocolatiering;Baking;Skin & Body Care',
-      net_wt: '8oz (227g)',
-      servings: '38 servings (1 tsp / 6g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
-
-    {% render 'ts-catalog-card',
-      name: 'Cacao Beans',
-      image: 'cacao-beans.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Energy and magnesium',
-      uses: 'Brewing;Smoothies;Snacks;Baking',
-      net_wt: '8oz (227g)',
-      servings: '45 servings (1 tsp / 5g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
-
-    {% render 'ts-catalog-card',
-      name: 'Cacao Nibs',
-      image: 'cacao-nibs.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Energy and magnesium',
-      uses: 'Snacking;Smoothies;Salads;Baking',
-      net_wt: '8oz (227g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
-
-    {% render 'ts-catalog-card',
-      name: 'Cacao Butter',
-      image: 'cacao-butter.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% cacao butter;Full-bodied creaminess;Rich in antioxidants & theobromine;Make chocolate & keto treats',
-      uses: 'Tempering;Ice Creams;Desserts;Baking',
-      net_wt: '8oz (227g)',
-      servings: '11 servings (1 tbsp / 20g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
-
-    {% render 'ts-catalog-card',
-      name: 'Cacao Wafers',
-      image: 'cacao-wafers.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Energy and magnesium',
-      uses: 'Tempering;Ice Creams;Desserts;Baking',
-      net_wt: '8oz (227g)',
-      servings: '4 servings (3 pieces / 54g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
-
-    {% render 'ts-catalog-card',
-      name: 'Cacao Tea',
-      image: 'cacao-tea.webp',
-      origin: 'Single Origin · Product of Guatemala',
-      tagline: "From Guatemala's volcanic region. Mineral-rich volcanic soil, rainforest climate and careful cultivation result in cacao that is aromatic, nutrient-dense and flavor-forward.",
-      bullets: '100% rich chocolate taste;Full-bodied aroma;Rich in antioxidants & theobromine;High in flavonoids;Energy and magnesium',
-      uses: 'Brewing;Smoothies;Snacks;Baking',
-      servings: '14 servings (1 tsp / 4g)',
-      ingredients: '100% Pure Cacao (Theobroma cacao)',
-      badge: 'Zero Sugar',
-      cta_label: 'Enquire',
-      cta_url: contact_url
-    %}
+    {% for handle in handles %}
+      {% render 'ts-product-info', handle: handle, mode: 'card' %}
+    {% endfor %}
   </div>
 
   {% if section.settings.note != blank %}
@@ -151,4 +66,3 @@
   ]
 }
 {% endschema %}
-
