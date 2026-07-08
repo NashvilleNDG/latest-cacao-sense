@@ -1,7 +1,13 @@
-{% liquid
-  assign coll = section.settings.collection
-  assign limit = section.settings.products_to_show | default: 12
-%}
+{% comment %}
+  Homepage "Complete Cacao Collection" — theme-managed catalog.
+
+  Renders the same tiles as the shop page from snippets/ts-product-info.liquid,
+  so the homepage and /collections/all can never drift. Product list comes from
+  snippets/ts-product-handles.liquid.
+{% endcomment %}
+
+{%- capture handles_csv -%}{%- render 'ts-product-handles' -%}{%- endcapture -%}
+{%- assign handles = handles_csv | strip | split: ',' -%}
 
 <section id="all-products" class="ts-vbc-all-products">
   <div class="ts-vbc-all-products__glow" aria-hidden="true"></div>
@@ -16,17 +22,17 @@
       {% endif %}
     </div>
 
-    {% if coll != blank and coll.all_products_count > 0 %}
-      <div class="ts-products__grid">
-        {% for product in coll.products limit: limit %}
-          {% render 'ts-product-card', product: product %}
-        {% endfor %}
-      </div>
-    {% else %}
-      <div class="ts-products__grid">
-        <p class="ts-vbc-all-products__empty">
-          {{ section.settings.empty_message }}
-        </p>
+    <div class="ts-catalog__grid">
+      {% for handle in handles %}
+        {% render 'ts-product-info', handle: handle, mode: 'card' %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <div class="ts-products__footer">
+        <a class="ts-btn-outline" href="{{ routes.all_products_collection_url }}">
+          {{ section.settings.view_all_label }}
+        </a>
       </div>
     {% endif %}
   </div>
@@ -39,18 +45,8 @@
   "class": "section-ts-vbc-all-products",
   "settings": [
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Collection"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "min": 3,
-      "max": 24,
-      "step": 1,
-      "label": "Products to show",
-      "default": 12
+      "type": "paragraph",
+      "content": "Products come from snippets/ts-product-handles.liquid and ts-product-info.liquid — the same source as the shop page."
     },
     {
       "type": "text",
@@ -77,10 +73,16 @@
       "default": "From raw whole beans to refined cacao butter — every form of pure cacao you need, all in one place."
     },
     {
-      "type": "textarea",
-      "id": "empty_message",
-      "label": "Empty state",
-      "default": "Select a collection in the theme editor (e.g. All products) to show your catalog."
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show \"view all\" button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all button label",
+      "default": "View All Products"
     }
   ],
   "presets": [{ "name": "Product grid (full range)" }]

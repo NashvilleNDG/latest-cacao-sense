@@ -6,9 +6,10 @@
   their Shopify data (still without price).
 {% endcomment %}
 
-{% liquid
-  assign known = 'cacao-powder,cacao-beans,cacao-nibs,cacao-butter,cacao-wafers,cacao-tea' | split: ','
+{%- capture handles_csv -%}{%- render 'ts-product-handles' -%}{%- endcapture -%}
+{%- assign known = handles_csv | strip | split: ',' -%}
 
+{% liquid
   assign url_contact = '/pages/contact'
   if pages['contact'] != blank
     assign url_contact = pages['contact'].url
