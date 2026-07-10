@@ -2912,6 +2912,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   position: absolute;
   inset: 0;
   background:
+    radial-gradient(120% 80% at 30% 65%, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 55%),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0, rgba(0, 0, 0, 0.2) 12%, rgba(0, 0, 0, 0) 28%),
     linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.15));
 }
@@ -2937,6 +2938,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   text-transform: uppercase;
   color: #fbbf24;
   margin-bottom: 1rem;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
 }
 
 .ts-os-hero__title {
@@ -2946,14 +2948,16 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   color: #fff;
   line-height: 1.1;
   margin-bottom: 1.5rem;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.5);
 }
 
 .ts-os-hero__lead {
   font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.75);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 42rem;
   line-height: 1.6;
   font-style: italic;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.55);
 }
 
 /* ----- Our Story: narrative with image rows ----- */
