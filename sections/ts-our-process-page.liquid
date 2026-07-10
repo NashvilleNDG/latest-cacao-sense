@@ -1,10 +1,14 @@
+{% comment %}
+  Our Process page — hero + intro + 8 alternating step rows.
+
+  Step content and images are fixed editorial content, defined inline below.
+  Step images are theme assets (op-step-1.webp … op-step-8.webp, op-step-5b.webp).
+  Hero + intro remain editable via the schema settings.
+{% endcomment %}
+
 {% liquid
   assign hero_img = section.settings.hero_image
-  assign hero_fallback = 'os-process-hero.webp' | asset_url
-  assign img1 = section.settings.image_1
-  assign img1_fallback = 'os-process-1.webp' | asset_url
-  assign img2 = section.settings.image_2
-  assign img2_fallback = 'os-process-2.webp' | asset_url
+  assign hero_fallback = 'op-hero.webp' | asset_url
 %}
 
 <div class="ts-os-page">
@@ -37,52 +41,95 @@
     {% endif %}
 
     <div class="ts-os-row">
-      <figure class="ts-os-row__media">
-        {% if img1 != blank %}
-          <img src="{{ img1 | image_url: width: 1400 }}" alt="{{ section.settings.image_1_alt | escape }}" width="{{ img1.width }}" height="{{ img1.height }}" loading="lazy">
-        {% else %}
-          <img src="{{ img1_fallback }}" alt="{{ section.settings.image_1_alt | escape }}" width="1600" height="1067" loading="lazy">
-        {% endif %}
-        {% if section.settings.image_1_caption != blank %}
-          <figcaption class="ts-os-row__caption">{{ section.settings.image_1_caption }}</figcaption>
-        {% endif %}
+      <figure class="ts-os-row__media ts-os-row__media--portrait">
+        <img src="{{ 'op-step-1.webp' | asset_url }}" alt="A cacao seedling nurtured by hand" width="1600" height="2400" loading="lazy">
       </figure>
       <div class="ts-os-row__text rte">
-        {% if section.settings.row_1_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_1_heading }}</h2>{% endif %}
-        {{ section.settings.row_1_rte }}
+        <h2 class="ts-os-row__heading">01. Germination &amp; Growth</h2>
+        <p>Each cacao plant begins with care. Our plants are germinated by hand, nurtured from the soil, and monitored as they grow. This early stage helps us protect the quality and future character of every cacao tree.</p>
       </div>
     </div>
 
     <div class="ts-os-row ts-os-row--reverse">
       <figure class="ts-os-row__media">
-        {% if img2 != blank %}
-          <img src="{{ img2 | image_url: width: 1400 }}" alt="{{ section.settings.image_2_alt | escape }}" width="{{ img2.width }}" height="{{ img2.height }}" loading="lazy">
-        {% else %}
-          <img src="{{ img2_fallback }}" alt="{{ section.settings.image_2_alt | escape }}" width="1600" height="1067" loading="lazy">
-        {% endif %}
-        {% if section.settings.image_2_caption != blank %}
-          <figcaption class="ts-os-row__caption">{{ section.settings.image_2_caption }}</figcaption>
-        {% endif %}
+        <img src="{{ 'op-step-2.webp' | asset_url }}" alt="Ripe cacao pods harvested by hand" width="1600" height="1198" loading="lazy">
       </figure>
       <div class="ts-os-row__text rte">
-        {% if section.settings.row_2_heading != blank %}<h2 class="ts-os-row__heading">{{ section.settings.row_2_heading }}</h2>{% endif %}
-        {{ section.settings.row_2_rte }}
+        <h2 class="ts-os-row__heading">02. Harvesting at Peak Ripeness</h2>
+        <p>Cacao pods are harvested by hand at peak ripeness. This allows us to select fruit at the right moment, when the cacao is ready to begin its transformation.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-3.webp' | asset_url }}" alt="Opening a fresh cacao fruit by hand" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">03. Opening the Cacao Fruit</h2>
+        <p>Once harvested, the cacao fruit is opened carefully to reveal the fresh pulp and seeds inside. This is where the transformation from fruit to cacao begins.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row ts-os-row--reverse">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-4.webp' | asset_url }}" alt="Manually sorting and selecting fresh cacao beans" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">04. Manual Selection</h2>
+        <p>The fresh cacao beans are manually sorted and selected. This hands-on step helps us separate the best fruit and prepare each batch for fermentation.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media ts-os-row__media--portrait">
+        <img src="{{ 'op-step-5.webp' | asset_url }}" alt="Cacao fermenting in traditional wooden boxes" width="1600" height="2400" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">05. Six-Day Fermentation</h2>
+        <p>Fermentation is one of the most important stages in developing cacao's aroma, flavor, and complexity. At Cacao Senses, we use a carefully controlled six-day fermentation process, inspired by traditional cacao practices and refined through our own research and field experience.</p>
+        <p>During fermentation, we monitor key quality indicators such as humidity, temperature, and pH to guide each batch and preserve the natural character of the cacao.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row ts-os-row--reverse">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-5b.webp' | asset_url }}" alt="Measuring cacao quality during fermentation" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <p>During fermentation and drying, we monitor key quality indicators such as humidity, temperature, and pH to guide each batch and preserve the natural character of the cacao.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-6.webp' | asset_url }}" alt="Cacao beans sun-drying on raised beds" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">06. Sun-Drying</h2>
+        <p>After fermentation, the cacao beans are slowly sun-dried and carefully rotated by hand. This step helps reduce moisture while preserving the cacao's natural aroma, flavor, and quality.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row ts-os-row--reverse">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-7.webp' | asset_url }}" alt="Evaluating dried cacao beans by cross-section" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">07. Bean Evaluation</h2>
+        <p>Each batch is evaluated to understand its fermentation, color, aroma, and quality. This allows us to confirm that the beans have reached the right profile before they move forward in the process.</p>
+      </div>
+    </div>
+
+    <div class="ts-os-row">
+      <figure class="ts-os-row__media">
+        <img src="{{ 'op-step-8.webp' | asset_url }}" alt="Dried cacao beans ready for transformation" width="1600" height="1067" loading="lazy">
+      </figure>
+      <div class="ts-os-row__text rte">
+        <h2 class="ts-os-row__heading">08. Ready for Transformation</h2>
+        <p>Once dried, selected, and evaluated, the beans are ready to be transformed into our cacao products — nibs, powder, butter, tea, paste, wafers, and more.</p>
       </div>
     </div>
   </section>
-
-  {% if section.settings.cta_title != blank %}
-    <section class="ts-os-cta ts-page-width">
-      <h2 class="ts-os-cta__title">{{ section.settings.cta_title }}</h2>
-      {% if section.settings.cta_text != blank %}
-        <p class="ts-os-cta__text">{{ section.settings.cta_text }}</p>
-      {% endif %}
-      <a class="ts-btn ts-btn--primary ts-os-cta__btn" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
-        {{ section.settings.cta_label }}
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-      </a>
-    </section>
-  {% endif %}
 </div>
 
 {% schema %}
@@ -92,50 +139,20 @@
   "class": "section-ts-os-page",
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset os-process-hero.webp if empty." },
-    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Cacao processing at Finca El Rosario Quesada" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset op-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Cacao drying racks at Cacao Senses" },
     { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Single Origin · Guatemala" },
     { "type": "text", "id": "hero_title", "label": "Hero title", "default": "Our Process" },
     { "type": "textarea", "id": "hero_lead", "label": "Hero subtitle", "default": "From beginning to end." },
 
-    { "type": "header", "content": "Intro (full width)" },
+    { "type": "header", "content": "Intro" },
     { "type": "text", "id": "intro_heading", "label": "Intro heading", "default": "From Seed to Your Table" },
     {
       "type": "richtext",
       "id": "intro_rte",
       "label": "Intro text",
       "default": "<p>Every cacao product begins with a single seed and a commitment to preserving the ancestral way of cultivating cacao.</p><p>At Cacao Senses, every step of our process is done with intention. We germinate each cacao plant by hand, carefully nurture every tree, and harvest each pod at peak ripeness to ensure the highest quality from the very beginning.</p>"
-    },
-
-    { "type": "header", "content": "Row 1 — image left, text right" },
-    { "type": "image_picker", "id": "image_1", "label": "Image 1", "info": "Falls back to asset os-process-1.webp if empty." },
-    { "type": "text", "id": "image_1_alt", "label": "Image 1 alt", "default": "Cacao beans fermenting" },
-    { "type": "text", "id": "image_1_caption", "label": "Image 1 caption" },
-    { "type": "text", "id": "row_1_heading", "label": "Row 1 heading" },
-    {
-      "type": "richtext",
-      "id": "row_1_rte",
-      "label": "Row 1 text",
-      "default": "<p>Once harvested, the cacao fruit is opened and the beans begin their transformation through fermentation — one of the most important steps in developing cacao's rich aroma and complex flavor. Inspired by ancient Mayan traditions, we have perfected our own fermentation protocols through years of research and experience.</p><p>Each cacao variety is unique, which is why every harvest follows a carefully designed process to highlight its natural characteristics.</p>"
-    },
-
-    { "type": "header", "content": "Row 2 — image left, text right" },
-    { "type": "image_picker", "id": "image_2", "label": "Image 2", "info": "Falls back to asset os-process-2.webp if empty." },
-    { "type": "text", "id": "image_2_alt", "label": "Image 2 alt", "default": "Cacao beans sun-drying" },
-    { "type": "text", "id": "image_2_caption", "label": "Image 2 caption" },
-    { "type": "text", "id": "row_2_heading", "label": "Row 2 heading" },
-    {
-      "type": "richtext",
-      "id": "row_2_rte",
-      "label": "Row 2 text",
-      "default": "<p>After fermentation, our beans are slowly sun-dried, carefully monitored, and prepared to become our cacao products.</p><p>We believe in honoring the whole cacao fruit. Nothing goes to waste — organic remains are returned to the earth as natural fertilizer, creating a cycle that nourishes the same soil where our cacao grows.</p>"
-    },
-
-    { "type": "header", "content": "Call to action" },
-    { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Taste the Heritage" },
-    { "type": "textarea", "id": "cta_text", "label": "CTA text", "default": "Discover our range of premium single-origin cacao products." },
-    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop Our Products" },
-    { "type": "url", "id": "cta_link", "label": "CTA link" }
+    }
   ],
   "presets": [{ "name": "Our process page" }]
 }

@@ -4313,3 +4313,11 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   .ts-cat-tile__name { font-size: 1.0625rem; }
   .ts-cat-tile__origin { font-size: 0.5625rem; letter-spacing: 0.06em; }
 }
+
+/* Portrait images in Our Process step rows — cap height, center in column */
+.ts-os-row__media--portrait img {
+  max-height: 560px;
+  width: auto;
+  max-width: 100%;
+  margin-inline: auto;
+}
