@@ -1,6 +1,7 @@
 {% liquid
   assign hero_img = section.settings.image
   assign default_hero = 'Home-hero.webp' | asset_url
+  assign fb_products = 'shop-hero.webp' | asset_url
   assign fb2 = 'hero-2.webp' | asset_url
   assign fb3 = 'hero-3.webp' | asset_url
   assign fb4 = 'hero-4.webp' | asset_url
@@ -12,9 +13,15 @@
   <div class="ts-hero__bg" data-ts-hero-slider data-interval="{{ slide_ms }}">
     <img
       class="ts-hero__slide is-active"
+      src="{% if section.settings.image_products != blank %}{{ section.settings.image_products | image_url: width: 2400 }}{% else %}{{ fb_products }}{% endif %}"
+      alt="{{ section.settings.products_image_alt | escape }}"
+      width="1920" height="1080" loading="eager" fetchpriority="high"
+    >
+    <img
+      class="ts-hero__slide"
       src="{% if hero_img != blank %}{{ hero_img | image_url: width: 2400 }}{% else %}{{ default_hero }}{% endif %}"
       alt="{{ hero_img.alt | default: section.settings.image_alt | escape }}"
-      width="1920" height="1080" loading="eager" fetchpriority="high"
+      width="1920" height="1080" loading="lazy"
     >
     <img class="ts-hero__slide" src="{% if section.settings.image_2 != blank %}{{ section.settings.image_2 | image_url: width: 2400 }}{% else %}{{ fb2 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
     <img class="ts-hero__slide" src="{% if section.settings.image_3 != blank %}{{ section.settings.image_3 | image_url: width: 2400 }}{% else %}{{ fb3 }}{% endif %}" alt="" width="1920" height="1080" loading="lazy">
@@ -83,16 +90,18 @@
       "content": "Background slideshow",
       "info": "The hero background cross-fades through these images automatically. Slide 1 shows first."
     },
+    { "type": "image_picker", "id": "image_products", "label": "Slide 1 (product range)", "info": "Defaults to shop-hero.webp." },
+    { "type": "text", "id": "products_image_alt", "label": "Slide 1 alt text", "default": "The full Cacao Senses product range" },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "Slide 1 (background image)",
+      "label": "Slide 2 (background image)",
       "info": "Optional — defaults to theme asset Home-hero.webp."
     },
-    { "type": "image_picker", "id": "image_2", "label": "Slide 2", "info": "Defaults to hero-2.webp." },
-    { "type": "image_picker", "id": "image_3", "label": "Slide 3", "info": "Defaults to hero-3.webp." },
-    { "type": "image_picker", "id": "image_4", "label": "Slide 4", "info": "Defaults to hero-4.webp." },
-    { "type": "image_picker", "id": "image_5", "label": "Slide 5", "info": "Defaults to hero-5.webp." },
+    { "type": "image_picker", "id": "image_2", "label": "Slide 3", "info": "Defaults to hero-2.webp." },
+    { "type": "image_picker", "id": "image_3", "label": "Slide 4", "info": "Defaults to hero-3.webp." },
+    { "type": "image_picker", "id": "image_4", "label": "Slide 5", "info": "Defaults to hero-4.webp." },
+    { "type": "image_picker", "id": "image_5", "label": "Slide 6", "info": "Defaults to hero-5.webp." },
     { "type": "range", "id": "slide_seconds", "min": 3, "max": 10, "step": 1, "unit": "s", "label": "Seconds per slide", "default": 5 },
     {
       "type": "text",
