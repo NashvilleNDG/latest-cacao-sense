@@ -45,6 +45,10 @@
             if pages['bulk-cacao'] != blank
               assign url_bulkcacao = pages['bulk-cacao'].url
             endif
+            assign url_journey = '/pages/take-a-journey'
+            if pages['take-a-journey'] != blank
+              assign url_journey = pages['take-a-journey'].url
+            endif
             assign url_recipes = '/pages/recipes'
             if pages['recipes'] != blank
               assign url_recipes = pages['recipes'].url
@@ -58,7 +62,24 @@
               assign url_contact = pages['contact'].url
             endif
           %}
-          <a class="ts-header__link" href="{{ routes.all_products_collection_url }}">Shop</a>
+          <div class="ts-header__dropdown" data-ts-dropdown>
+            <button
+              type="button"
+              class="ts-header__link ts-header__dropdown-toggle"
+              data-ts-dropdown-toggle
+              aria-expanded="false"
+              aria-haspopup="true"
+            >
+              {{ 'sections.header.shop' | t }}
+              <svg class="ts-header__dropdown-caret" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
+            </button>
+            <div class="ts-header__dropdown-menu" data-ts-dropdown-menu>
+              <a class="ts-header__dropdown-link" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.products' | t }}</a>
+              <a class="ts-header__dropdown-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
+            </div>
+          </div>
           <div class="ts-header__dropdown" data-ts-dropdown>
             <button
               type="button"
@@ -78,7 +99,7 @@
             </div>
           </div>
           <a class="ts-header__link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
-          <a class="ts-header__link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
+          <a class="ts-header__link" href="{{ url_journey }}">{{ 'sections.header.journey' | t }}</a>
           <a class="ts-header__link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
           <a class="ts-header__link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
           <a class="ts-header__link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>
@@ -147,6 +168,10 @@
           if pages['bulk-cacao'] != blank
             assign url_bulkcacao = pages['bulk-cacao'].url
           endif
+          assign url_journey = '/pages/take-a-journey'
+          if pages['take-a-journey'] != blank
+            assign url_journey = pages['take-a-journey'].url
+          endif
           assign url_recipes = '/pages/recipes'
           if pages['recipes'] != blank
             assign url_recipes = pages['recipes'].url
@@ -160,12 +185,14 @@
             assign url_contact = pages['contact'].url
           endif
         %}
-        <a class="ts-header__mobile-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <p class="ts-header__mobile-heading">{{ 'sections.header.shop' | t }}</p>
+        <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.products' | t }}</a>
+        <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
         <p class="ts-header__mobile-heading">{{ 'sections.header.about' | t }}</p>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
-        <a class="ts-header__mobile-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
+        <a class="ts-header__mobile-link" href="{{ url_journey }}">{{ 'sections.header.journey' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_contact }}">{{ 'sections.header.contact' | t }}</a>

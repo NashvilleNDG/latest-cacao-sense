@@ -4321,3 +4321,70 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   max-width: 100%;
   margin-inline: auto;
 }
+
+/* ===== Take a Journey page ===== */
+.ts-journey {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+}
+.ts-journey__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.75rem 2rem;
+  margin-top: 2.5rem;
+}
+@media (min-width: 48rem) {
+  .ts-journey__grid { grid-template-columns: repeat(2, 1fr); }
+}
+.ts-journey__item { display: flex; flex-direction: column; }
+.ts-journey__frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--ts-radius-lg);
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+.ts-journey__frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.ts-journey__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  text-align: center;
+  color: color-mix(in srgb, var(--ts-primary-fg) 70%, transparent);
+  background: var(--ts-primary);
+}
+.ts-journey__placeholder p { margin: 0; font-size: 0.9rem; }
+.ts-journey__body { padding-top: 1.25rem; }
+.ts-journey__eyebrow {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--ts-accent);
+}
+.ts-journey__title {
+  margin: 0 0 0.5rem;
+  font-family: var(--ts-font-display);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--ts-fg);
+}
+.ts-journey__desc {
+  margin: 0;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--ts-fg) 72%, transparent);
+}

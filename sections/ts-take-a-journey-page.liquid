@@ -1,0 +1,119 @@
+{% liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'Home-hero.webp' | asset_url
+%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.hero_eyebrow != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.hero_eyebrow }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.hero_title }}</h1>
+    </div>
+  </section>
+
+  <section class="ts-journey ts-page-width">
+    {% if section.settings.subtext != blank %}
+      <div class="ts-os-intro-block rte"><p>{{ section.settings.subtext }}</p></div>
+    {% endif %}
+
+    <div class="ts-journey__grid">
+      {% for block in section.blocks %}
+        {% if block.type == 'video' %}
+          {% assign vurl = block.settings.video_url %}
+          <article class="ts-journey__item" {{ block.shopify_attributes }}>
+            <div class="ts-journey__frame">
+              {% if vurl != blank %}
+                {% if vurl.type == 'youtube' %}
+                  <iframe
+                    src="https://www.youtube.com/embed/{{ vurl.id }}?rel=0&modestbranding=1&playsinline=1"
+                    title="{{ block.settings.title | default: 'Take a Journey' | escape }}"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                {% elsif vurl.type == 'vimeo' %}
+                  <iframe
+                    src="https://player.vimeo.com/video/{{ vurl.id }}?title=0&byline=0&portrait=0&dnt=1"
+                    title="{{ block.settings.title | default: 'Take a Journey' | escape }}"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen
+                    loading="lazy"
+                  ></iframe>
+                {% endif %}
+              {% else %}
+                <div class="ts-journey__placeholder">
+                  <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"></polygon></svg>
+                  <p>{{ section.settings.placeholder_text }}</p>
+                </div>
+              {% endif %}
+            </div>
+            {% if block.settings.title != blank or block.settings.description != blank %}
+              <div class="ts-journey__body">
+                {% if block.settings.eyebrow != blank %}<p class="ts-journey__eyebrow">{{ block.settings.eyebrow }}</p>{% endif %}
+                {% if block.settings.title != blank %}<h2 class="ts-journey__title">{{ block.settings.title }}</h2>{% endif %}
+                {% if block.settings.description != blank %}<p class="ts-journey__desc">{{ block.settings.description }}</p>{% endif %}
+              </div>
+            {% endif %}
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank or section.settings.cta_label != blank %}
+      <div class="ts-recipes__cta">
+        {% if section.settings.cta_text != blank %}<p class="ts-recipes__cta-text">{{ section.settings.cta_text }}</p>{% endif %}
+        {% if section.settings.cta_label != blank %}
+          <a class="ts-btn ts-btn--primary" href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}">
+            {{ section.settings.cta_label }}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Take a Journey page",
+  "tag": "section",
+  "class": "section-ts-os-page",
+  "max_blocks": 24,
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to the theme's Home-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Take a journey through our cacao" },
+    { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Take a Journey" },
+    { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "From Bean to Bliss" },
+    { "type": "textarea", "id": "subtext", "label": "Intro subtext", "default": "Follow our single-origin cacao from the farm to your cup. Watch the story of how it's grown, harvested, and crafted with care." },
+    { "type": "text", "id": "placeholder_text", "label": "Video placeholder text", "default": "Add a YouTube or Vimeo link in the theme editor" },
+    { "type": "header", "content": "Closing CTA" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Ready to taste the journey?" },
+    { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Shop the Full Cacao Collection" },
+    { "type": "url", "id": "cta_link", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        { "type": "video_url", "id": "video_url", "label": "Video URL", "accept": ["youtube", "vimeo"], "info": "Paste a YouTube or Vimeo link." },
+        { "type": "text", "id": "eyebrow", "label": "Eyebrow (optional)" },
+        { "type": "text", "id": "title", "label": "Title (optional)" },
+        { "type": "textarea", "id": "description", "label": "Description (optional)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Take a Journey page" }]
+}
+{% endschema %}

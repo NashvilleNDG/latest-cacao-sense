@@ -1,0 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "journey": {
+      "type": "ts-take-a-journey-page",
+      "blocks": {
+        "j1": {
+          "type": "video",
+          "settings": {}
+        },
+        "j2": {
+          "type": "video",
+          "settings": {}
+        },
+        "j3": {
+          "type": "video",
+          "settings": {}
+        }
+      },
+      "block_order": ["j1", "j2", "j3"],
+      "settings": {
+        "hero_eyebrow": "Take a Journey",
+        "hero_title": "From Bean to Bliss",
+        "subtext": "Follow our single-origin cacao from the farm to your cup. Watch the story of how it's grown, harvested, and crafted with care.",
+        "cta_text": "Ready to taste the journey?",
+        "cta_label": "Shop the Full Cacao Collection"
+      }
+    },
+    "newsletter": {
+      "type": "ts-newsletter",
+      "settings": {}
+    }
+  },
+  "order": ["journey", "newsletter"]
+}
