@@ -12,32 +12,53 @@
 {%- capture handles_csv -%}{%- render 'ts-product-handles' -%}{%- endcapture -%}
 {%- assign handles = handles_csv | strip | split: ',' -%}
 
-<section class="ts-catalog ts-page-width">
-  <header class="ts-catalog__head">
-    <p class="ts-products__kicker">{{ section.settings.kicker }}</p>
-    <h1 class="ts-products__title">{{ section.settings.title }}</h1>
-    {% if section.settings.intro != blank %}
-      <p class="ts-catalog__intro">{{ section.settings.intro }}</p>
+{%- liquid
+  assign hero_img = section.settings.hero_image
+  assign hero_fallback = 'shop-hero.webp' | asset_url
+-%}
+
+<div class="ts-os-page">
+  <section class="ts-os-hero">
+    <div class="ts-os-hero__bg">
+      {% if hero_img != blank %}
+        <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
+      {% else %}
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="1536" height="1024" loading="eager" fetchpriority="high">
+      {% endif %}
+      <div class="ts-os-hero__shade"></div>
+    </div>
+    <div class="ts-os-hero__content ts-page-width">
+      {% if section.settings.kicker != blank %}
+        <p class="ts-os-hero__eyebrow">{{ section.settings.kicker }}</p>
+      {% endif %}
+      <h1 class="ts-os-hero__title">{{ section.settings.title }}</h1>
+      {% if section.settings.intro != blank %}
+        <p class="ts-os-hero__lead">{{ section.settings.intro }}</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section class="ts-catalog ts-page-width">
+    <div class="ts-catalog__grid">
+      {% for handle in handles %}
+        {% render 'ts-product-info', handle: handle, mode: 'card' %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.note != blank %}
+      <p class="ts-catalog__note">{{ section.settings.note }}</p>
     {% endif %}
-  </header>
-
-  <div class="ts-catalog__grid">
-    {% for handle in handles %}
-      {% render 'ts-product-info', handle: handle, mode: 'card' %}
-    {% endfor %}
-  </div>
-
-  {% if section.settings.note != blank %}
-    <p class="ts-catalog__note">{{ section.settings.note }}</p>
-  {% endif %}
-</section>
+  </section>
+</div>
 
 {% schema %}
 {
   "name": "Collection",
   "tag": "section",
-  "class": "section-ts-collection",
+  "class": "section-ts-os-page",
   "settings": [
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to asset shop-hero.webp if empty." },
+    { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "The full Cacao Senses product range" },
     {
       "type": "text",
       "id": "kicker",

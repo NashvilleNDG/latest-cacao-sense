@@ -39,6 +39,16 @@
         {% if section.settings.cta_note != blank %}
           <p class="ts-bulk-cta__note">{{ section.settings.cta_note }}</p>
         {% endif %}
+        {% if section.settings.cta_note_2 != blank %}
+          <p class="ts-bulk-cta__note">{{ section.settings.cta_note_2 }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.us_heading != blank or section.settings.us_text != blank %}
+      <div class="ts-bulk-us">
+        {% if section.settings.us_heading != blank %}<h2 class="ts-bulk-us__title">{{ section.settings.us_heading }}</h2>{% endif %}
+        {% if section.settings.us_text != blank %}<p class="ts-bulk-us__text">{{ section.settings.us_text }}</p>{% endif %}
       </div>
     {% endif %}
   </section>
@@ -69,7 +79,12 @@
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_label", "label": "CTA button", "default": "Enquire About Bulk Orders" },
     { "type": "url", "id": "cta_link", "label": "CTA link", "info": "Defaults to /pages/contact if empty." },
-    { "type": "text", "id": "cta_note", "label": "CTA note", "default": "Minimum order quantity: 50 lbs" }
+    { "type": "text", "id": "cta_note", "label": "CTA note", "default": "Minimum order quantity: 50 lbs" },
+    { "type": "text", "id": "cta_note_2", "label": "CTA note (line 2)", "default": "Amount to be defined" },
+
+    { "type": "header", "content": "U.S. availability" },
+    { "type": "text", "id": "us_heading", "label": "U.S. panel heading", "default": "Bulk Cocoa Available in the U.S." },
+    { "type": "textarea", "id": "us_text", "label": "U.S. panel text", "default": "Premium Guatemalan cacao products, already imported and available in the United States. Ready for shipping to manufacturers, brands, chocolatiers, and food businesses." }
   ],
   "presets": [{ "name": "Bulk cacao page" }]
 }
