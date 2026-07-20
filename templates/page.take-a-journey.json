@@ -16,49 +16,56 @@
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=QuphHJgTOt0",
-            "title": "Architecture of the Senses"
+            "title": "Architecture of the Senses",
+            "description": "How aroma, texture and taste come together in every bean — the sensory design behind pure cacao."
           }
         },
         "j2": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=gzf6Gz9XP6s",
-            "title": "Engineering the Flavor"
+            "title": "Engineering the Flavor",
+            "description": "The craft behind the flavour — how careful fermentation, drying and roasting shape every batch."
           }
         },
         "j3": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=jmR6KB50S_I",
-            "title": "Preserve Knowledge"
+            "title": "Preserve Knowledge",
+            "description": "Honouring the traditional wisdom and growing practices passed down through generations of cacao farmers."
           }
         },
         "j4": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=D15vNLSZVGU",
-            "title": "The Awakening of the Sacred"
+            "title": "The Awakening of the Sacred",
+            "description": "Cacao as ceremony — the ritual and reverence at the heart of the cacao tradition."
           }
         },
         "j5": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=H1t4ne0x9iA",
-            "title": "The Circle of Life"
+            "title": "The Circle of Life",
+            "description": "From seed to harvest and back to the soil — the natural cycle that sustains our cacao."
           }
         },
         "j6": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=btG9miT3UB0",
-            "title": "Cacao Senses Cosmovision"
+            "title": "Cacao Senses Cosmovision",
+            "description": "Our worldview — the relationship between land, community and cacao that guides everything we do."
           }
         },
         "j7": {
           "type": "video",
           "settings": {
             "video_url": "https://www.youtube.com/watch?v=vh7iWr_W-ck",
-            "title": "Cacao Senses Esencia Sagrada Del Cacao"
+            "title": "Cacao Senses Esencia Sagrada Del Cacao",
+            "description": "The sacred essence of cacao — its spirit, its origin and its meaning beyond the cup."
           }
         }
       },
