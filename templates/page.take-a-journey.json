@@ -14,18 +14,55 @@
       "blocks": {
         "j1": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=QuphHJgTOt0",
+            "title": "Architecture of the Senses"
+          }
         },
         "j2": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=gzf6Gz9XP6s",
+            "title": "Engineering the Flavor"
+          }
         },
         "j3": {
           "type": "video",
-          "settings": {}
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=jmR6KB50S_I",
+            "title": "Preserve Knowledge"
+          }
+        },
+        "j4": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=D15vNLSZVGU",
+            "title": "The Awakening of the Sacred"
+          }
+        },
+        "j5": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=H1t4ne0x9iA",
+            "title": "The Circle of Life"
+          }
+        },
+        "j6": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=btG9miT3UB0",
+            "title": "Cacao Senses Cosmovision"
+          }
+        },
+        "j7": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://www.youtube.com/watch?v=vh7iWr_W-ck",
+            "title": "Cacao Senses Esencia Sagrada Del Cacao"
+          }
         }
       },
-      "block_order": ["j1", "j2", "j3"],
+      "block_order": ["j1", "j2", "j3", "j4", "j5", "j6", "j7"],
       "settings": {
         "hero_eyebrow": "Take a Journey",
         "hero_title": "From Bean to Bliss",
