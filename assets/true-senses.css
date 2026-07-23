@@ -4450,7 +4450,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 }
 
 .ts-hero__next:hover svg {
-  transform: translateY(2px);
+  transform: translateX(3px);
 }
 
 .ts-hero__next.is-hidden {
@@ -4465,7 +4465,63 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   }
 }
 
-/* Video section — hidden until revealed by the hero "Next" button */
+/* Video section as a full-screen panel that swipes in from the right
+   when the hero "Next" button is clicked. */
+.ts-video-sec--panel {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4.5rem 1.5rem;
+  background: rgba(12, 9, 7, 0.98);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.ts-video-sec--panel.is-open {
+  transform: translateX(0);
+}
+
+/* Fully closed — removed from the page entirely (overrides the panel display) */
 .ts-video-sec.is-collapsed {
   display: none;
+}
+
+.ts-video-sec__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--ts-radius-full);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.ts-video-sec__close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+@media (min-width: 768px) {
+  .ts-video-sec__close {
+    top: 2rem;
+    right: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ts-video-sec--panel {
+    transition: none;
+  }
 }

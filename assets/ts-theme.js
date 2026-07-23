@@ -242,13 +242,48 @@
     if (!target) {
       return;
     }
-    btn.addEventListener('click', function () {
+    var closeBtn = target.querySelector('[data-ts-panel-close]');
+    var closeTimer = null;
+
+    function openPanel() {
+      if (closeTimer) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
       target.classList.remove('is-collapsed');
+      // force reflow so the transform transition runs from the off-screen state
+      void target.offsetWidth;
+      target.classList.add('is-open');
       btn.classList.add('is-hidden');
-      var offset = 80;
-      var y = target.getBoundingClientRect().top + window.pageYOffset - offset;
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePanel() {
+      target.classList.remove('is-open');
+      btn.classList.remove('is-hidden');
+      document.body.style.overflow = '';
+      closeTimer = setTimeout(function () {
+        if (!target.classList.contains('is-open')) {
+          target.classList.add('is-collapsed');
+        }
+      }, 650);
+    }
+
+    btn.addEventListener('click', openPanel);
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closePanel);
+    }
+    // Click on the dark backdrop (outside the video content) closes the panel
+    target.addEventListener('click', function (e) {
+      if (e.target === target) {
+        closePanel();
+      }
+    });
+    // Escape closes the panel
+    document.addEventListener('keydown', function (e) {
+      if ((e.key === 'Escape' || e.keyCode === 27) && target.classList.contains('is-open')) {
+        closePanel();
+      }
     });
   }
 

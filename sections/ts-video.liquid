@@ -6,7 +6,10 @@
   assign loop = section.settings.loop
 %}
 
-<section class="ts-video-sec{% if section.settings.start_collapsed %} is-collapsed{% endif %}" id="ts-awakening" data-ts-collapsible>
+<section class="ts-video-sec ts-video-sec--panel{% if section.settings.start_collapsed %} is-collapsed{% endif %}" id="ts-awakening" data-ts-collapsible>
+  <button type="button" class="ts-video-sec__close" data-ts-panel-close aria-label="Close video">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+  </button>
   <div class="ts-page-width">
     {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subtext != blank %}
       <div class="ts-video-sec__head">
