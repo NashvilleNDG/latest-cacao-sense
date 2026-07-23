@@ -6,7 +6,7 @@
   assign loop = section.settings.loop
 %}
 
-<section class="ts-video-sec">
+<section class="ts-video-sec{% if section.settings.start_collapsed %} is-collapsed{% endif %}" id="ts-awakening" data-ts-collapsible>
   <div class="ts-page-width">
     {% if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subtext != blank %}
       <div class="ts-video-sec__head">
@@ -65,7 +65,9 @@
     { "type": "checkbox", "id": "show_controls", "label": "Show player controls", "default": true },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay (auto-mutes)", "default": false },
     { "type": "checkbox", "id": "loop", "label": "Loop", "default": false },
-    { "type": "text", "id": "placeholder_text", "label": "Placeholder text (shown before a video is added)", "default": "Add your video in the theme editor" }
+    { "type": "text", "id": "placeholder_text", "label": "Placeholder text (shown before a video is added)", "default": "Add your video in the theme editor" },
+    { "type": "header", "content": "Reveal" },
+    { "type": "checkbox", "id": "start_collapsed", "label": "Hidden until the hero \"Next\" button is clicked", "default": true }
   ],
   "presets": [{ "name": "Video" }]
 }

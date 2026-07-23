@@ -631,9 +631,9 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
 .ts-hero__title {
   font-family: var(--ts-font-display);
-  font-size: clamp(2.75rem, 8vw, 6rem);
+  font-size: clamp(2.4rem, 6.2vw, 4.75rem);
   font-weight: 700;
-  line-height: 0.92;
+  line-height: 0.98;
   color: #fff;
   margin: 0 0 2rem;
 }
@@ -4413,4 +4413,59 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   font-size: 0.95rem;
   line-height: 1.65;
   margin: 0;
+}
+
+/* Hero "Next" button (bottom-right) */
+.ts-hero__next {
+  position: absolute;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--ts-font-body);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: var(--ts-radius-full);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s, border-color 0.3s, transform 0.3s, opacity 0.4s;
+}
+
+.ts-hero__next:hover {
+  background: var(--ts-accent);
+  border-color: var(--ts-accent);
+  transform: translateY(-2px);
+}
+
+.ts-hero__next svg {
+  transition: transform 0.3s;
+}
+
+.ts-hero__next:hover svg {
+  transform: translateY(2px);
+}
+
+.ts-hero__next.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .ts-hero__next {
+    right: 2.5rem;
+    bottom: 2.5rem;
+  }
+}
+
+/* Video section — hidden until revealed by the hero "Next" button */
+.ts-video-sec.is-collapsed {
+  display: none;
 }
