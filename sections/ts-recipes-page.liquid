@@ -31,7 +31,7 @@
         {% if block.type == 'recipe' %}
           {% liquid
             assign rimg = block.settings.image
-            assign rfallback = 'recipe-' | append: block.settings.fallback | append: '.webp' | asset_url
+            assign rfallback = 'recipe-out-' | append: block.settings.fallback | append: '.webp' | asset_url
             assign ing_lines = block.settings.ingredients | newline_to_br | split: '<br />'
             assign method_lines = block.settings.method | newline_to_br | split: '<br />'
           %}
