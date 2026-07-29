@@ -9,7 +9,7 @@
       {% if hero_img != blank %}
         <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
       {% else %}
-        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+        <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1920" loading="eager" fetchpriority="high">
       {% endif %}
       <div class="ts-os-hero__shade"></div>
     </div>
