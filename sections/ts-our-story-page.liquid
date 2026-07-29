@@ -11,6 +11,8 @@
   assign vision_fallback = 'os-vision.webp' | asset_url
   assign img_cacao = section.settings.image_cacao
   assign cacao_fallback = 'os-cacao.webp' | asset_url
+  assign img_forest = section.settings.image_forest
+  assign forest_fallback = 'os-forest.webp' | asset_url
 %}
 
 <div class="ts-os-page">
@@ -108,6 +110,22 @@
         {{ section.settings.cacao_rte }}
       </div>
     </div>
+
+    {% if section.settings.forest_title != blank or section.settings.forest_rte != blank %}
+      <div class="ts-os-row ts-os-row--reverse">
+        <figure class="ts-os-row__media">
+          {% if img_forest != blank %}
+            <img src="{{ img_forest | image_url: width: 1400 }}" alt="{{ section.settings.forest_image_alt | escape }}" width="{{ img_forest.width }}" height="{{ img_forest.height }}" loading="lazy">
+          {% else %}
+            <img src="{{ forest_fallback }}" alt="{{ section.settings.forest_image_alt | escape }}" width="1600" height="1198" loading="lazy">
+          {% endif %}
+        </figure>
+        <div class="ts-os-row__text rte">
+          {% if section.settings.forest_title != blank %}<h2 class="ts-os-row__heading">{{ section.settings.forest_title }}</h2>{% endif %}
+          {{ section.settings.forest_rte }}
+        </div>
+      </div>
+    {% endif %}
   </section>
 
   {% if section.settings.cta_title != blank %}
@@ -198,6 +216,17 @@
       "id": "cacao_rte",
       "label": "Cacao text",
       "default": "<p>Our cacao is single origin, grown exclusively on our farm in Guatemala's tropical volcanic region.</p><p>We cultivate seven different cacao varieties on the same land, allowing for biodiversity, resilience, and a layered flavor spectrum. Each variety expresses itself differently depending on micro-soil conditions, elevation, and sun exposure — creating depth and complexity in every harvest.</p><p>The mineral-rich volcanic soil, rainforest climate, and careful cultivation result in cacao that is aromatic, nutrient-dense, and flavor-forward.</p><p>Our cacao is not blended with outside sources. Every bean can be traced back to our farm.</p>"
+    },
+
+    { "type": "header", "content": "Our Forest Reserve — image right, text left" },
+    { "type": "image_picker", "id": "image_forest", "label": "Forest image", "info": "Falls back to asset os-forest.webp if empty." },
+    { "type": "text", "id": "forest_image_alt", "label": "Forest image alt", "default": "The forest reserve on our farm" },
+    { "type": "text", "id": "forest_title", "label": "Forest heading", "default": "A Forest Reserve on Our Land" },
+    {
+      "type": "richtext",
+      "id": "forest_rte",
+      "label": "Forest text",
+      "default": "<p>Cacao is only part of what grows on our land. Across the farm we have planted many Torreliana trees — a living forest reserve that shades the soil, shelters wildlife, and helps protect the water and biodiversity that keep this place thriving.</p><p>For us, caring for the forest and caring for the cacao are the same work — an investment in the land our family will pass on, and in a healthier planet for everyone who shares in what we grow.</p>"
     },
 
     { "type": "header", "content": "Call to action" },
