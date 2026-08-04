@@ -4526,3 +4526,83 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   }
 }
 
+
+/* Our Story — Reforesting for the Future */
+.ts-reforest {
+  margin-top: 1rem;
+}
+
+.ts-reforest__head {
+  max-width: 46rem;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+}
+
+.ts-reforest__head h2 {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+  line-height: 1.15;
+  color: var(--ts-fg);
+  margin-bottom: 1rem;
+}
+
+.ts-reforest__stat {
+  max-width: 46rem;
+  margin: 0 auto 3.5rem;
+  padding: 2.25rem 2rem;
+  text-align: center;
+  background: color-mix(in srgb, #2f6b3f 10%, var(--ts-card));
+  border: 1px solid color-mix(in srgb, #2f6b3f 28%, transparent);
+  border-radius: var(--ts-radius-lg);
+}
+
+.ts-reforest__stat-value {
+  font-family: var(--ts-font-display);
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #2f6b3f;
+}
+
+.ts-reforest__stat-label {
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ts-fg);
+}
+
+.ts-reforest__stat-text {
+  max-width: 34rem;
+  margin: 1rem auto 0;
+  color: var(--ts-muted-fg);
+  line-height: 1.7;
+}
+
+.ts-reforest__purpose {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ts-reforest__purpose h2 {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  line-height: 1.2;
+  color: var(--ts-fg);
+  margin-bottom: 1rem;
+}
+
+.ts-reforest__closing {
+  max-width: 44rem;
+  margin: 2.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ts-border);
+  text-align: center;
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--ts-accent);
+}

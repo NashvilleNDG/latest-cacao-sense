@@ -13,6 +13,8 @@
   assign cacao_fallback = 'os-cacao.webp' | asset_url
   assign img_forest = section.settings.image_forest
   assign forest_fallback = 'os-forest.webp' | asset_url
+  assign img_forest_2 = section.settings.image_forest_2
+  assign forest2_fallback = 'os-forest-2.webp' | asset_url
 %}
 
 <div class="ts-os-page">
@@ -111,19 +113,58 @@
       </div>
     </div>
 
-    {% if section.settings.forest_title != blank or section.settings.forest_rte != blank %}
-      <div class="ts-os-row ts-os-row--reverse">
-        <figure class="ts-os-row__media">
-          {% if img_forest != blank %}
-            <img src="{{ img_forest | image_url: width: 1400 }}" alt="{{ section.settings.forest_image_alt | escape }}" width="{{ img_forest.width }}" height="{{ img_forest.height }}" loading="lazy">
-          {% else %}
-            <img src="{{ forest_fallback }}" alt="{{ section.settings.forest_image_alt | escape }}" width="1600" height="1198" loading="lazy">
-          {% endif %}
-        </figure>
-        <div class="ts-os-row__text rte">
-          {% if section.settings.forest_title != blank %}<h2 class="ts-os-row__heading">{{ section.settings.forest_title }}</h2>{% endif %}
-          {{ section.settings.forest_rte }}
+    {% if section.settings.forest_title != blank %}
+      <div class="ts-reforest">
+        <div class="ts-reforest__head rte">
+          <h2>{{ section.settings.forest_title }}</h2>
+          {{ section.settings.forest_intro }}
         </div>
+
+        {% if section.settings.stat_value != blank %}
+          <div class="ts-reforest__stat">
+            <p class="ts-reforest__stat-value">{{ section.settings.stat_value }}</p>
+            <p class="ts-reforest__stat-label">{{ section.settings.stat_label }}</p>
+            {% if section.settings.stat_text != blank %}
+              <p class="ts-reforest__stat-text">{{ section.settings.stat_text }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="ts-os-row ts-os-row--reverse">
+          <figure class="ts-os-row__media">
+            {% if img_forest != blank %}
+              <img src="{{ img_forest | image_url: width: 1400 }}" alt="{{ section.settings.forest_image_alt | escape }}" width="{{ img_forest.width }}" height="{{ img_forest.height }}" loading="lazy">
+            {% else %}
+              <img src="{{ forest_fallback }}" alt="{{ section.settings.forest_image_alt | escape }}" width="1600" height="1198" loading="lazy">
+            {% endif %}
+          </figure>
+          <div class="ts-os-row__text rte">{{ section.settings.forest_rte }}</div>
+        </div>
+
+        <div class="ts-os-row">
+          <figure class="ts-os-row__media">
+            {% if img_forest_2 != blank %}
+              <img src="{{ img_forest_2 | image_url: width: 1400 }}" alt="{{ section.settings.forest_2_image_alt | escape }}" width="{{ img_forest_2.width }}" height="{{ img_forest_2.height }}" loading="lazy">
+            {% else %}
+              <img src="{{ forest2_fallback }}" alt="{{ section.settings.forest_2_image_alt | escape }}" width="1600" height="1198" loading="lazy">
+            {% endif %}
+          </figure>
+          <div class="ts-os-row__text rte">
+            {% if section.settings.eco_title != blank %}<h2 class="ts-os-row__heading">{{ section.settings.eco_title }}</h2>{% endif %}
+            {{ section.settings.eco_rte }}
+          </div>
+        </div>
+
+        {% if section.settings.purpose_title != blank or section.settings.purpose_rte != blank %}
+          <div class="ts-reforest__purpose rte">
+            {% if section.settings.purpose_title != blank %}<h2>{{ section.settings.purpose_title }}</h2>{% endif %}
+            {{ section.settings.purpose_rte }}
+          </div>
+        {% endif %}
+
+        {% if section.settings.closing_text != blank %}
+          <p class="ts-reforest__closing">{{ section.settings.closing_text }}</p>
+        {% endif %}
       </div>
     {% endif %}
   </section>
@@ -218,16 +259,50 @@
       "default": "<p>Our cacao is single origin, grown exclusively on our farm in Guatemala's tropical volcanic region.</p><p>We cultivate seven different cacao varieties on the same land, allowing for biodiversity, resilience, and a layered flavor spectrum. Each variety expresses itself differently depending on micro-soil conditions, elevation, and sun exposure — creating depth and complexity in every harvest.</p><p>The mineral-rich volcanic soil, rainforest climate, and careful cultivation result in cacao that is aromatic, nutrient-dense, and flavor-forward.</p><p>Our cacao is not blended with outside sources. Every bean can be traced back to our farm.</p>"
     },
 
-    { "type": "header", "content": "Our Forest Reserve — image right, text left" },
+    { "type": "header", "content": "Reforesting for the Future" },
+    { "type": "text", "id": "forest_title", "label": "Section heading", "default": "Reforesting for the Future" },
+    {
+      "type": "richtext",
+      "id": "forest_intro",
+      "label": "Intro text",
+      "default": "<p>At Cacao Senses, sustainability is more than a commitment — it is part of how we grow, how we care for the land, and how we envision the future of cacao in Guatemala.</p>"
+    },
+
+    { "type": "header", "content": "Trees planted stat" },
+    { "type": "text", "id": "stat_value", "label": "Stat value", "default": "150,000+" },
+    { "type": "text", "id": "stat_label", "label": "Stat label", "default": "Trees Planted" },
+    { "type": "textarea", "id": "stat_text", "label": "Stat text", "default": "More than 150,000 Torelliana trees have been planted as part of our ongoing reforestation efforts in Guatemala." },
+
+    { "type": "header", "content": "Reforestation — image right, text left" },
     { "type": "image_picker", "id": "image_forest", "label": "Forest image", "info": "Falls back to asset os-forest.webp if empty." },
     { "type": "text", "id": "forest_image_alt", "label": "Forest image alt", "default": "The forest reserve on our farm" },
-    { "type": "text", "id": "forest_title", "label": "Forest heading", "default": "A Forest Reserve on Our Land" },
     {
       "type": "richtext",
       "id": "forest_rte",
-      "label": "Forest text",
-      "default": "<p>Cacao is only part of what grows on our land. Across the farm we have planted many Torreliana trees — a living forest reserve that shades the soil, shelters wildlife, and helps protect the water and biodiversity that keep this place thriving.</p><p>For us, caring for the forest and caring for the cacao are the same work — an investment in the land our family will pass on, and in a healthier planet for everyone who shares in what we grow.</p>"
+      "label": "Reforestation text",
+      "default": "<p>Each tree represents another step toward creating healthier, greener, and more resilient landscapes. As these trees grow, they help restore vegetation, protect soils from erosion, improve water retention, provide natural shade, support biodiversity, and create habitat and shelter for wildlife.</p><p>Trees also play an important role in capturing carbon from the atmosphere and helping regulate the surrounding microclimate. Together, these benefits make reforestation an essential part of building stronger and more balanced ecosystems.</p><p>But for us, the impact goes beyond the number of trees planted. It is about restoring the natural balance of the land and helping ensure that agriculture can coexist with the forests, wildlife, soil, and water systems that make these regions thrive.</p>"
     },
+
+    { "type": "header", "content": "Ecosystem — image left, text right" },
+    { "type": "image_picker", "id": "image_forest_2", "label": "Ecosystem image", "info": "Falls back to asset os-forest-2.webp if empty." },
+    { "type": "text", "id": "forest_2_image_alt", "label": "Ecosystem image alt", "default": "Aerial view of cacao growing among forest" },
+    { "type": "text", "id": "eco_title", "label": "Ecosystem heading", "default": "Protecting the Ecosystem Around Our Cacao" },
+    {
+      "type": "richtext",
+      "id": "eco_rte",
+      "label": "Ecosystem text",
+      "default": "<p>Healthy cacao begins with a healthy environment.</p><p>The forests and vegetation surrounding our agricultural areas contribute to the overall health of the ecosystem by protecting the soil, supporting natural water cycles, providing shade, and creating spaces where plants, insects, birds, and other wildlife can coexist.</p><p>By combining cacao cultivation with meaningful reforestation, we are working toward a landscape where productive agriculture and environmental conservation grow together.</p><p><strong>Our goal is simple: to leave the land stronger, greener, and more resilient than we found it.</strong></p>"
+    },
+
+    { "type": "header", "content": "Growing With Purpose" },
+    { "type": "text", "id": "purpose_title", "label": "Purpose heading", "default": "Growing With Purpose" },
+    {
+      "type": "richtext",
+      "id": "purpose_rte",
+      "label": "Purpose text",
+      "default": "<p>For us, producing premium cacao carries a responsibility that extends far beyond the cacao tree itself.</p><p>It means caring for the soil beneath our crops, protecting the ecosystems surrounding them, restoring trees to the landscape, and thinking about the generations that will depend on these natural resources in the future.</p><p>When you choose Cacao Senses, you are supporting a vision of cacao rooted not only in quality and tradition, but also in a genuine commitment to the land where it begins.</p><p><strong>More than 150,000 trees planted. One growing commitment to Guatemala's forests, ecosystems, and future.</strong></p>"
+    },
+    { "type": "text", "id": "closing_text", "label": "Closing line", "default": "Growing cacao. Restoring forests. Protecting ecosystems. Building a more sustainable future." },
 
     { "type": "header", "content": "Call to action" },
     { "type": "text", "id": "cta_title", "label": "CTA title", "default": "Taste the Heritage" },
