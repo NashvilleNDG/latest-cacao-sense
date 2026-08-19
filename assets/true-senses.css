@@ -4784,3 +4784,77 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
     font-size: 1.0625rem;
   }
 }
+
+/* ---------------------------------------------------------
+   Header — solid muted teal bar with cream type,
+   consistent across pages and scroll states.
+   --------------------------------------------------------- */
+:root {
+  --ts-nav-teal: #2f7d77;
+  --ts-nav-teal-dark: #276964;
+  --ts-nav-cream: #f4ecdd;
+}
+
+.ts-header.ts-header--home-header:not(.ts-header--scrolled),
+.ts-header.ts-header--bg-header:not(.ts-header--scrolled),
+.ts-header--scrolled {
+  background: var(--ts-nav-teal);
+  background-color: var(--ts-nav-teal);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Nav links + icons in cream */
+.ts-header:not(.ts-header--scrolled) .ts-header__link,
+.ts-header--scrolled .ts-header__link {
+  color: var(--ts-nav-cream);
+}
+
+.ts-header:not(.ts-header--scrolled) .ts-header__link:hover,
+.ts-header--scrolled .ts-header__link:hover {
+  color: #fff;
+}
+
+.ts-header:not(.ts-header--scrolled) .ts-header__icon-btn,
+.ts-header--scrolled .ts-header__icon-btn {
+  color: var(--ts-nav-cream);
+}
+
+.ts-header:not(.ts-header--scrolled) .ts-header__icon-btn:hover,
+.ts-header--scrolled .ts-header__icon-btn:hover {
+  color: #fff;
+}
+
+/* Dropdown panels sit on the same teal */
+.ts-header__dropdown-menu {
+  background: var(--ts-nav-teal-dark);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.ts-header__dropdown-link {
+  color: var(--ts-nav-cream);
+}
+
+.ts-header__dropdown-link:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile panel */
+.ts-header .ts-header__mobile-panel {
+  background: var(--ts-nav-teal);
+  border-top-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.ts-header .ts-header__mobile-link {
+  color: var(--ts-nav-cream);
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+}
+
+.ts-header .ts-header__mobile-link:hover {
+  color: #fff;
+}
