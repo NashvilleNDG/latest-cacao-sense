@@ -4591,7 +4591,7 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 @media (min-width: 768px) {
   .ts-hero {
     min-height: 0;
-    aspect-ratio: 1536 / 1024;
+    aspect-ratio: 1666 / 944;
   }
 }
 
@@ -4615,5 +4615,172 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 
   .ts-hero__stats {
     margin-top: 8.25rem;
+  }
+}
+
+/* ---------------------------------------------------------
+   Homepage hero — light banner treatment
+   The banner leaves a cream column on the left for the copy,
+   so the hero text is dark instead of white-on-photo.
+   --------------------------------------------------------- */
+.ts-hero {
+  --ts-hero-maroon: #8b221f;
+  --ts-hero-gold: #e79127;
+}
+
+.ts-hero__copy {
+  max-width: 30rem;
+}
+
+/* Drop the shadows used for white-on-photo text */
+.ts-hero__eyebrow,
+.ts-hero__title,
+.ts-hero__desc {
+  text-shadow: none;
+}
+
+.ts-hero__title em.ts-text-gradient-gold {
+  filter: none;
+}
+
+.ts-hero__eyebrow {
+  position: relative;
+  padding-bottom: 0.9rem;
+  color: var(--ts-hero-maroon);
+  font-weight: 700;
+}
+
+.ts-hero__eyebrow::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 5.5rem;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--ts-hero-gold);
+}
+
+.ts-hero__title,
+.ts-hero__title em.ts-text-gradient-gold {
+  color: var(--ts-hero-maroon);
+  -webkit-text-fill-color: var(--ts-hero-maroon);
+  background: none;
+}
+
+.ts-hero__desc {
+  color: #4a3730;
+}
+
+/* Trust badge on a light background */
+.ts-hero__trust.ts-glass {
+  color: var(--ts-hero-maroon);
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(139, 34, 31, 0.18);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+.ts-hero__trust .ts-hero__stars svg {
+  fill: var(--ts-hero-gold);
+}
+
+.ts-hero .ts-btn--primary {
+  background: var(--ts-hero-maroon);
+  color: #fff;
+}
+
+.ts-hero .ts-btn--primary:hover {
+  background: #741a18;
+}
+
+/* Stat chips are not part of this banner layout */
+.ts-hero__stats {
+  display: none;
+}
+
+/* Light banner hero — type scaled to the cream copy column */
+@media (min-width: 768px) {
+  .ts-hero__copy {
+    max-width: 33rem;
+  }
+
+  .ts-hero__title {
+    font-size: clamp(2rem, 3.5vw, 3.15rem);
+    line-height: 1.12;
+    margin-bottom: 1.5rem;
+  }
+
+  .ts-hero__desc {
+    max-width: 23rem;
+  }
+}
+
+/* Trust badge label — the base rule sets white for the old dark hero */
+.ts-hero__trust span {
+  color: #5a2a20;
+}
+
+/* Light banner hero on phones: the wide banner crops its cream copy area away,
+   so stack the full banner above the copy instead of overlaying dark text. */
+@media (max-width: 767px) {
+  .ts-hero {
+    display: block;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .ts-hero__bg {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 1666 / 944;
+  }
+
+  .ts-hero__bg img {
+    position: relative;
+    height: auto;
+  }
+
+  .ts-hero__content {
+    background: #fbe5d0;
+    padding: 1.75rem 1.5rem 3.25rem;
+  }
+
+  .ts-hero__copy {
+    max-width: none;
+  }
+
+  .ts-hero__title {
+    font-size: clamp(1.9rem, 8.5vw, 2.6rem);
+    line-height: 1.14;
+  }
+
+  .ts-hero__desc {
+    max-width: none;
+  }
+}
+
+/* Light banner hero — match the approved layout:
+   no trust badge, upright heading, copy centred in the cream column. */
+.ts-hero__trust {
+  display: none;
+}
+
+.ts-hero__title em.ts-text-gradient-gold {
+  font-style: normal;
+}
+
+@media (min-width: 768px) {
+  .ts-hero {
+    justify-content: center;
+  }
+
+  .ts-hero__content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .ts-hero__desc {
+    max-width: 20rem;
+    font-size: 1.0625rem;
   }
 }
