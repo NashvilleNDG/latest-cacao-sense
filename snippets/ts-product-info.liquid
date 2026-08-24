@@ -50,6 +50,12 @@
       assign p_net_wt = '6oz (170g)'
   endcase
 
+  assign p_size = '8oz'
+  if handle == 'cacao-tea'
+    assign p_size = '6oz'
+  endif
+  assign shop_product = all_products[handle]
+
   assign p_img = handle | append: '.webp' | asset_url
   assign p_pack = handle | append: '-pack.webp' | asset_url
   assign p_url = '/products/' | append: handle
@@ -64,18 +70,61 @@
   {% comment %}Unknown handle — render nothing rather than an empty shell.{% endcomment %}
 {% elsif mode == 'card' %}
 
-  <a class="ts-cat-tile" href="{{ p_url }}">
-    <div class="ts-cat-tile__media">
-      <img src="{{ p_img }}" alt="{{ p_name | escape }} pack" loading="lazy">
-      {% if p_badge != blank %}
-        <span class="ts-cat-tile__badge">{{ p_badge }}</span>
+  {%- liquid
+    assign rating = 4.5
+    if shop_product.metafields.custom.rating.value != blank
+      assign rating = shop_product.metafields.custom.rating.value | plus: 0.0
+    endif
+    assign full_stars = rating | floor
+    assign has_half = false
+    assign remainder = rating | minus: full_stars
+    if remainder >= 0.25
+      assign has_half = true
+    endif
+    assign half_index = full_stars | plus: 1
+  -%}
+
+  <article class="ts-cat-tile">
+    <a class="ts-cat-tile__link" href="{{ p_url }}">
+      <div class="ts-cat-tile__media">
+        <img src="{{ p_img }}" alt="{{ p_name | escape }} pack" loading="lazy">
+        {% if p_badge != blank %}
+          <span class="ts-cat-tile__badge">{{ p_badge }}</span>
+        {% endif %}
+      </div>
+      <h3 class="ts-cat-tile__name">{{ p_name }}, {{ p_size }}</h3>
+    </a>
+
+    <div class="ts-cat-tile__stars" aria-label="Rated {{ rating }} out of 5">
+      {%- for i in (1..5) -%}
+        {%- if i <= full_stars -%}
+          <svg class="is-full" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {%- elsif i == half_index and has_half -%}
+          <svg class="is-half" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="h{{ handle }}{{ i }}"><stop offset="50%" stop-color="currentColor"/><stop offset="50%" stop-color="transparent"/></linearGradient></defs><path fill="url(#h{{ handle }}{{ i }})" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {%- else -%}
+          <svg class="is-empty" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {% if shop_product != blank %}
+      <p class="ts-cat-tile__price">{{ shop_product.price | money }}</p>
+
+      {% if shop_product.available %}
+        {% form 'product', shop_product, class: 'ts-cat-tile__form' %}
+          <input type="hidden" name="id" value="{{ shop_product.selected_or_first_available_variant.id }}">
+          <button type="submit" name="add" class="ts-cat-tile__atc">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M6 6 5 3H2"></path></svg>
+            Add to Cart
+          </button>
+        {% endform %}
+      {% else %}
+        <a class="ts-cat-tile__atc is-disabled" href="{{ p_url }}">Sold Out</a>
       {% endif %}
-    </div>
-    <div class="ts-cat-tile__body">
-      <h3 class="ts-cat-tile__name">{{ p_name }}</h3>
-      <p class="ts-cat-tile__origin">{{ p_origin }}</p>
-    </div>
-  </a>
+    {% else %}
+      <a class="ts-cat-tile__atc" href="{{ p_url }}">View Product</a>
+    {% endif %}
+  </article>
 
 {% else %}
 
@@ -131,10 +180,22 @@
         <div><dt>Storage</dt><dd>{{ p_storage }}</dd></div>
       </dl>
 
-      <a class="ts-btn ts-btn--primary ts-pdp__cta" href="{{ url_contact }}">
-        Enquire About This Product
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
-      </a>
+      {% if shop_product != blank %}
+        <p class="ts-pdp__price">{{ shop_product.price | money }}</p>
+        {% if shop_product.available %}
+          {% form 'product', shop_product, class: 'ts-pdp__form' %}
+            <input type="hidden" name="id" value="{{ shop_product.selected_or_first_available_variant.id }}">
+            <button type="submit" name="add" class="ts-btn ts-btn--primary ts-pdp__cta">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12z"></path><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M6 6 5 3H2"></path></svg>
+              Add to Cart
+            </button>
+          {% endform %}
+        {% else %}
+          <p class="ts-pdp__soldout">Currently sold out</p>
+        {% endif %}
+      {% endif %}
+
+      <a class="ts-pdp__enquire" href="{{ url_contact }}">Enquire about bulk orders →</a>
 
       <a class="ts-pdp__back" href="{{ routes.all_products_collection_url }}">← Back to all products</a>
     </div>

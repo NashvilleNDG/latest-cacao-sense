@@ -12,6 +12,16 @@
 {%- capture handles_csv -%}{%- render 'ts-product-handles' -%}{%- endcapture -%}
 {%- assign handles = handles_csv | strip | split: ',' -%}
 
+{% if section.settings.show_banner %}
+  <div class="ts-shop-banner">
+    {% if section.settings.banner_image != blank %}
+      <img src="{{ section.settings.banner_image | image_url: width: 2400 }}" alt="{{ section.settings.banner_alt | escape }}" width="{{ section.settings.banner_image.width }}" height="{{ section.settings.banner_image.height }}" loading="eager" fetchpriority="high">
+    {% else %}
+      <img src="{{ 'shop-hero.webp' | asset_url }}" alt="{{ section.settings.banner_alt | escape }}" width="1666" height="944" loading="eager" fetchpriority="high">
+    {% endif %}
+  </div>
+{% endif %}
+
 <section class="ts-catalog ts-page-width">
   <header class="ts-catalog__head">
     <p class="ts-products__kicker">{{ section.settings.kicker }}</p>
@@ -32,12 +42,49 @@
   {% endif %}
 </section>
 
+{% if section.settings.show_goodfor %}
+  {%- liquid
+    assign url_recipes = '/pages/recipes'
+    if pages['recipes'] != blank
+      assign url_recipes = pages['recipes'].url
+    endif
+    assign gf_keys = 'powder,wafers,nibs,tea,butter,beans' | split: ','
+    assign gf_names = section.settings.goodfor_names | split: ','
+  -%}
+  <section class="ts-goodfor">
+    <h2 class="ts-goodfor__title">{{ section.settings.goodfor_title }}</h2>
+    <div class="ts-goodfor__row ts-page-width">
+      {% for key in gf_keys %}
+        {% assign label = gf_names[forloop.index0] | strip %}
+        {% if label != blank %}
+          <a class="ts-goodfor__item" href="{{ url_recipes }}">
+            <span class="ts-goodfor__media">
+              <img src="{{ 'recipe-out-' | append: key | append: '.webp' | asset_url }}" alt="{{ label | escape }}" width="1200" height="1200" loading="lazy">
+            </span>
+            <span class="ts-goodfor__label">{{ label }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endif %}
+
 {% schema %}
 {
   "name": "Collection",
   "tag": "section",
   "class": "section-ts-collection",
   "settings": [
+    { "type": "header", "content": "Banner" },
+    { "type": "checkbox", "id": "show_banner", "label": "Show banner image", "default": true },
+    { "type": "image_picker", "id": "banner_image", "label": "Banner image", "info": "Falls back to shop-hero.webp." },
+    { "type": "text", "id": "banner_alt", "label": "Banner alt text", "default": "Cacao Senses product range" },
+
+    { "type": "header", "content": "Good for" },
+    { "type": "checkbox", "id": "show_goodfor", "label": "Show \"Good for\" strip", "default": true },
+    { "type": "text", "id": "goodfor_title", "label": "Good for heading", "default": "Good for" },
+    { "type": "text", "id": "goodfor_names", "label": "Labels (comma separated, matches recipe photos)", "default": "Ceremonial Drink,Chocolate Ganache,Energy Granola,Cacao Husk Tea,Whipped Body Balm,Trail Mix" },
+
     {
       "type": "text",
       "id": "kicker",
