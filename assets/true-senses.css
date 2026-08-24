@@ -5061,3 +5061,49 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
 .ts-pdp__enquire:hover {
   color: var(--ts-accent);
 }
+
+/* Products banner — copy sits inside the yellow panel on the left */
+.ts-shop-banner {
+  position: relative;
+}
+
+.ts-shop-banner__copy {
+  position: absolute;
+  top: 50%;
+  left: 4%;
+  transform: translateY(-50%);
+  width: 20%;
+  max-width: 20rem;
+  color: #7a1d13;
+}
+
+.ts-shop-banner__eyebrow {
+  font-size: clamp(0.5rem, 0.85vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+  color: #8a3b0c;
+}
+
+.ts-shop-banner__title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1rem, 2.75vw, 2.7rem);
+  font-weight: 700;
+  line-height: 1.06;
+}
+
+.ts-shop-banner__sub {
+  margin-top: 0.7em;
+  font-size: clamp(0.55rem, 0.95vw, 0.95rem);
+  line-height: 1.45;
+  color: #8a3b0c;
+}
+
+/* The yellow panel disappears when the banner is scaled down on phones,
+   so the overlay copy is hidden there — the section heading below carries it. */
+@media (max-width: 749px) {
+  .ts-shop-banner__copy {
+    display: none;
+  }
+}
