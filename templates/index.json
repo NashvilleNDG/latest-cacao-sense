@@ -48,6 +48,7 @@
         "stat_4"
       ],
       "settings": {
+        "show_next": false,
         "image_alt": "Premium cocoa",
         "trust_text": "Trusted by 5000+ customers",
         "eyebrow": "Premium Cacao Products",
