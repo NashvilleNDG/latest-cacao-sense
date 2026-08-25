@@ -4800,6 +4800,12 @@ body.ts-body {
   .ts-hero__bg img {
     position: relative;
     height: auto;
+    /* Inline-level images sit on the text baseline, leaving ~6px of descender
+       space underneath. Here that strip fell between the banner and the cream
+       copy block, and since .ts-hero__bg and .ts-hero are both transparent it
+       showed the near-white body background as a hard line across the hero.
+       Blockifying removes the leading, so the photo meets the copy exactly. */
+    display: block;
   }
 
   .ts-hero__content {
