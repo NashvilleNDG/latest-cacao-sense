@@ -287,6 +287,39 @@
     });
   }
 
+  function initHeroVideo() {
+    var video = document.querySelector('[data-ts-hero-video]');
+    if (!video) {
+      return;
+    }
+    var src = video.getAttribute('data-src');
+    if (!src) {
+      return;
+    }
+    // Phones keep the poster image: the file is a full-size download and the
+    // wide banner is mostly cropped away on a narrow screen anyway.
+    if (window.matchMedia && !window.matchMedia('(min-width: 768px)').matches) {
+      return;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return;
+    }
+
+    video.addEventListener('playing', function () {
+      video.classList.add('is-playing');
+    });
+
+    video.src = src;
+    video.load();
+
+    var attempt = video.play();
+    if (attempt && typeof attempt.catch === 'function') {
+      // Autoplay refused (battery saver, data saver, browser policy) — the
+      // poster image is already on screen, so there is nothing to clean up.
+      attempt.catch(function () {});
+    }
+  }
+
   function initPdpGallery() {
     var pdp = document.querySelector('[data-ts-pdp]');
     if (!pdp) {
@@ -469,8 +502,8 @@
     document.addEventListener('DOMContentLoaded', function () {
       initHeader();
       initHeroSlider();
-    initHeroNext();
       initHeroNext();
+      initHeroVideo();
       initVideoCaptions();
       initPdpGallery();
       initDropdowns();
@@ -482,6 +515,7 @@
     initHeader();
     initHeroSlider();
     initHeroNext();
+    initHeroVideo();
     initVideoCaptions();
     initPdpGallery();
     initDropdowns();

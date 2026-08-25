@@ -1,6 +1,8 @@
 {% liquid
   assign hero_img = section.settings.hero_image
   assign hero_fallback = 'journey-hero.webp' | asset_url
+  assign hero_video = section.settings.hero_video
+  assign hero_video_url = section.settings.hero_video_url | strip
 %}
 
 <div class="ts-os-page">
@@ -11,6 +13,39 @@
       {% else %}
         <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1920" loading="eager" fetchpriority="high">
       {% endif %}
+
+      {%- liquid
+        assign hero_video_src = ''
+        if hero_video != blank
+          for source in hero_video.sources
+            if source.format == 'mp4'
+              assign hero_video_src = source.url
+            endif
+          endfor
+        elsif hero_video_url != blank
+          assign hero_video_src = hero_video_url
+        endif
+      -%}
+      {%- if hero_video_src != blank -%}
+        {%- comment -%}
+          The image above always renders and acts as the poster. The video layers
+          over it and only loads on screens 768px and wider (initHeroVideo in
+          ts-theme.js), so phones and reduced-motion visitors keep the still
+          image and never download the file.
+        {%- endcomment -%}
+        <video
+          class="ts-os-hero__video"
+          data-ts-hero-video
+          data-src="{{ hero_video_src }}"
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-hidden="true"
+          tabindex="-1"
+        ></video>
+      {%- endif -%}
+
       <div class="ts-os-hero__shade"></div>
     </div>
     <div class="ts-os-hero__content ts-page-width">
@@ -91,7 +126,9 @@
   "max_blocks": 24,
   "settings": [
     { "type": "header", "content": "Hero" },
-    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to the theme's Home-hero.webp if empty." },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Also used as the video poster. Falls back to the theme's journey-hero.webp if empty." },
+    { "type": "video", "id": "hero_video", "label": "Hero background video", "info": "Upload to Content > Files, then pick it here. Preferred over the URL below. Plays muted and looped on screens 768px and wider only." },
+    { "type": "text", "id": "hero_video_url", "label": "...or paste a video URL", "info": "Direct .mp4 link from Content > Files. Used only if no video is selected above." },
     { "type": "text", "id": "hero_image_alt", "label": "Hero image alt", "default": "Take a journey through our cacao" },
     { "type": "text", "id": "hero_eyebrow", "label": "Hero eyebrow", "default": "Take a Journey" },
     { "type": "text", "id": "hero_title", "label": "Hero heading", "default": "From Bean to Bliss" },
