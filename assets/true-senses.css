@@ -537,13 +537,22 @@ body.ts-body {
   max-width: 48rem;
 }
 
-/* Home: first section is hero — overlap under transparent header so body bg does not show a gap */
-body.template-index #MainContent > .shopify-section:first-child .ts-hero {
-  margin-top: -5.75rem;
-}
+/* Home: first section is hero — overlap under the header so body bg does not
+   show a gap, and pad the copy back down so it clears the nav.
 
-body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-hero__content {
-  padding-top: 8rem;
+   Desktop only. Below 768px the hero stacks (banner above, cream copy block
+   below) instead of overlaying, so the -5.75rem would hide the top of the
+   banner behind the opaque nav and the 8rem would open a dead gap above the
+   copy. The max-width:767px block near the end of this file sets the phone
+   padding, and it can only win if these are not competing. */
+@media (min-width: 768px) {
+  body.template-index #MainContent > .shopify-section:first-child .ts-hero {
+    margin-top: -5.75rem;
+  }
+
+  body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-hero__content {
+    padding-top: 8rem;
+  }
 }
 
 /* Story/process/premium pages: hero sits under the transparent header, with a top scrim for nav readability */
