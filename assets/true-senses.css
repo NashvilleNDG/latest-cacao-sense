@@ -4807,7 +4807,34 @@ body.ts-body {
     padding: 1.75rem 1.5rem 3.25rem;
   }
 
+  /* Blend the seam where the banner meets the copy block. The banner's bottom
+     edge is not one flat tone — sampled, it runs rgb(245,217,190) on the left
+     to rgb(222,182,145) on the right — so a plain cream block below it meets
+     the photo on a visible, uneven line. Reproduce that left-to-right ramp and
+     mask it out downward, so the photo dissolves into the cream instead. */
+  .ts-hero__content::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4rem;
+    background: linear-gradient(
+      to right,
+      rgb(245, 217, 190) 0%,
+      rgb(237, 201, 170) 50%,
+      rgb(222, 182, 145) 100%
+    );
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Keep the copy above the blend layer */
   .ts-hero__copy {
+    position: relative;
+    z-index: 1;
     max-width: none;
   }
 
