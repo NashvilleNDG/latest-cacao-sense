@@ -632,7 +632,9 @@ body.ts-body {
 }
 
 .ts-hero__desc {
-  font-size: clamp(1rem, 2vw, 1.25rem);
+  /* +15% on each stop, so the scaling curve is unchanged: was
+     clamp(1rem, 2vw, 1.25rem). Governs phones, where the floor applies. */
+  font-size: clamp(1.15rem, 2.3vw, 1.4375rem);
   color: rgba(255, 255, 255, 0.8);
   max-width: 36rem;
   line-height: 1.6;
@@ -4876,7 +4878,9 @@ body.ts-body {
 
   .ts-hero__desc {
     max-width: 20rem;
-    font-size: 1.0625rem;
+    /* +15% (was 1.0625rem). This override beats the base clamp above, so it
+       needs the same bump or desktop would stay at the old size. */
+    font-size: calc(1.0625rem * 1.15);
   }
 }
 
