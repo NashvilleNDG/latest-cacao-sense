@@ -296,11 +296,8 @@
     if (!src) {
       return;
     }
-    // Phones keep the poster image: the file is a full-size download and the
-    // wide banner is mostly cropped away on a narrow screen anyway.
-    if (window.matchMedia && !window.matchMedia('(min-width: 768px)').matches) {
-      return;
-    }
+    // Plays at every screen size. Reduced motion still opts out, and the poster
+    // image stays on screen whenever the video does not start.
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       return;
     }
