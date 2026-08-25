@@ -3,10 +3,26 @@
   assign hero_fallback = 'journey-hero.webp' | asset_url
   assign hero_video = section.settings.hero_video
   assign hero_video_url = section.settings.hero_video_url | strip
+
+  assign hero_video_src = ''
+  if hero_video != blank
+    for source in hero_video.sources
+      if source.format == 'mp4'
+        assign hero_video_src = source.url
+      endif
+    endfor
+  elsif hero_video_url != blank
+    assign hero_video_src = hero_video_url
+  endif
 %}
 
 <div class="ts-os-page">
-  <section class="ts-os-hero">
+  {%- comment -%}
+    ts-os-hero--video only when a video is actually set: .ts-os-hero is shared by
+    seven page sections, so the taller video framing must not leak into the ones
+    that show a still image.
+  {%- endcomment -%}
+  <section class="ts-os-hero{% if hero_video_src != blank %} ts-os-hero--video{% endif %}">
     <div class="ts-os-hero__bg">
       {% if hero_img != blank %}
         <img src="{{ hero_img | image_url: width: 2400 }}" alt="{{ section.settings.hero_image_alt | escape }}" width="{{ hero_img.width }}" height="{{ hero_img.height }}" loading="eager" fetchpriority="high">
@@ -14,18 +30,6 @@
         <img src="{{ hero_fallback }}" alt="{{ section.settings.hero_image_alt | escape }}" width="2400" height="1920" loading="eager" fetchpriority="high">
       {% endif %}
 
-      {%- liquid
-        assign hero_video_src = ''
-        if hero_video != blank
-          for source in hero_video.sources
-            if source.format == 'mp4'
-              assign hero_video_src = source.url
-            endif
-          endfor
-        elsif hero_video_url != blank
-          assign hero_video_src = hero_video_url
-        endif
-      -%}
       {%- if hero_video_src != blank -%}
         {%- comment -%}
           The image above always renders and acts as the poster. The video layers

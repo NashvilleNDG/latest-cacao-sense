@@ -2888,6 +2888,16 @@ body.template-index #MainContent > .shopify-section:first-child .ts-hero .ts-her
   object-fit: cover;
 }
 
+/* A 16:9 video in the standard 60vh hero loses about a third of its frame to
+   the vertical crop. Where a video is set, grow the hero toward the clip's own
+   aspect ratio (56.25vw == 16:9), capped so it never dominates the viewport.
+   Scoped to --video so the six image-only ts-os-hero pages are untouched. */
+@media (min-width: 768px) {
+  .ts-os-hero--video {
+    min-height: min(56.25vw, 86vh);
+  }
+}
+
 /* Hero background video — layers over the poster image, under the shade.
    Hidden until initHeroVideo attaches a source and playback starts, so a
    blocked or still-buffering video never shows a black rectangle. */
