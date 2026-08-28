@@ -5188,3 +5188,19 @@ body.ts-body {
     display: none;
   }
 }
+
+/* Homepage hero type in Montserrat */
+.ts-hero__eyebrow,
+.ts-hero__title,
+.ts-hero__title em,
+.ts-hero__title em.ts-text-gradient-gold,
+.ts-hero__desc,
+.ts-hero .ts-btn--primary {
+  font-family: "Montserrat", var(--ts-font-body);
+}
+
+.ts-hero__title,
+.ts-hero__title em.ts-text-gradient-gold {
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
