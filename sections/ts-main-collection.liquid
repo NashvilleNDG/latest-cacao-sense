@@ -80,8 +80,9 @@
         </header>
 
         <div class="ts-catalog__grid {{ g_cols }}">
-          {% for handle in g_handles %}
-            {% render 'ts-product-info', handle: handle | strip, mode: 'card' %}
+          {% for handle_raw in g_handles %}
+            {%- assign handle_clean = handle_raw | strip -%}
+            {% render 'ts-product-info', handle: handle_clean, mode: 'card' %}
           {% endfor %}
         </div>
       </div>
