@@ -5289,3 +5289,224 @@ body.ts-body {
   margin-top: 0.5rem;
   text-align: center;
 }
+
+/* ---------------------------------------------------------
+   Cacao Origins page
+   --------------------------------------------------------- */
+.ts-origins__hero {
+  position: relative;
+  min-height: 46vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.ts-origins__hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ts-origins__hero-shade {
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 12, 6, 0.45);
+}
+
+.ts-origins__hero-copy {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 4rem 1.5rem;
+}
+
+.ts-origins__hero-pre {
+  font-family: var(--ts-font-display);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+  margin-bottom: 0.2em;
+}
+
+.ts-origins__hero-title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  line-height: 1;
+  text-indent: 0.22em;
+}
+
+.ts-origins__band {
+  background: #3c5a1e;
+  color: #fff;
+  padding: 1.6rem 0;
+}
+
+.ts-origins__band-title {
+  font-family: var(--ts-font-body);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.2rem, 2.4vw, 1.75rem);
+  letter-spacing: 0.02em;
+}
+
+.ts-origins__band-sub {
+  margin-top: 0.35rem;
+  font-style: italic;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ts-origins__intro {
+  background: var(--ts-bg);
+  padding: 3.5rem 1.5rem;
+}
+
+.ts-origins__intro-inner {
+  max-width: 44rem;
+  margin: 0 auto;
+  text-align: center;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.05rem, 1.55vw, 1.35rem);
+  line-height: 1.65;
+  color: var(--ts-fg);
+}
+
+.ts-origins__intro-inner p + p {
+  margin-top: 1.1rem;
+}
+
+.ts-origins__farms {
+  background: #3c5a1e;
+  padding-bottom: 3.5rem;
+}
+
+.ts-origins__sacks img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ts-origins .ts-origins__cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: -5rem;
+  position: relative;
+  z-index: 2;
+  padding: 0 1.5rem;
+}
+
+@media (min-width: 700px) {
+  .ts-origins .ts-origins__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    /* Sit the cards up over the sacks photo */
+    margin-top: clamp(-16rem, -13vw, -9rem);
+  }
+}
+
+.ts-origins__card-media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.ts-origins__card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ts-origins__card-body {
+  background: #fdfaf4;
+  padding: 1.1rem 1.25rem 1.4rem;
+  text-align: center;
+}
+
+.ts-origins__card-name {
+  font-family: var(--ts-font-display);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  color: #b8860b;
+}
+
+.ts-origins__card-place {
+  margin-top: 0.15rem;
+  font-size: 0.95rem;
+  color: #3c5a1e;
+}
+
+.ts-origins__card-btn {
+  display: inline-block;
+  margin-top: 0.85rem;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.95rem;
+  color: #fdfaf4;
+  text-decoration: none;
+  background: #2e451a;
+  border-radius: 0.4rem;
+  transition: background 0.25s;
+}
+
+.ts-origins__card-btn:hover {
+  background: #24380f;
+}
+
+.ts-origins__cta {
+  margin-top: 3rem;
+  text-align: center;
+  padding: 0 1.5rem;
+}
+
+.ts-origins__cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.95rem 2.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+  background: #c9922f;
+  border-radius: var(--ts-radius-full);
+  transition: background 0.25s, transform 0.25s;
+}
+
+.ts-origins__cta-btn:hover {
+  background: #b8831f;
+  transform: translateY(-2px);
+}
+
+.ts-origins__cta-note {
+  margin-top: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.ts-origins__us {
+  max-width: 40rem;
+  margin: 2.5rem auto 0;
+  padding: 2rem 2rem 2.25rem;
+  text-align: center;
+  background: #f4efe2;
+  border-radius: 1.25rem;
+}
+
+.ts-origins__us-title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 700;
+  color: var(--ts-fg);
+}
+
+.ts-origins__us-text {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--ts-muted-fg);
+}

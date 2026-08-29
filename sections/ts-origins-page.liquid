@@ -1,0 +1,164 @@
+{% comment %}
+  Cacao Origins page — wholesale single-origin cacao.
+  Hero, green title band, intro copy, farm cards and enquiry CTA.
+{% endcomment %}
+
+{%- liquid
+  assign url_contact = '/pages/contact'
+  if pages['contact'] != blank
+    assign url_contact = pages['contact'].url
+  endif
+-%}
+
+<div class="ts-origins">
+  <section class="ts-origins__hero">
+    {% if section.settings.hero_image != blank %}
+      <img src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" loading="eager" fetchpriority="high">
+    {% else %}
+      <img src="{{ 'origins-hero.webp' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" width="2400" height="1600" loading="eager" fetchpriority="high">
+    {% endif %}
+    <div class="ts-origins__hero-shade"></div>
+    <div class="ts-origins__hero-copy">
+      {% if section.settings.hero_pre != blank %}<p class="ts-origins__hero-pre">{{ section.settings.hero_pre }}</p>{% endif %}
+      <h1 class="ts-origins__hero-title">{{ section.settings.hero_title }}</h1>
+    </div>
+  </section>
+
+  {% if section.settings.band_title != blank %}
+    <section class="ts-origins__band">
+      <div class="ts-page-width">
+        <h2 class="ts-origins__band-title">{{ section.settings.band_title }}</h2>
+        {% if section.settings.band_sub != blank %}
+          <p class="ts-origins__band-sub">{{ section.settings.band_sub }}</p>
+        {% endif %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if section.settings.body_rte != blank %}
+    <section class="ts-origins__intro">
+      <div class="ts-origins__intro-inner rte">{{ section.settings.body_rte }}</div>
+    </section>
+  {% endif %}
+
+  <section class="ts-origins__farms">
+    <div class="ts-origins__sacks">
+      {% if section.settings.sacks_image != blank %}
+        <img src="{{ section.settings.sacks_image | image_url: width: 2000 }}" alt="{{ section.settings.sacks_alt | escape }}" loading="lazy">
+      {% else %}
+        <img src="{{ 'os-bulk.webp' | asset_url }}" alt="{{ section.settings.sacks_alt | escape }}" width="1600" height="1280" loading="lazy">
+      {% endif %}
+    </div>
+
+    <div class="ts-origins__cards ts-page-width">
+      {% for i in (1..2) %}
+        {%- liquid
+          if i == 1
+            assign f_img = section.settings.farm_1_image
+            assign f_fallback = 'op-step-6.webp' | asset_url
+            assign f_name = section.settings.farm_1_name
+            assign f_place = section.settings.farm_1_place
+            assign f_link = section.settings.farm_1_link
+          else
+            assign f_img = section.settings.farm_2_image
+            assign f_fallback = 'os-premium-hero.webp' | asset_url
+            assign f_name = section.settings.farm_2_name
+            assign f_place = section.settings.farm_2_place
+            assign f_link = section.settings.farm_2_link
+          endif
+        -%}
+        {% if f_name != blank %}
+          <article class="ts-origins__card">
+            <div class="ts-origins__card-media">
+              {% if f_img != blank %}
+                <img src="{{ f_img | image_url: width: 1200 }}" alt="{{ f_name | escape }}" loading="lazy">
+              {% else %}
+                <img src="{{ f_fallback }}" alt="{{ f_name | escape }}" width="1200" height="800" loading="lazy">
+              {% endif %}
+            </div>
+            <div class="ts-origins__card-body">
+              <h3 class="ts-origins__card-name">{{ f_name }}</h3>
+              {% if f_place != blank %}<p class="ts-origins__card-place">{{ f_place }}</p>{% endif %}
+              {% if section.settings.farm_link_label != blank %}
+                <a class="ts-origins__card-btn" href="{{ f_link | default: url_contact }}">{{ section.settings.farm_link_label }}</a>
+              {% endif %}
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_label != blank %}
+      <div class="ts-origins__cta">
+        <a class="ts-origins__cta-btn" href="{{ section.settings.cta_link | default: url_contact }}">
+          {{ section.settings.cta_label }}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+        </a>
+        {% if section.settings.cta_note != blank %}
+          <p class="ts-origins__cta-note">{{ section.settings.cta_note }}</p>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.us_heading != blank %}
+      <div class="ts-origins__us">
+        <h2 class="ts-origins__us-title">{{ section.settings.us_heading }}</h2>
+        {% if section.settings.us_text != blank %}<p class="ts-origins__us-text">{{ section.settings.us_text }}</p>{% endif %}
+      </div>
+    {% endif %}
+  </section>
+</div>
+
+{% schema %}
+{
+  "name": "Cacao Origins page",
+  "tag": "section",
+  "class": "section-ts-origins",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to origins-hero.webp." },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt text", "default": "Cacao beans drying" },
+    { "type": "text", "id": "hero_pre", "label": "Hero small word", "default": "The" },
+    { "type": "text", "id": "hero_title", "label": "Hero title", "default": "ORIGINS" },
+
+    { "type": "header", "content": "Title band" },
+    { "type": "text", "id": "band_title", "label": "Band title", "default": "CACAO ORIGINS" },
+    { "type": "text", "id": "band_sub", "label": "Band subtitle", "default": "Wholesale single-origin cacao." },
+
+    { "type": "header", "content": "Intro" },
+    {
+      "type": "richtext",
+      "id": "body_rte",
+      "label": "Intro text",
+      "default": "<p>In addition to our products, we offer our premium single-origin cacao beans in bulk for chocolatiers, manufacturers, roasters, and specialty food companies seeking exceptional origin cacao.</p><p>Our beans are grown exclusively in Guatemala and are fully traceable from seed to shipment. Cultivated in mineral-rich volcanic soil and processed using carefully controlled fermentation and sun-drying protocols, our cacao delivers consistency, complexity, and character in every harvest.</p><p>Each lot is produced with the same attention to detail that defines our farm — from hand-harvesting at peak ripeness to meticulous post-harvest handling and quality control.</p><p>Whether you are crafting fine chocolate or developing premium cacao products, our bulk cacao beans offer an authentic expression of Guatemalan terroir and generations of cacao tradition.</p>"
+    },
+
+    { "type": "header", "content": "Sacks image" },
+    { "type": "image_picker", "id": "sacks_image", "label": "Sacks image", "info": "Falls back to os-bulk.webp." },
+    { "type": "text", "id": "sacks_alt", "label": "Sacks alt text", "default": "Sacks of specialty Guatemalan cacao" },
+
+    { "type": "header", "content": "Farm 1" },
+    { "type": "image_picker", "id": "farm_1_image", "label": "Image", "info": "Falls back to op-step-6.webp." },
+    { "type": "text", "id": "farm_1_name", "label": "Name", "default": "Rosario Quezada" },
+    { "type": "text", "id": "farm_1_place", "label": "Location", "default": "Coatepeque, Quetzaltenango" },
+    { "type": "url", "id": "farm_1_link", "label": "Link" },
+
+    { "type": "header", "content": "Farm 2" },
+    { "type": "image_picker", "id": "farm_2_image", "label": "Image", "info": "Falls back to os-premium-hero.webp." },
+    { "type": "text", "id": "farm_2_name", "label": "Name", "default": "Ana María" },
+    { "type": "text", "id": "farm_2_place", "label": "Location", "default": "Lachuá, Cobán" },
+    { "type": "url", "id": "farm_2_link", "label": "Link" },
+    { "type": "text", "id": "farm_link_label", "label": "Card button label", "default": "Learn more" },
+
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Enquire About Cacao Orders" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Defaults to the contact page." },
+    { "type": "text", "id": "cta_note", "label": "Note", "default": "Minimum order quantity: 50 lbs" },
+
+    { "type": "header", "content": "U.S. availability" },
+    { "type": "text", "id": "us_heading", "label": "Heading", "default": "Cacao Available in the U.S." },
+    { "type": "textarea", "id": "us_text", "label": "Text", "default": "Premium Guatemalan cacao products, already imported and available in the United States. Ready for shipping to manufacturers, brands, chocolatiers, and food businesses." }
+  ],
+  "presets": [{ "name": "Cacao Origins page" }]
+}
+{% endschema %}
