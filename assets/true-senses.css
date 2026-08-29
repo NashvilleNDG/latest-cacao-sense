@@ -5150,16 +5150,16 @@ body.ts-body {
 
 .ts-shop-banner__copy {
   position: absolute;
-  top: 50%;
-  left: 4%;
+  top: 46%;
+  left: 5%;
   transform: translateY(-50%);
-  width: 20%;
-  max-width: 20rem;
+  width: 22.5%;
+  max-width: 26rem;
   color: #7a1d13;
 }
 
 .ts-shop-banner__eyebrow {
-  font-size: clamp(0.5rem, 0.85vw, 0.8rem);
+  font-size: clamp(0.6rem, 1.05vw, 1rem);
   font-weight: 800;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -5169,15 +5169,16 @@ body.ts-body {
 
 .ts-shop-banner__title {
   font-family: var(--ts-font-display);
-  font-size: clamp(1rem, 2.75vw, 2.7rem);
+  font-size: clamp(1.3rem, 3.6vw, 3.5rem);
   font-weight: 700;
-  line-height: 1.06;
+  line-height: 1.08;
 }
 
 .ts-shop-banner__sub {
-  margin-top: 0.7em;
-  font-size: clamp(0.55rem, 0.95vw, 0.95rem);
-  line-height: 1.45;
+  margin-top: 0.85em;
+  max-width: 15.5rem;
+  font-size: clamp(0.7rem, 1.15vw, 1.1rem);
+  line-height: 1.5;
   color: #8a3b0c;
 }
 
