@@ -5204,3 +5204,87 @@ body.ts-body {
   font-weight: 700;
   letter-spacing: -0.015em;
 }
+
+/* ---------------------------------------------------------
+   Shop page — collection groups
+   --------------------------------------------------------- */
+.ts-collgroup {
+  margin-bottom: 3.5rem;
+}
+
+.ts-collgroup__head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.ts-collgroup__headings {
+  max-width: 42rem;
+}
+
+.ts-collgroup__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ts-muted-fg);
+  margin-bottom: 0.5rem;
+}
+
+.ts-collgroup__title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #1f6f68;
+}
+
+.ts-collgroup__title em {
+  font-style: italic;
+  font-weight: 500;
+  color: #2f7d77;
+}
+
+.ts-collgroup__sub {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ts-muted-fg);
+}
+
+.ts-collgroup__sticker {
+  flex: 0 0 auto;
+  width: clamp(72px, 9vw, 118px);
+}
+
+.ts-collgroup__sticker img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 699px) {
+  .ts-collgroup__head {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+/* Column counts per group */
+@media (min-width: 700px) {
+  .ts-catalog__grid.is-4up {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .ts-catalog__grid.is-3up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ts-catalog__viewall {
+  margin-top: 0.5rem;
+  text-align: center;
+}

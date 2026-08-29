@@ -34,20 +34,65 @@
   </div>
 {% endif %}
 
-<section class="ts-catalog ts-page-width">
-  <header class="ts-catalog__head">
-    <p class="ts-products__kicker">{{ section.settings.kicker }}</p>
-    <h1 class="ts-products__title">{{ section.settings.title }}</h1>
-    {% if section.settings.intro != blank %}
-      <p class="ts-catalog__intro">{{ section.settings.intro }}</p>
-    {% endif %}
-  </header>
+{%- capture group_markup -%}{%- endcapture -%}
 
-  <div class="ts-catalog__grid">
-    {% for handle in handles %}
-      {% render 'ts-product-info', handle: handle, mode: 'card' %}
-    {% endfor %}
-  </div>
+<section class="ts-catalog ts-page-width">
+  {%- assign groups = 'one,two' | split: ',' -%}
+  {%- for g in groups -%}
+    {%- liquid
+      if g == 'one'
+        assign g_eyebrow = section.settings.g1_eyebrow
+        assign g_heading = section.settings.g1_heading
+        assign g_accent = section.settings.g1_accent
+        assign g_sub = section.settings.g1_sub
+        assign g_handles = section.settings.g1_handles | split: ','
+        assign g_cols = 'is-4up'
+      else
+        assign g_eyebrow = section.settings.g2_eyebrow
+        assign g_heading = section.settings.g2_heading
+        assign g_accent = section.settings.g2_accent
+        assign g_sub = section.settings.g2_sub
+        assign g_handles = section.settings.g2_handles | split: ','
+        assign g_cols = 'is-3up'
+      endif
+    -%}
+
+    {%- if g_handles.size > 0 and g_heading != blank -%}
+      <div class="ts-collgroup">
+        <header class="ts-collgroup__head">
+          <div class="ts-collgroup__headings">
+            {% if g_eyebrow != blank %}<p class="ts-collgroup__eyebrow">{{ g_eyebrow }}</p>{% endif %}
+            <h2 class="ts-collgroup__title">
+              {{ g_heading }}{% if g_accent != blank %} <em>{{ g_accent }}</em>{% endif %}
+            </h2>
+            {% if g_sub != blank %}<p class="ts-collgroup__sub">{{ g_sub }}</p>{% endif %}
+          </div>
+
+          {% if g == 'one' and section.settings.show_sticker %}
+            <div class="ts-collgroup__sticker">
+              {% if section.settings.sticker_image != blank %}
+                <img src="{{ section.settings.sticker_image | image_url: width: 600 }}" alt="{{ section.settings.sticker_alt | escape }}" width="600" height="600" loading="lazy">
+              {% else %}
+                <img src="{{ 'white-beans-sticker.png' | asset_url }}" alt="{{ section.settings.sticker_alt | escape }}" width="600" height="600" loading="lazy">
+              {% endif %}
+            </div>
+          {% endif %}
+        </header>
+
+        <div class="ts-catalog__grid {{ g_cols }}">
+          {% for handle in g_handles %}
+            {% render 'ts-product-info', handle: handle | strip, mode: 'card' %}
+          {% endfor %}
+        </div>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+
+  {% if section.settings.view_all_label != blank %}
+    <div class="ts-catalog__viewall">
+      <a class="ts-btn-outline" href="{{ section.settings.view_all_link | default: routes.all_products_collection_url }}">{{ section.settings.view_all_label }}</a>
+    </div>
+  {% endif %}
 
   {% if section.settings.note != blank %}
     <p class="ts-catalog__note">{{ section.settings.note }}</p>
@@ -100,24 +145,27 @@
     { "type": "text", "id": "goodfor_title", "label": "Good for heading", "default": "Good for" },
     { "type": "text", "id": "goodfor_names", "label": "Labels (comma separated, matches recipe photos)", "default": "Ceremonial Drink,Chocolate Ganache,Energy Granola,Cacao Husk Tea,Whipped Body Balm,Trail Mix" },
 
-    {
-      "type": "text",
-      "id": "kicker",
-      "label": "Kicker",
-      "default": "Shop"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "default": "Products"
-    },
-    {
-      "type": "textarea",
-      "id": "intro",
-      "label": "Intro",
-      "default": "Single-origin cacao, grown on our own farms in the highlands of Guatemala and crafted in small batches."
-    },
+    { "type": "header", "content": "Collection 1" },
+    { "type": "text", "id": "g1_eyebrow", "label": "Eyebrow", "default": "Full Range" },
+    { "type": "text", "id": "g1_heading", "label": "Heading", "default": "White Bean Premium" },
+    { "type": "text", "id": "g1_accent", "label": "Heading accent (italic)", "default": "Collection" },
+    { "type": "textarea", "id": "g1_sub", "label": "Subtitle", "default": "From raw whole beans to refined cacao butter — every form of pure cacao you need, all in one place." },
+    { "type": "text", "id": "g1_handles", "label": "Product handles (comma separated)", "default": "cacao-beans,cacao-nibs,cacao-wafers,cacao-tea" },
+    { "type": "checkbox", "id": "show_sticker", "label": "Show sticker badge", "default": true },
+    { "type": "image_picker", "id": "sticker_image", "label": "Sticker image", "info": "Falls back to white-beans-sticker.png." },
+    { "type": "text", "id": "sticker_alt", "label": "Sticker alt text", "default": "Specialty White Cacao Beans" },
+
+    { "type": "header", "content": "Collection 2" },
+    { "type": "text", "id": "g2_eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "g2_heading", "label": "Heading", "default": "Specialty" },
+    { "type": "text", "id": "g2_accent", "label": "Heading accent (italic)", "default": "Collection" },
+    { "type": "textarea", "id": "g2_sub", "label": "Subtitle" },
+    { "type": "text", "id": "g2_handles", "label": "Product handles (comma separated)", "default": "cacao-powder,cacao-beans,cacao-nibs,cacao-butter,cacao-wafers,cacao-tea" },
+
+    { "type": "header", "content": "View all" },
+    { "type": "text", "id": "view_all_label", "label": "Button label", "default": "View All Products" },
+    { "type": "url", "id": "view_all_link", "label": "Button link" },
+
     {
       "type": "textarea",
       "id": "note",
