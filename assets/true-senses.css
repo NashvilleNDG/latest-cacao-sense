@@ -11,8 +11,8 @@
   --ts-accent: hsl(36, 55%, 52%);
   --ts-accent-fg: hsl(20, 30%, 12%);
   --ts-border: hsl(30, 20%, 88%);
-  --ts-font-display: "Playfair Display", Georgia, serif;
-  --ts-font-body: "Inter", system-ui, sans-serif;
+  --ts-font-display: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  --ts-font-body: "Open Sans", system-ui, sans-serif;
   --ts-max: 80rem;
   --ts-radius-lg: 1.5rem;
   --ts-radius-full: 9999px;
@@ -5190,14 +5190,13 @@ body.ts-body {
   }
 }
 
-/* Homepage hero type in Montserrat */
+/* Hero headline: Montserrat comes from --ts-font-display; these are the
+   weight and tracking it needs at display size. */
 .ts-hero__eyebrow,
 .ts-hero__title,
 .ts-hero__title em,
-.ts-hero__title em.ts-text-gradient-gold,
-.ts-hero__desc,
-.ts-hero .ts-btn--primary {
-  font-family: "Montserrat", var(--ts-font-body);
+.ts-hero__title em.ts-text-gradient-gold {
+  font-family: var(--ts-font-display);
 }
 
 .ts-hero__title,
