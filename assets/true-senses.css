@@ -5509,3 +5509,126 @@ body.ts-body {
   line-height: 1.65;
   color: var(--ts-muted-fg);
 }
+
+/* ---------------------------------------------------------
+   White Bean Premium Collection page
+   --------------------------------------------------------- */
+.ts-wbp__hero img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ts-wbp__intro {
+  padding: 2.5rem 1.5rem 0;
+  text-align: center;
+}
+
+.ts-wbp__badge {
+  width: clamp(84px, 9vw, 116px);
+  margin: 0 auto 1.5rem;
+}
+
+.ts-wbp__badge img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ts-wbp__title {
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.7rem, 3.6vw, 2.75rem);
+  font-weight: 600;
+  line-height: 1.15;
+  color: #1f6f68;
+}
+
+.ts-wbp__title em {
+  font-style: italic;
+  font-weight: 600;
+  color: #c9922f;
+}
+
+.ts-wbp__lede {
+  max-width: 46rem;
+  margin: 1.1rem auto 0;
+  font-style: italic;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: #2f7d77;
+}
+
+.ts-wbp__shop {
+  padding: 2.75rem 1.5rem 0;
+}
+
+.ts-wbp__shop-title {
+  margin-bottom: 1.75rem;
+  font-family: var(--ts-font-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  text-align: center;
+  color: #4a3550;
+}
+
+.ts-wbp__strip-title {
+  margin: 3rem 0 1.75rem;
+  font-family: var(--ts-font-display);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 600;
+  text-align: center;
+  color: #1f6f68;
+}
+
+.ts-wbp__strip {
+  padding: 2.25rem 1.5rem 2.75rem;
+  background: #cfe6e0;
+}
+
+.ts-wbp__strip-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .ts-wbp__strip-row {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+.ts-wbp__strip-item {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ts-wbp__strip-media {
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.ts-wbp__strip-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.ts-wbp__strip-item:hover .ts-wbp__strip-media img {
+  transform: scale(1.06);
+}
+
+.ts-wbp__strip-label {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 0.95rem;
+  color: #1f4f4a;
+}

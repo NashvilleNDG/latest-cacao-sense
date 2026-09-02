@@ -1,0 +1,113 @@
+{% comment %}
+  White Bean Premium Collection page.
+  Hero, badge, intro, product grid, and the heritage recipe strip.
+{% endcomment %}
+
+<div class="ts-wbp">
+  <section class="ts-wbp__hero">
+    {% if section.settings.hero_image != blank %}
+      <img src="{{ section.settings.hero_image | image_url: width: 2400 }}" alt="{{ section.settings.hero_alt | escape }}" width="{{ section.settings.hero_image.width }}" height="{{ section.settings.hero_image.height }}" loading="eager" fetchpriority="high">
+    {% else %}
+      <img src="{{ 'white-bean-hero.webp' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" width="1666" height="944" loading="eager" fetchpriority="high">
+    {% endif %}
+  </section>
+
+  <section class="ts-wbp__intro ts-page-width">
+    {% if section.settings.show_badge %}
+      <div class="ts-wbp__badge">
+        {% if section.settings.badge_image != blank %}
+          <img src="{{ section.settings.badge_image | image_url: width: 600 }}" alt="{{ section.settings.badge_alt | escape }}" width="600" height="600" loading="lazy">
+        {% else %}
+          <img src="{{ 'white-beans-sticker.png' | asset_url }}" alt="{{ section.settings.badge_alt | escape }}" width="600" height="600" loading="lazy">
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.intro_heading != blank %}
+      <h1 class="ts-wbp__title">
+        {{ section.settings.intro_heading }}{% if section.settings.intro_accent != blank %} <em>{{ section.settings.intro_accent }}</em>{% endif %}
+      </h1>
+    {% endif %}
+
+    {% if section.settings.intro_text != blank %}
+      <p class="ts-wbp__lede">{{ section.settings.intro_text }}</p>
+    {% endif %}
+  </section>
+
+  {%- assign wbp_handles = section.settings.product_handles | split: ',' -%}
+  {% if wbp_handles.size > 0 %}
+    <section class="ts-wbp__shop ts-page-width">
+      {% if section.settings.shop_heading != blank %}
+        <h2 class="ts-wbp__shop-title">{{ section.settings.shop_heading }}</h2>
+      {% endif %}
+      <div class="ts-catalog__grid is-4up">
+        {% for handle_raw in wbp_handles %}
+          {%- assign handle_clean = handle_raw | strip -%}
+          {% render 'ts-product-info', handle: handle_clean, mode: 'card' %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+
+  {% if section.settings.show_strip %}
+    {%- liquid
+      assign url_recipes = '/pages/recipes'
+      if pages['recipes'] != blank
+        assign url_recipes = pages['recipes'].url
+      endif
+      assign strip_keys = section.settings.strip_keys | split: ','
+      assign strip_names = section.settings.strip_names | split: ','
+    -%}
+    {% if section.settings.strip_heading != blank %}
+      <h2 class="ts-wbp__strip-title">{{ section.settings.strip_heading }}</h2>
+    {% endif %}
+    <section class="ts-wbp__strip">
+      <div class="ts-wbp__strip-row ts-page-width">
+        {% for key_raw in strip_keys %}
+          {%- assign key = key_raw | strip -%}
+          {%- assign label = strip_names[forloop.index0] | strip -%}
+          {% if label != blank %}
+            <a class="ts-wbp__strip-item" href="{{ url_recipes }}">
+              <span class="ts-wbp__strip-media">
+                <img src="{{ 'recipe-out-' | append: key | append: '.webp' | asset_url }}" alt="{{ label | escape }}" width="1200" height="1200" loading="lazy">
+              </span>
+              <span class="ts-wbp__strip-label">{{ label }}</span>
+            </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </section>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "White Bean Premium page",
+  "tag": "section",
+  "class": "section-ts-white-bean",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image", "info": "Falls back to white-bean-hero.webp." },
+    { "type": "text", "id": "hero_alt", "label": "Hero alt text", "default": "White Cacao Bean Premium Collection" },
+
+    { "type": "header", "content": "Intro" },
+    { "type": "checkbox", "id": "show_badge", "label": "Show badge", "default": true },
+    { "type": "image_picker", "id": "badge_image", "label": "Badge image", "info": "Falls back to white-beans-sticker.png." },
+    { "type": "text", "id": "badge_alt", "label": "Badge alt text", "default": "Premium White Beans" },
+    { "type": "text", "id": "intro_heading", "label": "Heading", "default": "What makes it" },
+    { "type": "text", "id": "intro_accent", "label": "Heading accent (italic)", "default": "special" },
+    { "type": "textarea", "id": "intro_text", "label": "Intro text", "default": "An ancient cacao variety recognized for its naturally light-colored seeds and exceptional genetic purity. Protected through generations of ancestral knowledge, this unique cacao lineage represents a living connection to the origins of cacao." },
+
+    { "type": "header", "content": "Products" },
+    { "type": "text", "id": "shop_heading", "label": "Heading", "default": "Shop the collection" },
+    { "type": "text", "id": "product_handles", "label": "Product handles (comma separated)", "default": "cacao-beans,cacao-nibs,cacao-wafers,cacao-tea" },
+
+    { "type": "header", "content": "Recipe strip" },
+    { "type": "checkbox", "id": "show_strip", "label": "Show recipe strip", "default": true },
+    { "type": "text", "id": "strip_heading", "label": "Heading", "default": "Taste the Heritage" },
+    { "type": "text", "id": "strip_keys", "label": "Recipe photo keys (comma separated)", "info": "Each maps to assets/recipe-out-<key>.webp", "default": "powder,wafers,nibs,tea,butter" },
+    { "type": "text", "id": "strip_names", "label": "Labels (comma separated)", "default": "Ceremonial Drink,Chocolate Ganache,Energy Granola,Cacao Husk Tea,Whipped Body Balm" }
+  ],
+  "presets": [{ "name": "White Bean Premium page" }]
+}
+{% endschema %}

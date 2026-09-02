@@ -1,0 +1,7 @@
+{
+  "sections": {
+    "white_bean": { "type": "ts-white-bean-page", "settings": {} },
+    "newsletter": { "type": "ts-newsletter", "settings": {} }
+  },
+  "order": ["white_bean", "newsletter"]
+}

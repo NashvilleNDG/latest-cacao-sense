@@ -45,7 +45,15 @@
             if pages['bulk-cacao'] != blank
               assign url_bulkcacao = pages['bulk-cacao'].url
             endif
-            assign url_origins = '/pages/cacao-by-origin'
+            assign url_whitebean = '/pages/white-bean-premium-collection'
+            if pages['white-bean-premium-collection'] != blank
+              assign url_whitebean = pages['white-bean-premium-collection'].url
+            endif
+            assign url_whitebean = '/pages/white-bean-premium-collection'
+          if pages['white-bean-premium-collection'] != blank
+            assign url_whitebean = pages['white-bean-premium-collection'].url
+          endif
+          assign url_origins = '/pages/cacao-by-origin'
             if pages['cacao-by-origin'] != blank
               assign url_origins = pages['cacao-by-origin'].url
             endif
@@ -85,6 +93,7 @@
               {% if section.settings.show_bulk %}
                 <a class="ts-header__dropdown-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
               {% endif %}
+              <a class="ts-header__dropdown-link" href="{{ url_whitebean }}">{{ 'sections.header.whitebean' | t }}</a>
               <a class="ts-header__dropdown-link" href="{{ url_origins }}">{{ 'sections.header.origins' | t }}</a>
             </div>
           </div>
@@ -203,6 +212,7 @@
         {% if section.settings.show_bulk %}
           <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
         {% endif %}
+        <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_whitebean }}">{{ 'sections.header.whitebean' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_origins }}">{{ 'sections.header.origins' | t }}</a>
         <p class="ts-header__mobile-heading">{{ 'sections.header.about' | t }}</p>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
