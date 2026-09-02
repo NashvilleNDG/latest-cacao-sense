@@ -49,11 +49,7 @@
             if pages['white-bean-premium-collection'] != blank
               assign url_whitebean = pages['white-bean-premium-collection'].url
             endif
-            assign url_whitebean = '/pages/white-bean-premium-collection'
-          if pages['white-bean-premium-collection'] != blank
-            assign url_whitebean = pages['white-bean-premium-collection'].url
-          endif
-          assign url_origins = '/pages/cacao-by-origin'
+            assign url_origins = '/pages/cacao-by-origin'
             if pages['cacao-by-origin'] != blank
               assign url_origins = pages['cacao-by-origin'].url
             endif
@@ -89,7 +85,9 @@
             </button>
             <div class="ts-header__dropdown-menu" data-ts-dropdown-menu>
               <a class="ts-header__dropdown-link" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.products' | t }}</a>
-              <a class="ts-header__dropdown-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+              {% if section.settings.show_premium %}
+                <a class="ts-header__dropdown-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+              {% endif %}
               {% if section.settings.show_bulk %}
                 <a class="ts-header__dropdown-link" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
               {% endif %}
@@ -115,7 +113,7 @@
               <a class="ts-header__dropdown-link" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
             </div>
           </div>
-          <a class="ts-header__link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+          <a class="ts-header__link" href="{{ url_whitebean }}">{{ 'sections.header.whitebean' | t }}</a>
           <a class="ts-header__link" href="{{ url_journey }}">{{ 'sections.header.journey' | t }}</a>
           <a class="ts-header__link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
           <a class="ts-header__link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
@@ -185,6 +183,10 @@
           if pages['bulk-cacao'] != blank
             assign url_bulkcacao = pages['bulk-cacao'].url
           endif
+          assign url_whitebean = '/pages/white-bean-premium-collection'
+          if pages['white-bean-premium-collection'] != blank
+            assign url_whitebean = pages['white-bean-premium-collection'].url
+          endif
           assign url_origins = '/pages/cacao-by-origin'
           if pages['cacao-by-origin'] != blank
             assign url_origins = pages['cacao-by-origin'].url
@@ -208,7 +210,9 @@
         %}
         <p class="ts-header__mobile-heading">{{ 'sections.header.shop' | t }}</p>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ routes.all_products_collection_url }}">{{ 'sections.header.products' | t }}</a>
-        <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+        {% if section.settings.show_premium %}
+          <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+        {% endif %}
         {% if section.settings.show_bulk %}
           <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_bulkcacao }}">{{ 'sections.header.bulk' | t }}</a>
         {% endif %}
@@ -217,7 +221,7 @@
         <p class="ts-header__mobile-heading">{{ 'sections.header.about' | t }}</p>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_story }}">{{ 'sections.header.story' | t }}</a>
         <a class="ts-header__mobile-link ts-header__mobile-sublink" href="{{ url_process }}">{{ 'sections.header.process' | t }}</a>
-        <a class="ts-header__mobile-link" href="{{ url_premium }}">{{ 'sections.header.premium' | t }}</a>
+        <a class="ts-header__mobile-link" href="{{ url_whitebean }}">{{ 'sections.header.whitebean' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_journey }}">{{ 'sections.header.journey' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_recipes }}">{{ 'sections.header.recipes' | t }}</a>
         <a class="ts-header__mobile-link" href="{{ url_blog }}">{{ 'sections.header.blog' | t }}</a>
@@ -232,6 +236,13 @@
   "name": "Header",
   "class": "section-header",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_premium",
+      "label": "Show Premium Collection in Shop menu",
+      "default": false,
+      "info": "The page stays live at /pages/premium-collection while hidden."
+    },
     {
       "type": "checkbox",
       "id": "show_bulk",
