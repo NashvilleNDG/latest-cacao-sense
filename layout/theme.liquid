@@ -20,8 +20,10 @@
       {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
     </title>
 
-    {% if page_description %}
-      <meta name="description" content="{{ page_description | escape }}">
+    {%- capture ts_fallback_description -%}{%- render 'ts-meta-description' -%}{%- endcapture -%}
+    {%- assign meta_description = page_description | default: ts_fallback_description | strip -%}
+    {% if meta_description != blank %}
+      <meta name="description" content="{{ meta_description | escape }}">
     {% endif %}
 
     {%- liquid
@@ -42,8 +44,8 @@
         endunless
       endcapture
       assign og_title = og_title | strip
-      if page_description != blank
-        assign og_description = page_description
+      if meta_description != blank
+        assign og_description = meta_description
       elsif shop.description != blank
         assign og_description = shop.description
       else

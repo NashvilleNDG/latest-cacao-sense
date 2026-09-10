@@ -1,0 +1,65 @@
+{%- comment -%}
+  Fallback meta description, used only when a page has no
+  "Search engine listing" description set in Shopify admin.
+  Anything entered in admin always wins over these.
+{%- endcomment -%}
+{%- liquid
+  assign d = ''
+
+  case template.name
+    when 'index'
+      assign d = "Single-origin cacao grown on our own farms in Guatemala's volcanic highlands. Pure cacao powder, beans, nibs, butter, wafers and tea — no additives, no sugar."
+
+    when 'collection'
+      assign d = 'Shop Cacao Senses single-origin cacao: powder, beans, nibs, butter, wafers and tea. 100% pure, grown on our own farms in Guatemala.'
+
+    when 'cart'
+      assign d = 'Review your Cacao Senses order — single-origin Guatemalan cacao, 100% pure with no additives.'
+
+    when 'product'
+      case product.handle
+        when 'cacao-powder'
+          assign d = '100% pure single-origin cacao powder from Guatemala. Rich chocolate taste, full-bodied aroma, deliciously unsweetened. 8oz (227g), zero sugar.'
+        when 'cacao-beans'
+          assign d = 'Whole single-origin cacao beans from Guatemala. Rich chocolate taste and full-bodied aroma for brewing, smoothies and baking. 8oz (227g), zero sugar.'
+        when 'cacao-nibs'
+          assign d = 'Single-origin cacao nibs from Guatemala. Crunchy, deliciously unsweetened, perfect for snacking, smoothies, salads and baking. 8oz (227g), zero sugar.'
+        when 'cacao-butter'
+          assign d = 'Pure single-origin cacao butter from Guatemala. For tempering, ice creams, desserts and baking, or skin and body care. 8oz (227g), zero sugar.'
+        when 'cacao-wafers'
+          assign d = 'Single-origin cacao wafers from Guatemala. Easy to melt for tempering, ice creams, desserts and baking. 8oz (227g), zero sugar.'
+        when 'cacao-tea'
+          assign d = 'Single-origin cacao husk tea from Guatemala. Naturally caffeine-light with a full-bodied chocolate aroma. 6oz (170g), zero sugar.'
+        else
+          assign d = product.title | append: ' — 100% pure single-origin cacao from our own farms in Guatemala. No additives, no fillers, no sugar.'
+      endcase
+
+    when 'page'
+      case page.handle
+        when 'our-story'
+          assign d = "From bean to bliss — the story of Cacao Senses, our family farms in Guatemala's volcanic highlands, and the 150,000+ trees we have planted."
+        when 'our-process'
+          assign d = 'How our cacao is made: hand-harvesting at peak ripeness, controlled fermentation, sun-drying and small-batch crafting on our own Guatemalan farms.'
+        when 'recipes'
+          assign d = 'Simple recipes using 100% pure single-origin cacao — ceremonial drinks, ganache, granola, husk tea and more from Cacao Senses.'
+        when 'blog'
+          assign d = 'Stories, science and rituals from the world of pure single-origin cacao — the heritage behind every bean and the craft behind every sip.'
+        when 'contact'
+          assign d = 'Get in touch with Cacao Senses about products, wholesale and bulk single-origin Guatemalan cacao.'
+        when 'take-a-journey'
+          assign d = "Take a journey from bean to bliss — films and stories from the Cacao Senses farms in Guatemala's volcanic highlands."
+        when 'cacao-by-origin'
+          assign d = 'Wholesale single-origin Guatemalan cacao beans in bulk for chocolatiers, manufacturers and roasters. Fully traceable from seed to shipment.'
+        when 'white-bean-premium-collection'
+          assign d = 'An ancient cacao variety with naturally light-coloured seeds and exceptional genetic purity — the White Bean Premium Collection from Cacao Senses.'
+        when 'premium-collection'
+          assign d = 'Rare white cacao from our Guatemalan farms — the Cacao Senses premium collection of single-origin cacao.'
+        when 'bulk-cacao'
+          assign d = 'Bulk single-origin Guatemalan cacao, already imported and available in the U.S. for manufacturers, brands, chocolatiers and food businesses.'
+        else
+          assign d = page.title | append: ' — Cacao Senses, single-origin cacao grown on our own farms in Guatemala.'
+      endcase
+  endcase
+
+  echo d
+-%}
